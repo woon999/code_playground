@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class LostBracket {
-	
 	private static String[] minus;
 	private static String[] sum;
 
