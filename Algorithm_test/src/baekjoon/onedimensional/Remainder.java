@@ -1,14 +1,14 @@
 package baekjoon.onedimensional;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.*;
 
 public class Remainder {
 	
 	private static int count = 1;
 
 	public static void main(String[] args) throws Exception {
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int[] arr = new int[10];

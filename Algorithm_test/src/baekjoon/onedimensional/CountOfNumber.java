@@ -1,7 +1,6 @@
 package baekjoon.onedimensional;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class CountOfNumber {
 
