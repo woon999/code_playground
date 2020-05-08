@@ -12,13 +12,19 @@ import java.util.Comparator;
 // {{123}}						  -> 123	
 // {{4,2,3},{3},{2,3,4,1},{2,3}}  -> 3 2 4 1
 
+
+// 	      다른 분의 문제풀이
+//		String[] arr = s.replaceAll("[{]", " ").replaceAll("[}]", " ").trim().split(" , ");
+
 public class Tuple {
 
 	public static void main(String[] args) {
-		String s = "{{20,111},{111}}";
-
+		String s = " {{4,2,3},{3},{2,3,4,1},{2,3}}";
+		
+		
 		System.out.println(Arrays.toString(solution(s)));
 	}
+
 
 	public static int[] solution(String s) {
 		String temp = s.substring(1, s.length() - 1);
