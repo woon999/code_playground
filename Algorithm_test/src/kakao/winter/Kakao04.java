@@ -36,7 +36,6 @@ public class Kakao04 {
 			} else {
 				p = room+1;
 				while (true) {
-					System.out.println(p);
 					if (!check[p]) {
 						check[p] = true;
 
