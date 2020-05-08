@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
+//2019 카카오 개발자 겨울 인턴십 코딩테스트 #2
+
 // {{2},{2,1},{2,1,3},{2,1,3,4}}  -> 2 1 3 4 
 // {{1,2,3},{2,1},{1,2,4,3},{2}}  -> 2 1 3 4 
 // {{20,111},{111}}               -> 111 20	
