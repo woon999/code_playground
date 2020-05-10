@@ -3,7 +3,7 @@ package baekjoon.backtracking;
 import java.io.*;
 import java.util.StringTokenizer;
 
-public class NandM {
+public class NandM01 {
 
     static int n,m;
     static int[] num;
