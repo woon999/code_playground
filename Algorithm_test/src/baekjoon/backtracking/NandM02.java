@@ -1,6 +1,7 @@
 package baekjoon.backtracking;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class NandM02 {
@@ -20,12 +21,12 @@ public class NandM02 {
 		num = new int[m];
 		check = new boolean[n + 1];
 
-		dfs(0);
+		dfs(0,0);
 		System.out.println(sb);
 
 	}
 
-	static void dfs(int count) {
+	static void dfs(int start, int count) {
 
 		if (count == m) {
 
@@ -43,19 +44,27 @@ public class NandM02 {
 
 		}
 
-		for (int i = 1; i <= n; i++) {
-
-			if (!check[i]) {
-				check[i] = true;
-				num[count] = i;
-				if (count == 0) {
-					dfs(count + 1);
-				}
-				if (count > 0 && num[count] > num[count - 1]) {
-					dfs(count + 1);
-				}
-				check[i] = false;
-			}
+//		for (int i = 1; i <= n; i++) {
+//
+//			if (!check[i]) {
+//				check[i] = true;
+//				num[count] = i;
+//				if (count == 0) {
+//					dfs(count + 1);
+//				}
+//				if (count > 0 && num[count] > num[count - 1]) {
+//					dfs(count + 1);
+//				}
+//				check[i] = false;
+//			}
+//		}
+		for(int i=start+1; i<n+1;i++ ) {
+			   if(!check[i]) {
+	            	check[i] = true;
+	            	num[count] = i;
+	                dfs(i,count+1);  
+	                check[i] = false;
+	            }
 		}
 	}
 
