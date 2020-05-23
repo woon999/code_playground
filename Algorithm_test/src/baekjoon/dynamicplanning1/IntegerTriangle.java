@@ -1,5 +1,6 @@
 package baekjoon.dynamicplanning1;
 
+// #1932
 import java.io.*;
 import java.util.StringTokenizer;
 
