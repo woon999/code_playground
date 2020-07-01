@@ -47,6 +47,9 @@ public class MeetingRoom {
 			}
 		});
 
+//		for(int i=0;i<n;i++) {
+//			System.out.println(list.get(i).getStart() +"," + list.get(i).getEnd());
+//		}
 		int end = -1;
 		int start;
 		int count = 0;
