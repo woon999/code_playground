@@ -11,8 +11,8 @@ public class Downhill {
 	static int n, m;
 	static int[][] map;
 	static int[][] dp;
-	static int[] dx = { 1, 0, -1, 0 };
-	static int[] dy = { 0, 1, 0, -1 };
+	static int[] dx = { 0, 1, 0, -1 };
+	static int[] dy = { 1, 0, -1, 0 };
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -38,13 +38,8 @@ public class Downhill {
 	}
 
 	static int dfs(int x, int y) {
-//		for (int j = 0; j < n; j++) {
-//			for (int k = 0; k < m; k++) {
-//				System.out.print(dp[j][k] + " ");
-//			}
-//			System.out.println();
-//		}
-//		System.out.println("-------------------------------------");
+		
+		
 		if (x == n - 1 && y == m - 1)
 			return 1;
 		if (dp[x][y] != -1)
@@ -54,7 +49,16 @@ public class Downhill {
 			for (int i = 0; i < 4; i++) {
 				int nx = x + dx[i];
 				int ny = y + dy[i];
+				
 //				System.out.println("x :" +x + ", y:" +y +", nx :" + nx + ", ny : "+ny);
+//				for (int j = 0; j < n; j++) {
+//					for (int k = 0; k < m; k++) {
+//						System.out.print(dp[j][k] + " ");
+//					}
+//					System.out.println();
+//				}
+//				System.out.println("-------------------------------------");
+
 				if (nx >= 0 && nx < n && ny >= 0 && ny < m && map[x][y] > map[nx][ny]) {
 					dp[x][y] += dfs(nx, ny);
 				}
