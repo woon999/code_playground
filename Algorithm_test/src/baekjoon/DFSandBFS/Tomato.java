@@ -3,6 +3,7 @@ package baekjoon.DFSandBFS;
 // #7576
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -25,7 +26,8 @@ public class Tomato {
 
 		m = Integer.parseInt(st.nextToken());
 		n = Integer.parseInt(st.nextToken());
-
+	
+		
 		box = new int[n][m];
 		checked = new boolean[n][m];
 
@@ -46,13 +48,7 @@ public class Tomato {
 		}
 		
 		boolean full = true;
-//		for (int i = 0; i < n; i++) {
-//			for (int j = 0; j < m; j++) {
-//				System.out.print(box[i][j]+" ");
-//			}
-//			System.out.println();
-//		}
-//		
+		
 		for(int i=0; i<n; i++) {
 			for(int j : box[i]) {
 				if(j==0) {
@@ -101,3 +97,4 @@ public class Tomato {
 		}
 	}
 }
+
