@@ -57,11 +57,11 @@ public class ShortestPath {
 			Node nPos = q.poll();
 			int pos = nPos.end;
 
-			for(int i=0; i< dis.length; i++) {
-				System.out.print(dis[i]+" ");
-				
-			}
-			System.out.println("---------------");
+//			for(int i=0; i< dis.length; i++) {
+//				System.out.print(dis[i]+" ");
+//				
+//			}
+//			System.out.println("---------------");
 			if(check[pos]) continue;
 			check[pos] =true;
 			
