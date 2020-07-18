@@ -2,11 +2,11 @@ package kakao.winter2019;
 
 import java.util.ArrayList;
 
-//	2019 Ä«Ä«¿À °³¹ßÀÚ °Ü¿ï ÀÎÅÏ½Ê ÄÚµùÅ×½ºÆ® #1 Å©·¹ÀÎ ÀÎÇü »Ì±â
+//2019 ì¹´ì¹´ì˜¤ ê°œë°œì ê²¨ìš¸ ì¸í„´ì‹­ ì½”ë”©í…ŒìŠ¤íŠ¸ #1 í¬ë ˆì¸ ì¸í˜• ë½‘ê¸°
 
 
-//	[[0,0,0,0,0],[0,0,1,0,3],[0,2,5,0,1],[4,2,4,4,2],[3,5,1,3,1]],[1,5,3,5,1,2,1,4]
-//	stack,listµµ °¡´É
+//[[0,0,0,0,0],[0,0,1,0,3],[0,2,5,0,1],[4,2,4,4,2],[3,5,1,3,1]],[1,5,3,5,1,2,1,4]
+//stack,listë„ ê°€ëŠ¥
 public class Kakao01 {
 	public static void main(String[] args) {
 		int[][] board = { { 0, 0, 0, 0, 0 }, { 0, 0, 1, 0, 3 }, { 0, 2, 5, 0, 1 }, { 4, 2, 4, 4, 2 },
@@ -24,7 +24,7 @@ public class Kakao01 {
 		for (int i = 0; i < moves.length; i++) {
 			for (int j = 0; j < board.length; j++) {
 				if (board[j][moves[i] - 1] != 0) {
-					System.out.println("j : " + j + " ,ÀÎÇü : " + board[j][moves[i] - 1]);
+					System.out.println("j : " + j + " ,ï¿½ï¿½ï¿½ï¿½ : " + board[j][moves[i] - 1]);
 
 					if (list.size()!=0 && list.get(list.size() - 1) == board[j][moves[i] - 1]) {
 						answer += 2;

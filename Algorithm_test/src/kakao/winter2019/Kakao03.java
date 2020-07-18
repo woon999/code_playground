@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 
-//	2019 Ä«Ä«¿À °³¹ßÀÚ °Ü¿ï ÀÎÅÏ½Ê ÄÚµùÅ×½ºÆ® #3 ºÒ·® »ç¿ëÀÚ
+//2019 ì¹´ì¹´ì˜¤ ê°œë°œì ê²¨ìš¸ ì¸í„´ì‹­ ì½”ë”©í…ŒìŠ¤íŠ¸ #3 ë¶ˆëŸ‰ ì‚¬ìš©ì
 
-// 	user_id : 	["frodo", "fradi", "crodo", "abc123", "frodoc"]
-// 	banned_id :  ["fr*d*", "abc1**"] 
-// 	result = 2
+//	user_id : 	["frodo", "fradi", "crodo", "abc123", "frodoc"]
+//	banned_id :  ["fr*d*", "abc1**"] 
+//	result = 2
 public class Kakao03 {
 
 	public static void main(String[] args) {
@@ -49,7 +49,7 @@ public class Kakao03 {
 
 //				System.out.println(count + star + " vs " + s1.length() );
 					if (star + count == s1.length()) {
-					System.out.println(s1.length()+ " ¤Ñ¤Ñ" + s1 + ", s2 : " +s2);
+					System.out.println(s1.length()+ " ï¿½Ñ¤ï¿½" + s1 + ", s2 : " +s2);
 						result++;
 
 						c.add(s2);
