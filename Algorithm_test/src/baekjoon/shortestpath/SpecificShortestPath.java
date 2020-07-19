@@ -1,5 +1,6 @@
 package baekjoon.shortestpath;
 
+// #1504
 import java.io.*;
 import java.util.*;
 
