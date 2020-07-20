@@ -6,7 +6,7 @@ import java.util.*;
 
 public class UncertainDestination {
 
-	static int INF = 10000000;
+	static int INF = 1000000;
 	static int n;
 	static int[][] map;
 	static int[] dis;
