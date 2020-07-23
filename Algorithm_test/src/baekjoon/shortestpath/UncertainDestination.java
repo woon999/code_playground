@@ -108,7 +108,6 @@ class Node3 implements Comparable<Node3> {
 
 	@Override
 	public int compareTo(Node3 o) {
-		// TODO Auto-generated method stub
 		return weight - o.weight;
 	}
 }
