@@ -1,6 +1,7 @@
 package baekjoon.binarysearch;
 
 // #12015
+// #12738 과 동일 
 
 import java.io.*;
 import java.util.*;
