@@ -1,13 +1,15 @@
 package baekjoon.dpandreverseshortestpath;
 
-// #14002
-// dp풀이 O(n^2)
+// #14003
+// 이분탐색 풀이 O(nlogn) 14002문제에서 경로만 추가 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class LongestIncreasingSubsequence4 {
+public class LongestIncreasingSubsequence5 {
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -16,26 +18,41 @@ public class LongestIncreasingSubsequence4 {
 
 		int[] arr = new int[n + 1];
 		int[] dp = new int[n + 1];
+		List<Integer> list = new ArrayList<>();
 
-		int result = 0;
 
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for (int i = 1; i < n + 1; i++) {
 			arr[i] = Integer.parseInt(st.nextToken());
-
-			for (int j = 0; j < i; j++) {
-				if (arr[i] > arr[j]) {
-					dp[i] = Math.max(dp[j] + 1, dp[i]);
-					result = Math.max(dp[i], result);
+		}
+		list.add(Integer.MIN_VALUE);
+		
+		for(int i=1; i<n+1; i++) {
+			int num = arr[i];
+			
+			
+			if(num > list.get(list.size() -1 )) {
+				list.add(num);
+				dp[i]  =  list.size()-1;
+			}else {
+				int left = 1;
+				int right = list.size()-1;
+				int mid =0;
+				while(left<right) {
+					mid = (left+right) >>1;
+					if(list.get(mid) < num) left = mid+1;
+					else right = mid;
 				}
+				list.set(right, num);
+				dp[i] = right;
+				
 			}
 		}
-//		System.out.println(Arrays.toString(dp));
-		sb.append(result + " \n");
+		sb.append(list.size()-1 + " \n");
 
-		int len = result;
 		Stack<Integer> s = new Stack<Integer>();
 
+		int len = list.size()-1;
 		for (int i = n; i > 0; i--) {
 			if (dp[i] == len) {
 				s.push(arr[i]);
