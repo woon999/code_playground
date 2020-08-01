@@ -12,7 +12,7 @@ public class MaxHeap {
 		Queue<Integer> q = new PriorityQueue<>();
 		
 //		Queue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-//		ÀÌ·¸°ÔÇÏ¸é poll()°ú add()¿¡¼­ -1°ö¼ÀÀ» ¾ÈÇØµµ µÈ´Ù.
+//		ì´ë ‡ê²Œí•˜ë©´ poll()ê³¼ add()ì—ì„œ -1ê³±ì…ˆì„ ì•ˆí•´ë„ ëœë‹¤.
 		
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < n; i++) {
@@ -21,11 +21,11 @@ public class MaxHeap {
 				if (q.isEmpty()) {
 					sb.append(0 + "\n");
 				} else {
-					// ´Ù½Ã -1À» °öÇØ¼­ ¿ø·¡ ÀÔ·Â¹Ş¾Ò´ø °ªÀ¸·Î Ãâ·Â
+					// ë‹¤ì‹œ -1ì„ ê³±í•´ì„œ ì›ë˜ ì…ë ¥ë°›ì•˜ë˜ ê°’ìœ¼ë¡œ ì¶œë ¥
 					sb.append(q.poll() * -1 + "\n");
 				}
 			} else {
-				// ÃÖ´ñ°ªÀ» ³Ö¾î¾ß ÇÏ¹Ç·Î -1À» °öÇØ¼­ ¸Ç¾Õ¿¡ Å«¼ıÀÚ°¡ ¿Í¾ßµÊ 
+				// ìµœëŒ“ê°’ì„ ë„£ì–´ì•¼ í•˜ë¯€ë¡œ -1ì„ ê³±í•´ì„œ ë§¨ì•ì— í°ìˆ«ìê°€ ì™€ì•¼ë¨
 				q.add(k * -1);
 			}
 			
