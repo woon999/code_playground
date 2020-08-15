@@ -33,6 +33,8 @@ public class CCW {
 		else
 			return 0;
 	}
+	
+
 }
 
 class Point {
