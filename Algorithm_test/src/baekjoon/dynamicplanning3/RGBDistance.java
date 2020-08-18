@@ -40,6 +40,13 @@ public class RGBDistance {
 				dp[j][2] = Math.min(dp[j-1][0], dp[j-1][1]) + arr[j][2];
 			}
 			
+			for(int k=0; k<3; k++) {
+				for(int j=0; j<n+1; j++) {
+					System.out.print(dp[j][k]+" ");
+				}
+				System.out.println();
+			}
+			System.out.println("===================");
 			for(int j=0; j<3; j++) {
 				if(i != j) result = Math.min(result, dp[n][j]);
 				
