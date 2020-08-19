@@ -48,7 +48,7 @@ public class MakeAStar {
 		}
 
 		double result = 0;
-		;
+		
 
 		for (int i = 0; i < list.size(); i++) {
 			Edge2 e = list.get(i);

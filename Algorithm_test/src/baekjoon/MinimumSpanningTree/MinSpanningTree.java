@@ -63,7 +63,7 @@ public class MinSpanningTree {
 	public static void union(int x, int y) {
 		x = find(x);
 		y = find(y);
-		
+
 		if(x!= y) {
 			parent[y] =x;
 			
