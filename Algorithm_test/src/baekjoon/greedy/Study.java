@@ -46,7 +46,7 @@ public class Study {
 		}
 		
 		
-		for(int i=0; i<task.length; i++) {
+		for(int i=0; i<score.length; i++) {
 			result += score[i];
 		}
 		
