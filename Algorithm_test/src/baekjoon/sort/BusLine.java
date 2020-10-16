@@ -1,7 +1,7 @@
 package baekjoon.sort;
 
 // #10165
-// vector 공부 
+// vector ? arrayList?
 import java.io.*;
 import java.util.*;
 
@@ -16,7 +16,7 @@ public class BusLine {
 		int m = Integer.parseInt(br.readLine());
 		
 				
-		Vector<Course> v = new Vector<>();
+		List<Course> list = new ArrayList<>();
 		int back =0;
 		
 		for(int i=0; i<m; i++) {
@@ -26,19 +26,19 @@ public class BusLine {
 			int end = Integer.parseInt(st.nextToken());
 			
 			
-				v.add(new Course(i+1, start, end));
-			if(v.get(i).s > v.get(i).e) {
-				back = Math.max(back, v.get(i).e);
-				v.get(i).e += n;
+				list.add(new Course(i+1, start, end));
+			if(list.get(i).s > list.get(i).e) {
+				back = Math.max(back, list.get(i).e);
+				list.get(i).e += n;
 			}
 		}
 		
-		Collections.sort(v);
+		Collections.sort(list);
 		
 		
 		Deque<Course> q = new ArrayDeque<>();
 		
-		for (Course b : v) {
+		for (Course b : list) {
 			if (q.isEmpty() || q.getLast().e < b.e) {
 				q.addLast(b);
 			}
@@ -48,7 +48,7 @@ public class BusLine {
 			q.removeFirst();
 		}
 
-		Vector<Course> res = new Vector<>();
+		List<Course> res = new ArrayList<>();
 		while (!q.isEmpty()) {
 			res.add(q.pop());
 		}
