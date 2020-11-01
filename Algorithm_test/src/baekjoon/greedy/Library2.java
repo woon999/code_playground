@@ -1,5 +1,7 @@
 package baekjoon.greedy;
 
+// #1461
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.PriorityQueue;
@@ -16,7 +18,7 @@ public class Library2 {
 		int n = Integer.parseInt(st.nextToken());
 		int m = Integer.parseInt(st.nextToken());
 
-		Queue<Integer> pos = new PriorityQueue<>();
+		Queue<Integer> pos = new PriorityQueue<>((x, y) -> y - x); //(x, y) -> Integer.compare(y, x) 
 		Queue<Integer> neg = new PriorityQueue<>();
 
 		st = new StringTokenizer(br.readLine());
