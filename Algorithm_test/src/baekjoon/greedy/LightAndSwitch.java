@@ -1,7 +1,7 @@
 package baekjoon.greedy;
 
 
-// #2138
+//
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
