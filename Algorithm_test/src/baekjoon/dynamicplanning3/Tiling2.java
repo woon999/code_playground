@@ -1,12 +1,11 @@
 package baekjoon.dynamicplanning3;
 
-// #11726
+// #11727
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class Tiling {
+public class Tiling2{
 
-	
 	static int[] dp;
 	
 	public static void main(String[] args) throws Exception{
@@ -30,7 +29,7 @@ public class Tiling {
 			return dp[n];
 		}
 		else {
-			dp[n] = (solve(n-1) + solve(n-2)) % 10007;
+			dp[n] = (solve(n-1) + solve(n-2)+ solve(n-2)) % 10007;
 			return dp[n];
  		}
 	}
