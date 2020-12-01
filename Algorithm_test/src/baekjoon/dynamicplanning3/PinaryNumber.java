@@ -14,7 +14,6 @@ public class PinaryNumber {
 
 		if (n == 1) {
 			arr[0] = 1;
-			
 		}
 		else if(n ==2) {
 			arr[1] = 1;
