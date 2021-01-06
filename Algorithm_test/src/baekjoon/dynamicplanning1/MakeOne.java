@@ -6,34 +6,38 @@ import java.util.Arrays;
 
 public class MakeOne {
 
-	static int[] memo;
+	static int min;
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		int n = Integer.parseInt(br.readLine());
 	
-		memo = new int[n+1];
-		System.out.println(one(n));
-		System.out.println(Arrays.toString(memo));
+		min = Integer.MAX_VALUE;
+		dfs(n,0);
+		
+		System.out.println(min);
 
 	}
 
-	static int one(int n) {
+	static void dfs(int n, int cnt) {
 
-		if(n ==1) return 0;
-		if(memo[n]>0) {
-			return memo[n];
+		if(n ==1) {
+			min = min > cnt ? cnt : min;
+			return;
 		}
 		
-		memo[n] = one(n-1) +1;
-		if(n%3 ==0) {
-			memo[n] = Math.min(memo[n], one(n/3)+1);
-		}
+		if(cnt >= min) return;
+		
 		if(n%2==0) {
-			memo[n] = Math.min(memo[n], one(n/2)+1);
-		}	
-			
-		return memo[n];
+			dfs(n/2, cnt+1);
+		}
+		if(n%3==0) {
+			dfs(n/3, cnt+1);
+		}
+		
+		dfs(n-1, cnt+1);
+		
+		
 	}
 }
