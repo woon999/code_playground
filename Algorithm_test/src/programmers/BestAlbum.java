@@ -5,6 +5,7 @@ package programmers;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -23,67 +24,62 @@ public class BestAlbum {
 }
 
 
+@SuppressWarnings("unchecked")
 class Solution5 {
 	public int[] solution(String[] genres, int[] plays) {
         int len = genres.length;
         
+        Map<String, Object> tracks = new HashMap<>();
         Map<String, Integer> streaming = new HashMap<>();
         List<String> rank = new ArrayList<>();
         List<Integer> trackNum = new ArrayList<>();
         
         
-        // genre당 총 play수 저장 
+        // tracks : 장르별 (트랙 넘버, 플레이수)로 저장
+        // streaming : 장르별 총 플레이수 저장 
         for(int i=0; i<len; i++) {
+        	Map<Integer, Integer> map;  
+        	
+        	if(tracks.containsKey(genres[i])) {
+        		map = (HashMap<Integer, Integer>) tracks.get(genres[i]); // ex. {1=600}
+        	}else {
+        		map = new HashMap<>();
+        	}
+        	
+        	map.put(i, plays[i]);
+        	tracks.put(genres[i], map); // ex. key: pop, value: {1=600, 4=2500}
+        	
+        	
+        	// 장르별 총 스트리밍 수 
         	streaming.put(genres[i], streaming.getOrDefault(genres[i], 0)+ plays[i]);
         }
         
         
         // play수 높은대로 장르 정렬 
-        for(String s : streaming.keySet()) {
-        	System.out.println(s + ", " + streaming.get(s) );
-        	rank.add(s);
-        }
-        
-        rank.sort(new Comparator<String>() {
-			@Override
-			public int compare(String o1, String o2) {
-				return streaming.get(o2).compareTo(streaming.get(o1));
-			}
-		});
+        rank = sortToList(streaming);
      
         
+        int count =0;
         // play수 높은 장르 순서대로 장르별 가장 play수 많은 두 곡 선정 후 trackNum저장 
         for(int i=0; i<rank.size(); i++) {
-        	int hash = rank.get(i).hashCode();
-        	System.out.println(rank.get(i));
-        	int first =0, second =0;
-        	
+        	String key = rank.get(i);
         	int max  = 0;
         	
-        	for(int j=0; j<len; j++) {
-        		if(hash == genres[j].hashCode()) {
-        			if(plays[j] > max) {
-        				max = plays[j];
-        				first = j;
-        			}
-        		}
-        	}
+        	System.out.println(rank.get(i));
+        	System.out.println(tracks.get(key));
         	
-        	max = -1;
-        	for(int j=0; j<len; j++) {
-        		if(hash == genres[j].hashCode()) {
-        			if(j != first && plays[j] > max) {
-        				max = plays[j];
-        				second = j;
-        			}
-        		}
-        	}
+        	Iterator it = sortToList((HashMap<Integer,Integer>) tracks.get(key)).iterator();
         	
-        	System.out.println(first+","+second+"," +max);
-        	trackNum.add(first);
-        	if(max != -1) {
-        		trackNum.add(second);
+        	while(it.hasNext()) {
+        		int num = (int)it.next();
+        		System.out.println("sd: "+ num);
+        		trackNum.add(num);
+        		count++;
+        		max++;
+        		if(max >=2 ) break;
+        		
         	}
+        
         }
         
         
@@ -96,5 +92,20 @@ class Solution5 {
         
         
         return answer;
+    }
+	
+	@SuppressWarnings({ "unused", "rawtypes" })
+	private ArrayList sortToList(Map map){
+        ArrayList<Object> list = new ArrayList();
+        list.addAll(map.keySet());
+
+        list.sort(new Comparator<Object>(){
+            public int compare(Object o1, Object o2){
+
+                return ((Comparable)map.get(o2)).compareTo(map.get(o1));
+            }
+        });
+
+        return list;
     }
 }
