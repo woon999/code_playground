@@ -1,6 +1,6 @@
 package programmers;
 
-// Hash #3
+// Hash #3 위장 
 import java.util.HashMap;
 import java.util.Map;
 
