@@ -1,13 +1,12 @@
 package programmers;
 
+// Stack/Queue #2 주식 가격   
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
-// Stack/Queue #2 주식 가격   
-
 
 public class StockPrice {
 
