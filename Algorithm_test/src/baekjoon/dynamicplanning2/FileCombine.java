@@ -47,8 +47,8 @@ public class FileCombine {
 		 }
 		 System.out.println(Arrays.deepToString(dp));
 		 
-		 for(int j=2; j<len; j++) { //ї­
-			 for(int i=0; i+j <len; i++) { //За
+		 for(int j=2; j<len; j++) { //пїЅпїЅ
+			 for(int i=0; i+j <len; i++) { //пїЅпїЅ
 				 for(int k=i; k<i+j; k++) {
 					 if(dp[i][i+j]==0) {
 						 dp[i][i+j] = dp[i][k] + dp[k+1][i+j] + allSum(sum,i,i+j);

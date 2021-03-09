@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-//ÆÓ¸°µå·Ò(palindrome)ÀÌ¶õ ¾Õ¿¡¼­ºÎÅÍ ÀÐÀ¸³ª µÚ¿¡¼­ºÎÅÍ ÀÐÀ¸³ª °°Àº ´Ü¾î
+//ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½(palindrome)ï¿½Ì¶ï¿½ ï¿½Õ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ü¾ï¿½
 
 public class Palindrome {
 
@@ -37,8 +37,8 @@ public class Palindrome {
 		 int first = Integer.parseInt(st.nextToken());
 		 int last = Integer.parseInt(st.nextToken());
 		 
-//		 ±×³É sysoutÀ¸·Î 1 0 Ãâ·ÂÇÏ¸é ½Ã°£ÃÊ°ú 
-//		 dpÅ½»ö
+//		 ï¿½×³ï¿½ sysoutï¿½ï¿½ï¿½ï¿½ 1 0 ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ã°ï¿½ï¿½Ê°ï¿½ 
+//		 dpÅ½ï¿½ï¿½
 		 if(dp[first][last]) {
 			sb.append("1\n");
 		 }
