@@ -24,7 +24,6 @@ public class RecommendNewId {
         List<String> list = new LinkedList<>();	
         
         for(String s : a) {
-//        	System.out.println(s);
         	list.add(s);
         }
         
@@ -36,13 +35,11 @@ public class RecommendNewId {
         
         
         // 2단계 
-//        int size = list.size();
         for(int i=0; i<list.size(); i++) {
         	String s = list.get(i);
         	if(!spec.contains(s) && !Pattern.matches("[a-z0-9]", s)) {
         		list.remove(i);
         		i--;
-//        		size = list.size();
         	}
         }
         
@@ -72,11 +69,11 @@ public class RecommendNewId {
         }
         
         
-        for(int i=0; i<list.size(); i++) {
-          	String s = list.get(i);
-          	System.out.print(s);
-           }
-            System.out.println();
+//        for(int i=0; i<list.size(); i++) {
+//          	String s = list.get(i);
+//          	System.out.print(s);
+//           }
+//            System.out.println();
       
     
       // 6단계 
