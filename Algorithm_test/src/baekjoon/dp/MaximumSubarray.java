@@ -38,6 +38,7 @@ public class MaximumSubarray {
 	}
 	
 	
+//	----------------------분할정복----------------------------
 	static int solve(int left, int right, int[] arr) {
 		if(left == right) return arr[left];
 		int mid = (left+right)/2;
@@ -74,4 +75,6 @@ public class MaximumSubarray {
 		return rMax + lMax;
 		
 	}
+	
+//	----------------------분할정복----------------------------
 }
