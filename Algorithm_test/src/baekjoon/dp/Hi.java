@@ -28,14 +28,14 @@ public class Hi {
 		
 		dp = new int[101];
 //		bottom-up
-//		for(int i=1; i<n+1; i++) {
-//			for(int j=99; j>=0; j--) {
-//				int ene = energy[i]+j;
-//				if(ene<100) {
-//					dp[ene] = Math.max(dp[ene], dp[j]+gift[i]);
-//				}
-//			}
-//		}
+		for(int i=1; i<n+1; i++) {
+			for(int j=99; j>=0; j--) {
+				int ene = energy[i]+j;
+				if(ene<100) {
+					dp[ene] = Math.max(dp[ene], dp[j]+gift[i]);
+				}
+			}
+		}
 		
 		for(int j=1; j<101; j++) {
 			System.out.print(dp[j]+" ");
