@@ -2,6 +2,7 @@ package kakao.blind2021;
 
 
 // blind #1 신규 아이디 추천
+
 // 정규식, 문자열  (replaceAll 사용해서 다시 풀어보기) 
 import java.util.*;
 import java.util.regex.Pattern;

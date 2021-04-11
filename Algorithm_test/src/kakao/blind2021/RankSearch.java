@@ -1,9 +1,9 @@
 package kakao.blind2021;
 
 
-// blind #3 순위 검색 
-import java.util.HashMap;
-import java.util.Map;
+// blind #3 순위 검색  (효율성0점...) 
+import java.util.*;
+
 
 public class RankSearch {
 	public static void main(String[] args) {
@@ -25,45 +25,99 @@ public class RankSearch {
 				"- and - and - and - 150"
 		};
 		
-		solution(info, query);
+		System.out.println(Arrays.toString(solution(info, query)));
 	}
 	
 	public static int[] solution(String[] info, String[] query) {
-        int[] answer = {};
+        int[] answer = new int[query.length];
         
-        Map<Result, Integer> map = new HashMap<>();
-        
-        		
-        for(String s : info) {
-        	String[] insert = s.split(" ");
-        	
-        	String in_lan = insert[0];
-        	String in_part = insert[1];
-        	String in_career = insert[2];
-        	String in_food = insert[3];
-        	int in_score = Integer.parseInt(insert[4]);
-        	
-        	new Result(in_lan, in_part, in_career, in_food, in_score);
-        	for(String in : insert) {
-        		System.out.print(in + " ");
-        	}
-        	System.out.println();
+        // 
+        for(int i=0; i<query.length; i++) {
+        	query[i] = query[i].replaceAll(" and", "");
         }
+
+        List<Participant> input = new ArrayList<>();
+        List<Participant> question = new ArrayList<>();
+        
+        input = inputData(info);
+        question = inputData(query);
+        
+        Collections.sort(input, new Comparator<Participant>() {
+
+			@Override
+			public int compare(Participant o1, Participant o2) {
+				// TODO Auto-generated method stub
+				return o2.score - o1.score;
+			}
+		});
+        for(Participant r : input) {
+    		System.out.println(r.language+", "+ r.part +", " + r.career +", " +r.food+", "+r.score);
+    	}
+        
+        for(int i=0; i<question.size(); i++) {
+        	Participant res = question.get(i);
+        	int count = 0;
+
+        	for(Participant data : input) {
+//        		System.out.println(res.language+", "+ res.part +", " + res.career +", " +res.food+", "+res.score);
+        		if(res.score > data.score) {
+//        			System.out.println("scpre 땡 "+ data.score);
+        			continue;
+        		}
+        		if(!res.language.equals("-") && !res.language.equals(data.language)) {
+//        			System.out.println("lan 땡 "+ data.language);
+        			continue;
+        		}
+        		if(!res.part.equals("-") && !res.part.equals(data.part)) {
+//        			System.out.println("part 땡 "+ data.part);
+        			continue;
+        		}
+        		if(!res.career.equals("-") && !res.career.equals(data.career)) {
+//        			System.out.println("career 땡 "+ data.career);
+        			continue;
+        		}
+        		if(!res.food.equals("-") && !res.food.equals(data.food)) {
+//        			System.out.println("food 땡 "+ data.food);
+        			continue;
+        		}
+        		
+        		count++;
+        		
+        	}
+        	answer[i] = count;
+        	System.out.println("데이터 수 : " + count);
+        }
+
+      
         return answer;
     }
+	
+	static List<Participant> inputData(String[] arr) {
+		List<Participant> list = new ArrayList<>();
+		for(String s : arr) {
+        	String[] insert = s.split(" ");        
+       
+        	list.add(new Participant(insert[0], insert[1], insert[2], insert[3], Integer.parseInt(insert[4])));
+        }
+//        for(Participant r : list) {
+//    		System.out.println(r.language+", "+ r.part +", " + r.career +", " +r.food+", "+r.score);
+//    	}
+        
+		return list;
+	}
 	
 	
 
 }
 
-class Result{
+class Participant {
 	String language;
 	String part;
 	String career;
 	String food;
 	int score;
 	
-	public Result(String language, String part, String career, String food, int score) {
+	public Participant(String language, String part, String career, String food, int score) {
 		this.language = language;
 		this.part = part;
 		this.career = career;
