@@ -1,6 +1,6 @@
 package baekjoon.dp;
 
-// #2662 기업투자 (dp, dfs ) - bottom up으로 다시 풀기 
+// #2662 기업투자 (dp, dfs ) 
 import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -34,34 +34,69 @@ public class EntInvest {
 			}
 		}
 		
-		for(int i=0; i<n+1;i++) {
-			Arrays.fill(dp[i], -1);
-		}
+//		for(int i=0; i<n+1;i++) {
+//			Arrays.fill(dp[i], -1);
+//		}
 		
-		for(int i=1; i<n+1; i++) {
-			System.out.print(i+"만원 : ");
-			for(int j=1; j<m+1; j++) {
-				System.out.print(value[i][j]+" ");
+//		bottom-up
+		for(int i=1; i<m+1; i++) { // 회사 차례대로 방문 
+			for(int j=n; j>0; j--) { // 현재 보고있는 회사에서 총액 n부터 값 채워나가기 
+				for(int k=0; k<j+1; k++) {  // 최적값을 찾기 위해  k : 0~j범위로 k를 움직이며 탐색 
+					if(dp[j][i] < dp[j-k][i-1]+value[k][i]) {
+						
+						dp[j][i] = dp[j-k][i-1] + value[k][i];
+						System.out.println(i+"번 기업 탐색, 총액 " + j+", 탐색 금액 "  +k+ " = " + dp[j][i]);
+						invested[j][i] = j-k;
+					}
+				}
 			}
-			System.out.println();
 		}
 		
-		System.out.println(solve(n,1));
+		System.out.println(dp[n][m]);
+		out(n,m);
 		
 		
-		for(int i=1; i<n+1; i++)	{
-			for(int j=0; j<m+1; j++) {
-				System.out.print(invested[i][j]+" ");
-			}	
-			System.out.println();
-		}
 		
-		int entNum = n;
-		for(int i=1; i<m+1; i++) {
-			System.out.println(invested[entNum][i]);
-			entNum -= invested[entNum][i];
-		}
+//		top-down
+//		for(int i=1; i<n+1; i++) {
+//			System.out.print(i+"만원 : ");
+//			for(int j=1; j<m+1; j++) {
+//				System.out.print(value[i][j]+" ");
+//			}
+//			System.out.println();
+//		}
+//		
+//		System.out.println(solve(n,1));
+//		
+//		
 		
+//		for(int i=1; i<n+1; i++)	{
+//			for(int j=1; j<m+1; j++) {
+//				System.out.print(dp[i][j]+" ");
+//			}	
+//			System.out.println();
+//		}
+//		System.out.println();
+//		
+//		for(int i=1; i<n+1; i++){
+//			for(int j=1; j<m+1; j++) {
+//				System.out.print(invested[i][j]+" ");
+//			}	
+//			System.out.println();
+//		}
+//		
+//		int entNum = n;
+//		for(int i=1; i<m+1; i++) {
+//			System.out.println(invested[entNum][i]);
+//			entNum -= invested[entNum][i];
+//		}
+		
+	}
+	
+	static void out(int x, int y) {
+		if(y==0)	return;
+		out(invested[x][y], y-1);
+		System.out.print(x-invested[x][y]+" ");
 	}
 	
 	static int solve(int money, int ent) {
