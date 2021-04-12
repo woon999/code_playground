@@ -6,6 +6,9 @@ import java.util.*;
 
 
 public class RankSearch {
+	
+	static Map<String, ArrayList<Integer>> allInfo;
+	static ArrayList<Integer> in;
 	public static void main(String[] args) {
 		String[] info = {
 				"java backend junior pizza 150",
@@ -31,99 +34,74 @@ public class RankSearch {
 	public static int[] solution(String[] info, String[] query) {
         int[] answer = new int[query.length];
         
-        // 
+        allInfo = new HashMap<>();
+        
+        // 1. info 모든 경우의 수 map에 저장 
+        for(int i=0; i<info.length; i++) {
+//        	System.out.println(Arrays.toString(info[i].split(" ")));
+        	dfs("",0, info[i].split(" "));
+        }
+        
+        // 2. map에 저장된 점수 list 오름차순으로 정렬 	
+        List<String> list = new ArrayList<>(allInfo.keySet());
+        for(int i=0; i<list.size(); i++) {
+        	List<Integer> scoreList = allInfo.get(list.get(i));
+        	Collections.sort(scoreList);
+        }
+        
+        
+    	// 3. 이분 탐색
         for(int i=0; i<query.length; i++) {
-        	query[i] = query[i].replaceAll(" and", "");
+        	query[i] = query[i].replaceAll(" and ", "");
+        	String[] str = query[i].split(" ");
+        	int score = Integer.parseInt(str[1]);
+        	
+//        	System.out.println("idx : " +search(str[0], score));
+        	answer[i] = search(str[0], score);
         }
-
-        List<Participant> input = new ArrayList<>();
-        List<Participant> question = new ArrayList<>();
-        
-        input = inputData(info);
-        question = inputData(query);
-        
-        Collections.sort(input, new Comparator<Participant>() {
-
-			@Override
-			public int compare(Participant o1, Participant o2) {
-				// TODO Auto-generated method stub
-				return o2.score - o1.score;
-			}
-		});
-        for(Participant r : input) {
-    		System.out.println(r.language+", "+ r.part +", " + r.career +", " +r.food+", "+r.score);
-    	}
-        
-        for(int i=0; i<question.size(); i++) {
-        	Participant res = question.get(i);
-        	int count = 0;
-
-        	for(Participant data : input) {
-//        		System.out.println(res.language+", "+ res.part +", " + res.career +", " +res.food+", "+res.score);
-        		if(res.score > data.score) {
-//        			System.out.println("scpre 땡 "+ data.score);
-        			continue;
-        		}
-        		if(!res.language.equals("-") && !res.language.equals(data.language)) {
-//        			System.out.println("lan 땡 "+ data.language);
-        			continue;
-        		}
-        		if(!res.part.equals("-") && !res.part.equals(data.part)) {
-//        			System.out.println("part 땡 "+ data.part);
-        			continue;
-        		}
-        		if(!res.career.equals("-") && !res.career.equals(data.career)) {
-//        			System.out.println("career 땡 "+ data.career);
-        			continue;
-        		}
-        		if(!res.food.equals("-") && !res.food.equals(data.food)) {
-//        			System.out.println("food 땡 "+ data.food);
-        			continue;
-        		}
-        		
-        		count++;
-        		
-        	}
-        	answer[i] = count;
-        	System.out.println("데이터 수 : " + count);
-        }
-
       
         return answer;
     }
 	
-	static List<Participant> inputData(String[] arr) {
-		List<Participant> list = new ArrayList<>();
-		for(String s : arr) {
-        	String[] insert = s.split(" ");        
-       
-        	list.add(new Participant(insert[0], insert[1], insert[2], insert[3], Integer.parseInt(insert[4])));
-        }
-//        for(Participant r : list) {
-//    		System.out.println(r.language+", "+ r.part +", " + r.career +", " +r.food+", "+r.score);
-//    	}
-        
-		return list;
+	static void dfs(String pos, int depth, String[] info) {
+		
+		if(depth == 4) {
+//			System.out.println(pos);
+			if(!allInfo.containsKey(pos)) {
+				in = new ArrayList<>();
+				in.add(Integer.parseInt(info[4]));
+				allInfo.put(pos, in);
+			}else {
+				allInfo.get(pos).add(Integer.parseInt(info[4]));
+			}
+			
+			return;
+		}
+		
+		dfs(pos+"-", depth+1, info);
+		dfs(pos+info[depth], depth+1, info);
+		
 	}
 	
 	
-
-}
-
-class Participant {
-	String language;
-	String part;
-	String career;
-	String food;
-	int score;
-	
-	public Participant(String language, String part, String career, String food, int score) {
-		this.language = language;
-		this.part = part;
-		this.career = career;
-		this.food = food;
-		this.score = score;
+	// 이분 탐색 
+	static int search(String str, int score) {
+		if(!allInfo.containsKey(str)) return 0;
+		
+		List<Integer> scoreList = allInfo.get(str); 
+    	int start= 0, end = scoreList.size()-1;
+    	while(start<=end) {
+    
+    		int mid =(start+end)/2;
+    		if(scoreList.get(mid) <score) {
+    			start = mid+1;	
+    		}else {
+    			end = mid-1;
+    		}
+    		
+    	}
+    	System.out.println(scoreList.size() + " - " +start);
+    		
+    	return scoreList.size()-start;
 	}
-	
-	
 }
