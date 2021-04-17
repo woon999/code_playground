@@ -1,9 +1,9 @@
 package kakao.blind2021;
 
 
-// blind #2 메뉴 리뉴얼 
+// blind #2 메뉴 리뉴얼 (dfs, map정렬, 최댓값 구하기) 
 import java.util.*;
-import java.util.Map.Entry;
+
 
 public class MenuRenewal {
 	
@@ -13,7 +13,7 @@ public class MenuRenewal {
 //		String[] orders = {"ABCFG", "AC"};
 		int[] course = {2,3,4};
 		
-		System.out.println(solution(orders, course));
+		System.out.println(Arrays.toString(solution(orders, course)));
 	}
 	
 	public static String[] solution(String[] orders, int[] course) {
