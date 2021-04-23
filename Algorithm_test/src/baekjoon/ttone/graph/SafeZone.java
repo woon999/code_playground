@@ -59,7 +59,7 @@ public class SafeZone {
 			
 			if(nx<0 || ny<0 || nx>n-1 || ny >n-1) continue;
 			if(checked[nx][ny]) continue;
-//			
+			
 			if(map[nx][ny]> height) {
 				dfs(nx,ny, height);
 			}
