@@ -3,14 +3,16 @@ package baekjoon.ttone.graph;
 // #2644 graph 촌수계산 (dfs) 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class DegreeOfKinship {
 	
 	static List<Integer>[] relation;
 	static boolean[] checked;
-	static int res = Integer.MAX_VALUE;
+	static int res = -1;
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
@@ -37,15 +39,14 @@ public class DegreeOfKinship {
 		}
 		
 		dfs(x,y, 0);
-		
-		System.out.println(res == Integer.MAX_VALUE ? -1 : res);
+		System.out.println(res);
 	}
 	
 	static void dfs(int start, int end, int cnt) {
 	
 		if(start == end) {
 //			System.out.println("coin!"+ cnt);
-			res = Math.min(res, cnt);
+			res = cnt;
 			return; 
 		}
 		
@@ -57,7 +58,6 @@ public class DegreeOfKinship {
 				dfs(next, end, cnt+1);
 			}
 		}
-		checked[start] = false;
 	}
 }
 
