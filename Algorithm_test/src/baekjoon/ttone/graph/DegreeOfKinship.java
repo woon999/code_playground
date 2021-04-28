@@ -3,9 +3,7 @@ package baekjoon.ttone.graph;
 // #2644 graph 촌수계산 (dfs) 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class DegreeOfKinship {
