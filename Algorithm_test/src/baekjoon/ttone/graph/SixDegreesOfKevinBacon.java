@@ -1,6 +1,7 @@
 package baekjoon.ttone.graph;
 
-// #1389 graph 케빈 베이컨의 6단계 법칙 (bfs, dfs, floyd-warshall) 
+// #1389 graph 케빈 베이컨의 6단계 법칙 (bfs, dfs, floyd-warshall)
+// floyd-warshall이 정석 모든 정점에서 다른 모든 정점의 최단거리 구하기 
 import java.io.*;
 import java.util.*;
 
@@ -11,6 +12,7 @@ public class SixDegreesOfKevinBacon {
 	static int[] memo, move;
 	static boolean[] check;
 	static int answer;
+	
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -25,15 +27,15 @@ public class SixDegreesOfKevinBacon {
 		}
 		
 		// DFS, BFS input
-		for(int i=0; i<m; i++) {
-			st = new StringTokenizer(br.readLine());
-			
-			int a = Integer.parseInt(st.nextToken());
-			int b = Integer.parseInt(st.nextToken());
-			
-			list[a].add(b);
-			list[b].add(a);
-		}
+//		for(int i=0; i<m; i++) {
+//			st = new StringTokenizer(br.readLine());
+//			
+//			int a = Integer.parseInt(st.nextToken());
+//			int b = Integer.parseInt(st.nextToken());
+//			
+//			list[a].add(b);
+//			list[b].add(a);
+//		}
 		
 		
 //		----------- DFS main code ------------
@@ -54,67 +56,68 @@ public class SixDegreesOfKevinBacon {
 		
 		
 //		----------- BFS main code ------------
-		for(int i=1; i<n+1; i++) {
-			for(int j=1; j<n+1; j++) {
-				check = new boolean[n+1];
-				move = new int[n+1];
-				if(i!=j) {
-					int res = bfs(i,j);
-					System.out.println(i+"->"+j +" : " + res);
-					memo[i] += res;
-				}
-			}
-		}
-		
+//		for(int i=1; i<n+1; i++) {
+//			for(int j=1; j<n+1; j++) {
+//				check = new boolean[n+1];
+//				move = new int[n+1];
+//				if(i!=j) {
+//					int res = bfs(i,j);
+//					System.out.println(i+"->"+j +" : " + res);
+//					memo[i] += res;
+//				}
+//			}
+//		}
 //		-------------------------------------------
+		
 		
 //		----------- Floyd-Warshall main code ------------
 		
-//		int[][] floyd = new int[n+1][n+1];
-//		
-//		// 초기화 
-//		for(int i=1; i<n+1; i++) {
-//			for(int j=1; j<n+1; j++) {
-//				if(i==j) floyd[i][j] = 0;
-//				else floyd[i][j] = 99999999;
-//			}
-//		}
-//		
-//		for(int i=0; i<m; i++) {
-//			st = new StringTokenizer(br.readLine());
-//			
-//			int a = Integer.parseInt(st.nextToken());
-//			int b = Integer.parseInt(st.nextToken());
-//			
-//			floyd[a][b] =1;
-//			floyd[b][a] =1;
-//		}
-//		
-//		
-//		for(int k=1; k<n+1; k++) {
-//			for(int i=1; i<n+1; i++) {
-//				for(int j=1; j<n+1; j++) {
-//					if(floyd[i][j] > floyd[i][k] + floyd[k][j]) {
-//						floyd[i][j] = floyd[i][k] + floyd[k][j];
-//					}
-//				}
-//				
-//			}
-//			
-//		}
-//		
-//		for(int i=1; i<n+1; i++) {
-//			for(int j=1; j<n+1; j++) {
-//				System.out.print(floyd[i][j] +" ");
-//			}
-//			System.out.println();
-//		}
-//		
-//		for(int i=1; i<n+1; i++) {
-//			for(int j=1; j<n+1; j++) {
-//				memo[i] += floyd[i][j];
-//			}
-//		}
+		int[][] floyd = new int[n+1][n+1];
+		
+		// 초기화 
+		for(int i=1; i<n+1; i++) {
+			for(int j=1; j<n+1; j++) {
+				if(i==j) floyd[i][j] = 0;
+				else floyd[i][j] = 99999999;
+			}
+		}
+		
+//		 floyd input 
+		for(int i=0; i<m; i++) {
+			st = new StringTokenizer(br.readLine());
+			
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			
+			floyd[a][b] =1;
+			floyd[b][a] =1;
+		}
+		
+		
+		for(int k=1; k<n+1; k++) {
+			for(int i=1; i<n+1; i++) {
+				for(int j=1; j<n+1; j++) {
+					if(floyd[i][j] > floyd[i][k] + floyd[k][j]) {
+						floyd[i][j] = floyd[i][k] + floyd[k][j];
+					}
+				}
+				
+			}
+			
+		}
+		
+		for(int i=1; i<n+1; i++) {
+			for(int j=1; j<n+1; j++) {
+				System.out.print(floyd[i][j] +" ");
+			}
+			System.out.println();
+		}
+		
+		for(int i=1; i<n+1; i++) {
+			for(int j=1; j<n+1; j++) {
+				memo[i] += floyd[i][j];
+			}
+		}
 		
 		
 		
