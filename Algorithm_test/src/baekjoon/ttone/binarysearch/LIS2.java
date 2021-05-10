@@ -2,12 +2,11 @@ package baekjoon.ttone.binarysearch;
 
 // #12015 이진탐색 가장 긴 증가하는 부분 수열 2 
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class LIS2 {
 	
 	static int[] memo;
-	static int INF = Integer.MIN_VALUE;
 
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -31,7 +30,10 @@ public class LIS2 {
 				System.out.println("길이 : " + len +" -> " +arr[i]);
 				memo[len] = arr[i];
 			}else {
-//				idx = Arrays.binarySearch(memo, 0, len, arr[i]);
+				idx = Arrays.binarySearch(memo, 0, len, arr[i]);
+//				if(idx<0) {
+//					idx = -idx-1;
+//				}
 				
 				idx = binarySearch(0,len, arr[i]);
 				System.out.println(arr[i] +" -> "+idx);
