@@ -1,4 +1,4 @@
-package baekjoon.ttone.binarysearch;
+package baekjoon.ttone.binarySearch;
 
 // #13711 이진탐색 LCS4
 import java.io.*;

@@ -1,4 +1,4 @@
-package baekjoon.ttone.binarysearch;
+package baekjoon.ttone.binarySearch;
 
 // #12015 이진탐색 가장 긴 증가하는 부분 수열 2 
 import java.io.*;
