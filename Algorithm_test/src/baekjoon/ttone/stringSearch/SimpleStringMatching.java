@@ -11,7 +11,7 @@ public class SimpleStringMatching {
 		
 		
 		String s1 = br.readLine();
-		String s2 = br.readLine()
+		String s2 = br.readLine();
 		
 		System.out.println(findString(s1,s2));
 		
