@@ -1,6 +1,7 @@
 package baekjoon.ttone.graph;
 
 // #16234 bfs/dfs 인구이동 - 중간 저장 
+// 예제는 다 풀리는데 반례를 모르겠음 내일 마저 고고 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
