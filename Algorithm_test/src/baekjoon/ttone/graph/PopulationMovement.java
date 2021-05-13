@@ -70,7 +70,7 @@ public class PopulationMovement {
 			
 			// 연합 존재하지 않으면 이동 종료 
 			if(!flag) break;
-			System.out.println(move_num+ " 시작 ======================");
+//			System.out.println(move_num+ " 시작 ======================");
 			
 			// 2. 존재하는 연합 탐색 및 인구 이동  
 			move_num ++;
