@@ -1,7 +1,6 @@
 package baekjoon.ttone.graph;
 
-// #16234 bfs/dfs 인구이동 - 중간 저장 
-// 예제는 다 풀리는데 반례를 모르겠음 내일 마저 고고 
+// #16234 bfs/dfs 인구이동 - 1차 풀이   
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +12,6 @@ public class PopulationMovement {
 	
 	static int n,l,r;
 	static int[][] map;
-	static boolean[][] barrier; // (a,b) a와 b의 국경 상태
 	static boolean[] check;
 	static List<Integer>[] union;
 	static int cnt, sum;
@@ -51,7 +49,7 @@ public class PopulationMovement {
 	
 	static void solve() {
 		
-		// 국경 열려있을 때 까지 반복 
+		// 열 수있는 국경이 존재할 때 까지 반복 
 		int move_num =0;
 		while(true) {
 			flag = false;
@@ -61,11 +59,12 @@ public class PopulationMovement {
 			for(int i=0; i<n*n; i++) {
 				union[i] = new ArrayList<>();
 			}
-			barrier = new boolean[n*n][n*n];
+			
 			for(int i=0; i<n; i++) {
 				for(int j=0; j<n; j++) {
 					// i,j 나라 탐색 
 					openDoor(i,j);
+					
 				}
 			}
 			
@@ -76,41 +75,42 @@ public class PopulationMovement {
 			// 2. 존재하는 연합 탐색 및 인구 이동  
 			move_num ++;
 			check = new boolean[n*n];
-			for(int i=0; i<n*n; i++) {
+			List<Integer> visit = new ArrayList<>();
+			for(int a=0; a<n*n; a++) {
 				
-				if(union[i].size() >0 && !check[i]) {
+				if(union[a].size() >0 && !check[a]) {
 					cnt =0; sum =0;
-//					System.out.println();
-					System.out.println(i + " : 연합 탐색 시작");
-					unionSearch(i);
-					System.out.println("총 인원 : " + sum +", 연합국 갯수 : " +cnt);
+//					System.out.println(a + " : 연합 탐색 시작");
+					// 연합 탐색 시작 
+					unionSearch(a);
+//					System.out.println("총 인원 : " + sum +", 연합국 갯수 : " +cnt);
 					
-					
-					//인구 이동 
+					//인구 이동 수 계산 
 					int re_population = sum/cnt;
-					System.out.println("해당 연합 인구 이동 " +re_population);
+					
+//					System.out.println("해당 연합 인구 이동 " +re_population);
 					for(int nara=0; nara<n*n; nara++) {
-						if(check[nara]) {
+						if(check[nara] && !visit.contains(nara)) {
+							visit.add(nara); // 이미 방문 싸이클 체크 
 //							System.out.println(nara + " 이동완료");
 							int x = nara/n;
 							int y = nara%n;
 							map[x][y] = re_population;
 						}
 					}
-					System.out.println(i + " : 연합 탐색 및 인구이동 끝");
-					System.out.println();
+//					System.out.println(a + " : 연합 탐색 및 인구이동 끝");
 					
 				}
 			}
 			
 //			 이동 확인 
-			for(int[] num : map) {
-				System.out.println(Arrays.toString(num));
-			}
-			System.out.println();
+//			for(int[] num : map) {
+//				System.out.println(Arrays.toString(num));
+//			}
+//			System.out.println();
 		}
 		
-		
+		// 결과 출력 
 		System.out.println("총 이동횟수 : " + move_num);
 		
 	}
@@ -152,21 +152,16 @@ public class PopulationMovement {
 			int b_name= n*nx +ny;
 			int b_num = map[nx][ny];
 			
-			// 무조건 a_name가 작음, b_name이 큼 
-//			if(a_name < b_name) {
-				int dif = Math.abs(a_num-b_num);
-				if(barrier[a_name][b_name] || barrier[b_name][a_name]) continue;
+			int dif = Math.abs(a_num-b_num);
+			if(union[a_name].contains(b_name) || union[b_name].contains(a_name)) continue;
 				
-				if(l <= dif && dif <=r) {
-					flag = true;
-					// a_name, b_name 국경 개방 
-//					System.out.println(a_name +" ," + b_name+ " 국경 오픈 ");
-					union[a_name].add(b_name);
-					union[b_name].add(a_name);
-					barrier[a_name][b_name] = true;
-					barrier[b_name][a_name] = true;
-				}
-//			}
+			// a_name, b_name 국경 개방 
+			if(l <= dif && dif <=r) {
+				flag = true;
+//				System.out.println(a_name +" ," + b_name+ " 국경 오픈 ");
+				union[a_name].add(b_name);
+				union[b_name].add(a_name);
+			}
 			
 		}
 	}
