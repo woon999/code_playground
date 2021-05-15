@@ -1,6 +1,6 @@
 package baekjoon.ttone.dp;
 
-// #3344 N-Queen 
+// #3344 N-Queen - 중간 저장 
 import java.io.*;
 
 
