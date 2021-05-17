@@ -1,60 +1,55 @@
 package baekjoon.ttone.dp;
 
-// #3344 N-Queen - 중간 저장 
+// #3344 N-Queen  
 import java.io.*;
 
 
 public class NQueen2 {
 
-	static int n;
-	static int[] map;
-	static StringBuilder sb = new StringBuilder();
  	public static void main(String[] args) throws IOException{
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+ 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+ 		StringBuilder sb = new StringBuilder();
+ 		int n = Integer.parseInt(br.readLine());
+ 		
+ 		if(n%6 !=2 && n%6 !=3) {
+ 			for(int i=1; i<=n/2; i++) {
+ 				sb.append(2*i-1).append("\n");
+ 			}
+ 			if(n%2 ==1) {
+ 				sb.append(n).append("\n");
+ 			}
+ 			for(int i=1; i<=n/2; i++) {
+ 				sb.append(2*i).append("\n");
+ 			}
+ 			
+ 		}else if(n % 6 == 2) {
+ 			
+ 			for(int i=1; i<=n/2; i++) {
+ 				sb.append(2*i).append("\n");
+ 			}
+ 			sb.append(3).append("\n");
+ 			sb.append(1).append("\n");
+ 			for(int i=n/2+2; i<n-1; i++) {
+ 				sb.append(2*(i-n/2 +1)+1).append("\n"); // 2x+1 
+ 			}
+ 			sb.append(5).append("\n");
+ 			
+ 		}else if(n%6 ==3) {
+ 			for(int i=2; i<=n/2; i++) {
+ 				sb.append(2*i).append("\n");
+ 			}
+ 			sb.append(2).append("\n");
+ 			
+ 			for(int i=n/2; i<n-2; i++) {
+ 				sb.append((i-n/2 +2)*2+1).append("\n");
+ 			}
+ 			sb.append(1).append("\n");
+ 			sb.append(3).append("\n");
+ 		}
+ 		
+ 		
+ 		System.out.println(sb.toString());
+ 		
 		
-		n = Integer.parseInt(br.readLine());
-		
-		map = new int[n+1];
-		
-		for(int i=1; i<n+1; i++) {
-			map[1]=i;
-			dfs(2);
-		}
-		System.out.println(sb.toString());
-		
-	}
-static void dfs(int depth) {
-		if(sb.length() == n*2) return;
-		
-		if(depth == n+1) {
-//			System.out.println("coin!");
-			for(int i=1; i<n+1; i++) {
-				sb.append(map[i]+ "\n");
-			}
-			return;
-		}
-		
-		
-		for(int i=1; i<n+1; i++) {
-			map[depth] = i;
-			if(condition(depth)) {
-				dfs(depth+1);
-			}
-		}
-		
-		
-	}
-	
-	static boolean condition(int depth) {
-		
-		for(int i=1; i<depth; i++) {
-			// 세로방향 
-			if(map[i] == map[depth]) return false;
-
-			// 대각선 방향 
-			if(Math.abs(i-depth) == Math.abs(map[i]-map[depth])) return false;
-		}
-		
-		return true;
 	}
 }
