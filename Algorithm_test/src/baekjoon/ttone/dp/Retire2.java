@@ -12,9 +12,9 @@ public class Retire2 {
 		int n = Integer.parseInt(br.readLine());
 		StringTokenizer st = null; 
 		
-		int[][] arr =new int[n+1][2];
-		int[] dp = new int[n+1];
-		for(int i=0; i<n; i++) {
+		int[][] arr =new int[n+2][2];
+		int[] dp = new int[n+2];
+		for(int i=1; i<n+1; i++) {
 			st = new StringTokenizer(br.readLine());
 			
 			int t = Integer.parseInt(st.nextToken());
@@ -26,13 +26,13 @@ public class Retire2 {
 		}
 		
 		int max = -1;
-		for(int i=0; i<n+1; i++) {
+		for(int i=1; i<n+2; i++) {
 			if(max < dp[i]) {
 				max = dp[i];
 			}
 			
 			int nxt = i +arr[i][0];
-			if(nxt < n+1) {
+			if(nxt < n+2) {
 				dp[nxt] = Math.max(dp[nxt], max+arr[i][1]);
 			}
 		}
@@ -41,6 +41,6 @@ public class Retire2 {
 			System.out.println(num);
 		}
 		
-		System.out.println(dp[n]);
+		System.out.println(dp[n+1]);
 	}
 }
