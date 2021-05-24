@@ -1,4 +1,4 @@
-package baekjoon.ttone.graph;
+package baekjoon.ttone.dp;
 
 // #2213 dp,traversal 트리의 독립집합 
 import java.io.*;
