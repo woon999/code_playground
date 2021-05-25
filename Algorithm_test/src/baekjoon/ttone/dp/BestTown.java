@@ -1,6 +1,6 @@
 package baekjoon.ttone.dp;
 
-// #1949 dp 우수마을 (dp, dfs, tree)
+// #1949 dp 우수마을 (dp, tree)
 import java.io.*;
 import java.util.*;
 
