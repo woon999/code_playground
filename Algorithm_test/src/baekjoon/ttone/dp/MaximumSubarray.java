@@ -23,8 +23,8 @@ public class MaximumSubarray {
 			for(int i=0; i<n; i++) {
 				arr[i] = Integer.parseInt(st.nextToken());
 			}
-//			System.out.println(solve(0,n-1, arr));
-			System.out.println(dp(arr));
+			System.out.println(solve(0,n-1, arr));
+//			System.out.println(dp(arr));
 		}
 	}
 	static int dp(int[] arr) {
