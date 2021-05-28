@@ -60,7 +60,7 @@ public class MaximumSubarray {
 		int lSum=0, rSum=0;
 		int lMax = Integer.MIN_VALUE;
 		int rMax = Integer.MIN_VALUE;
-		for(int i=mid; i>=0; i--) {
+		for(int i=mid; i>=left; i--) {
 			lSum += arr[i];
 			lMax = lSum > lMax? lSum : lMax;
 		}
