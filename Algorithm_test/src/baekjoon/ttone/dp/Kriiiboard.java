@@ -11,19 +11,19 @@ public class Kriiiboard {
 		int n = Integer.parseInt(br.readLine());
 		dp = new long[n+1];
 		
-		// bottom-up
-//		for(int i=1; i<n+1; i++) {
-//			dp[i] = dp[i-1]+1;
-//			
-//			if(i>6) {
-//				for(int j=2; j<6; j++) {
-//					dp[i] = Math.max(dp[i], dp[i-(j+1)]*j);
-//				}
-//			}
-//		}
-//		System.out.println(dp[n]);
+//		 bottom-up
+		for(int i=1; i<n+1; i++) {
+			dp[i] = dp[i-1]+1;
+			
+			if(i>6) {
+				for(int j=2; j<i; j++) {
+					dp[i] = Math.max(dp[i], dp[i-(j+1)]*j);
+				}
+			}
+		}
+		System.out.println(dp[n]);
 		
-		System.out.println(solve(n));
+//		System.out.println(solve(n));
 	}
 	
 	// top-down
