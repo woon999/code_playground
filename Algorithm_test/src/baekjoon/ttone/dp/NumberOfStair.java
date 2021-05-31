@@ -30,15 +30,15 @@ public class NumberOfStair {
 					...
 					k = 1023, 11 1111 1111
 					
-			i : 2, j : 3, k : 00 0000 1110 : 28 (2^0은 표기 생략)
-			2자리 숫자 중 4로 끝나면서 234가 포함된 계단 수는? 
+			i : 2, j : 3, k : 00 0001 1100 : 28 
+			2자리 숫자 중 4로 끝나면서 234가 포함된 계단 수는?
+		    답 : 23,43  (dp[2][3][12] + dp[2][3][24] = 2개)
 		 */
 		
 		for(int i=2; i<n+1; i++) {
 			for(int j=0; j<10; j++) {
 				for(int k=0; k<1024; k++) {
 					int bit = k | (1 << j);
-//					System.out.println(j+ "bit : " + bit + ", k : "+ k);
 					if(j==0) {
 						dp[i][j][bit] = (dp[i][j][bit] + dp[i-1][j+1][k]) % MOD;
 					}
@@ -53,7 +53,8 @@ public class NumberOfStair {
 		}
 		
 		long sum = 0;
-		System.out.println(dp[2][3][28]);
+		System.out.println(dp[2][3][12]);
+	
 		for(int i=0; i<10; i++) {
 			System.out.print(dp[n][i][1023]+" ");
 			sum = (sum + dp[n][i][1023]) % MOD;
