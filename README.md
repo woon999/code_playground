@@ -42,5 +42,5 @@ PS 연습은 백준과 프로그래머스를 통해 연습하고 있습니다. (
   21. [알고리즘] 서로소 집합 자료구조 (Union-find) [(link)](https://loosie.tistory.com/158?category=972195)
 
 
-
+---
 최종 수정 2021.06.02 © loosie
