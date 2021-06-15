@@ -29,19 +29,6 @@ public class TSP {
 		}
 		
 		System.out.println(tsp(0,1));
-		
-		for(int i=0; i<n; i++) {
-			for(int j=0; j<statusFullBit; j++) {
-				int num = dp[i][j];
-				if(num == INF) {
-					System.out.print(0+" ");
-				}else {
-					System.out.print(dp[i][j] +" ");
-				}
-			}
-			System.out.println();
-		}
-		System.out.println(1 | (1<<3));
 	}
 	
 	static int tsp(int x, int check) {
