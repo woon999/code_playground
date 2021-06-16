@@ -18,16 +18,16 @@ public class PrefixSumWithSegmentTree {
 		int k = Integer.parseInt(st.nextToken());
 		
 		arr = new long[n];
-		tree = new long[getSize()];
+		tree = new long[getTreeSize()];
 		for(int i=0; i<n; i++) {
 			arr[i] = Long.parseLong(br.readLine());
 		}
 		
 		init(0, n-1, 1);
-		for(int i=0; i<tree.length; i++) {
-			System.out.print(tree[i]+" ");
-		}
-		System.out.println();
+//		for(int i=0; i<tree.length; i++) {
+//			System.out.print(tree[i]+" ");
+//		}
+//		System.out.println();
 		while(true) {
 			if(m==0 && k==0) break;
 			
@@ -55,13 +55,10 @@ public class PrefixSumWithSegmentTree {
 		
 		System.out.println(sb.toString());
 	}
-	static int getSize() {
-		int size =1;
+	static int getTreeSize() {
+		int h = (int)Math.ceil(Math.log(n)/Math.log(2)) +1;
 		
-		while(size <n) {
-			size*=2;
-		}
-		return size+2;
+		return (int)Math.pow(2, h)-1;
 	}
 	
 	static long init(int start, int end, int node) {
