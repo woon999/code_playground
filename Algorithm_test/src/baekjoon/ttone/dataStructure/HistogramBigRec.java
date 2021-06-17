@@ -61,7 +61,7 @@ public class HistogramBigRec {
 	}
 	static long getMax(int left, int right) {
 		int n = arr.length;
-		int m = query(1,0,n-1,left,right);
+		int m = query(0,n-1,left,right,1);
 		
 		long area = (long)(right - left +1)*(long)arr[m];
 //		System.out.println(left+"~"+right+ " : " + m + " -> size :" + area);
@@ -82,31 +82,27 @@ public class HistogramBigRec {
 		return area;
 	}
 	
-	static int query(int node, int start, int end, int left, int right) {
-		
-		if(left > end || right < start) {
-			
-			return -1;
-		}
+	static int query(int start, int end, int left, int right, int node) {
+		if(left > end || right < start) return -1;
 		if(left <= start && end <= right) {
 			return tree[node];
 		}
 		
 		int mid = (start+end)/2;
-		int m1  = query(node*2, start, mid, left, right);
-		int m2 = query(node*2+1, mid+1, end, left, right);
+		int leftNode = query(start, mid, left, right, node*2);
+		int rightNode = query(mid+1, end, left, right, node*2+1);
 		
-		if(m1 == -1) {
-			return m2;
+		if(leftNode == -1) {
+			return rightNode;
 		}
-		else if(m2 == -1) {
-			return m1;
+		else if(rightNode == -1) {
+			return leftNode;
 		}
 		else {
-			if(arr[m1]<=arr[m2])
-				return m1;
+			if(arr[leftNode]<=arr[rightNode])
+				return leftNode;
 			else 
-				return m2;
+				return rightNode;
 		}
 	}
 	
