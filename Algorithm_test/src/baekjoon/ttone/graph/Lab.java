@@ -38,13 +38,13 @@ public class Lab {
 			}
 		}
 		
-		backTracking(0,0);
+		makeWall(0,0);
 		System.out.println(max);
 		
 	}
 	
-	// backtracking: 벽3개 세우기 
-	static void backTracking(int start, int wallNum) {
+	// Backtracking : 벽3개 세우기 
+	static void makeWall(int start, int wallNum) {
 	
 		if(wallNum == 3) {
 			// map 복사
@@ -62,14 +62,13 @@ public class Lab {
 			return;
 		}
 		
-//		숫자를 0 ~ n*m 까지 증가시킬때 (i/m, i%m) 을 좌표로 하면 2차원 배열의 모든 인덱스를 탐색
 		for(int i=start; i< n*m; i++) {
 			int x = i/m;
 			int y = i%m;
 			
 			if(map[x][y] ==0) {
 				map[x][y] =1;
-				backTracking(i+1, wallNum+1);
+				makeWall(i+1, wallNum+1);
 				map[x][y] =0;
 			}
 		}
