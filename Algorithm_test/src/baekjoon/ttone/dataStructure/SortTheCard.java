@@ -2,7 +2,6 @@ package baekjoon.ttone.dataStructure;
 
 // #1715 dataStructure 카드정렬하기 - Priority Queue  
 import java.io.*;
-import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
