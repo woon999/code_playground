@@ -1,6 +1,6 @@
 package baekjoon.ttone.dataStructure;
 
-// #1939 dataStructure 중량제한 (bfs,이진탐색) 
+// #1939 dataStructure 중량제한 (bfs,이진탐색)
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
