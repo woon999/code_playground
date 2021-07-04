@@ -17,9 +17,12 @@ public class StringBoom {
 		
 		for(int i=0; i<line.length(); i++) {
 			st.push(line.charAt(i));
-				
+			
+			// 폭발 문자열과 길이가 같아지면 탐색 시작 
 			if(st.size()>= regexSize) {
 				boolean flag = true;
+				
+				// st.size-regexSize부터 ~ st.size까지 탐색하여 regex와 일치하면 제거 
 				for(int j=0; j<regexSize; j++) {
 					if(st.get(st.size()-regexSize+j) != regex.charAt(j)) {
 						flag = false;
