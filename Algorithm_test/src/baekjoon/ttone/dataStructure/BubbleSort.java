@@ -7,9 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-//6
-//6 4 3 5 2 1
-
 public class BubbleSort {
 
 	static int n;
@@ -34,22 +31,8 @@ public class BubbleSort {
 		long ans =0;
 		for(int i=0; i<n; i++)	{
 			int idx = pos.get(index[i]);
-//			ans += sum(0, n-1, 1, idx+1, n-1);
-			long s = sum(0, n-1, 1, idx+1, n-1);
-			ans += s;
-			System.out.println(index[i] +" :" + idx+ "###################+"+s);
-			System.out.println((idx+1) + " ~ " + (n-1));
-			for(long a : tree)	{
-				System.out.print(a+" ");
-			}
-			System.out.println();
+			ans += sum(0, n-1, 1, idx+1, n-1);
 			update(0, n-1, 1, idx, 1);
-			for(long a : tree)	{
-				System.out.print(a+" ");
-			}
-			System.out.println();
-			System.out.println("###################");
-			
 		}
 		System.out.println(ans);
 	}
@@ -62,7 +45,6 @@ public class BubbleSort {
 	static long sum(int start, int end, int node, int left, int right) {
 		if(end < left || right < start ) return 0;
 		if(left <= start && end <= right) {
-			System.out.println("sum : "+node+"---" + tree[node]);
 			return tree[node];
 		
 		}
