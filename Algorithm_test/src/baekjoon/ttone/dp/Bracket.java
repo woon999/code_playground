@@ -21,6 +21,7 @@ public class Bracket {
 			}
 		}
 		
+		
 		for(int i=0; i<t; i++) {
 			int a = Integer.parseInt(br.readLine());
 			System.out.println(dp[a]);
@@ -30,7 +31,7 @@ public class Bracket {
 		// dp[2] = 1 // ("") dp[2]*dp[0]
 		// dp[4] = 2 // (dp[2])"", ("")dp[2] 
 		// dp[6] = 5 // (dp[4])"", ("")dp[4], (dp[2])dp[2] 
-		// dp[8] = 14  // (dp[6])"", ("")dp[6], (dp[4])dp[4] 
+		// dp[8] = 14  // (dp[6])"", ("")dp[6], (dp[4])dp[2],(dp[2])dp[4] 
 		   
 	}
 }
