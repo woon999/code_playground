@@ -38,14 +38,15 @@ PS 연습은 백준과 프로그래머스를 통해 연습하고 있습니다. (
   1. [알고리즘] 최소 신장 트리 크루스칼 알고리즘 [(link)](https://loosie.tistory.com/159?category=972195)
   1. [알고리즘] 다익스트라 vs 크루스칼 [(link)](https://loosie.tistory.com/167?category=972195)
   1. [알고리즘] 벨만 포드 알고리즘 [(link)](https://loosie.tistory.com/category/Java/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20%E2%88%99%20%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0)
-  1. [알고리즘] 순열(Permutation)과 조합(Combination) [(link)](https://loosie.tistory.com/286?category=972195)
-  1. [알고리즘] 문자열 매칭 알고리즘 KMP [(link)](https://loosie.tistory.com/192?category=972195)
-  1. [알고리즘] 서로소 집합 자료구조 (Union-find) [(link)](https://loosie.tistory.com/158?category=972195)
-  1. [알고리즘] 소수 (Prime Number) 구하기 [(link)](https://loosie.tistory.com/267?category=972195)
-  1. [알고리즘] 외판원 순회 (TSP; Traveling Salesman Problem) [(link)](https://loosie.tistory.com/272?category=972195)
-  1. [알고리즘] 세그먼트 트리 (Segment Tree) [(link)](https://loosie.tistory.com/273?category=972195)
-  1. [알고리즘] 세그먼트 트리 + Lazy Propagation [(link)](https://loosie.tistory.com/327?category=972195)
   1. [알고리즘] 투 포인터와 슬라이딩 윈도우 [(link)](https://loosie.tistory.com/327?category=972195)
+  3. [알고리즘] 순열(Permutation)과 조합(Combination) [(link)](https://loosie.tistory.com/286?category=972195)
+  4. [알고리즘] 문자열 매칭 알고리즘 KMP [(link)](https://loosie.tistory.com/192?category=972195)
+  5. [알고리즘] 서로소 집합 자료구조 (Union-find) [(link)](https://loosie.tistory.com/158?category=972195)
+  6. [알고리즘] 소수 (Prime Number) 구하기 [(link)](https://loosie.tistory.com/267?category=972195)
+  7. [알고리즘] 외판원 순회 (TSP; Traveling Salesman Problem) [(link)](https://loosie.tistory.com/272?category=972195)
+  8. [알고리즘] 세그먼트 트리 (Segment Tree) [(link)](https://loosie.tistory.com/273?category=972195)
+  9. [알고리즘] 세그먼트 트리 + Lazy Propagation [(link)](https://loosie.tistory.com/327?category=972195)
+
 
 
 ---
