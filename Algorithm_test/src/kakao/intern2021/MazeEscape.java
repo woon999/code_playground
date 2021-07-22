@@ -119,23 +119,25 @@ public class MazeEscape {
                     if(trapList.containsKey(nxt.to)) {
                     	f2 = ((status & trapList.get(nxt.to)) != 0);
                     	nStatus = trapSwitch(f2, status,trapList.get(nxt.to));
-	                    
-	                    if(f1&f2 || (!f1&!f2)) {
+	                    // tt, ff
+	                    if(!f1^f2) {
+	                    	System.out.println("#1 " + f1+","+f2);
 	                    	if(dist[nxt.to][status] > w + nxt.weight) {
                                 dist[nxt.to][status] = w + nxt.weight;
                                 q.add(new Node(nxt.to, dist[nxt.to][status], nStatus));
                             }
 	                    }
                     }
+                    // f f(일반)  
                     else {
                         if(!f1) {
+                        	System.out.println("#2 " + f1+","+f2);
                             if(dist[nxt.to][status] > w + nxt.weight) {
                                 dist[nxt.to][status] = w + nxt.weight;
                                 q.add(new Node(nxt.to, dist[nxt.to][status], nStatus));
                             }
                         }
                     }
-                   
 	            }
 	            // 역방향 (tf, ft)  
 	            f2 = false;
@@ -146,6 +148,7 @@ public class MazeEscape {
 	                	nStatus = trapSwitch(f2, status,trapList.get(nxt.to));
 	                }
 	                if(f1^f2) {
+	                	System.out.println("## " + f1+","+f2);
                     	if(dist[nxt.to][status] > w + nxt.weight) {
                             dist[nxt.to][status] = w + nxt.weight;
                             q.add(new Node(nxt.to, dist[nxt.to][status], nStatus));
@@ -170,5 +173,4 @@ public class MazeEscape {
 				return now|node;
 			}
 		}
-
 }
