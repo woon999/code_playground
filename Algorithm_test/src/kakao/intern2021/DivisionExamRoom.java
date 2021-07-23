@@ -59,7 +59,7 @@ public class DivisionExamRoom {
         
         System.out.println();
         
-        trevarsal(root,0);
+        traversal(root,0);
         
         System.out.println();
         for(int a=0; a<size; a++) {
@@ -72,15 +72,15 @@ public class DivisionExamRoom {
         return answer;
     }
 	
-	static void trevarsal(int pos, int cnt) {
+	static void traversal(int pos, int cnt) {
 		
 		Node curNode = list[pos].get(0);
 //		System.out.println(curNode.left+" , " +pos + " ," + curNode.right);
 		
 		for(Node child : list[pos]) {
 			
-			if(child.left!=-1) trevarsal(child.left, cnt+1);
-			if(child.right!=-1) trevarsal(child.right, cnt+1);
+			if(child.left!=-1) traversal(child.left, cnt+1);
+			if(child.right!=-1) traversal(child.right, cnt+1);
 			
 			System.out.println("--------------------------");
 			System.out.println(pos + "번 노드 " + cnt);
