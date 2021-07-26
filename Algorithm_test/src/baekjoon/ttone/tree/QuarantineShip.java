@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
 public class QuarantineShip {
 
 	static int MAX = 100_001;
-	static long INF = Long.MAX_VALUE-987_654_321; 
+	static long INF = Long.MAX_VALUE-100_001; 
 	static long[] data;
 	static long[][] dp;
 	static boolean[] check;
