@@ -30,7 +30,7 @@ public class ClimbingStairs {
 			dp[3] = Math.max(data[1] + data[3], data[2] + data[3]);
 			
 			for(int i=4; i<n+1; i++) {
-				// 1. 한 계단 + 한 계단 + (한 칸 뛰고) + 두 계단 오른 경우 
+				// 1. 한 계단 + 두 계단 오른 경우 
 				// 2. 한 번에 두 계단오른 경우
 				dp[i] = Math.max(dp[i-3] + data[i] + data[i-1], dp[i-2] + data[i]);
 			}
