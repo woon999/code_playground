@@ -18,22 +18,23 @@ public class Editor {
 		
 		Stack<Character> dS= new Stack<>();
 		for(int i=0; i<m; i++) {
-			String[] op = br.readLine().split(" ");
+			String op = br.readLine();
+			char o = op.charAt(0);
 			
-			if(op[0].equals("L")) {
+			if(o == 'L') {
 				if(!s.isEmpty()) {
 					dS.push(s.pop());
 				}
-			}else if(op[0].equals("D")) {
+			}else if(o == 'D') {
 				if(!dS.isEmpty()) {
 					s.push(dS.pop());
 				}
-			}else if(op[0].equals("B")) {
+			}else if(o == 'B') {
 				if(!s.isEmpty()) {
 					s.pop();
 				}
 			}else {
-				s.push(op[1].charAt(0));
+				s.push(op.charAt(2));
 			}
 		}
 		
@@ -41,7 +42,6 @@ public class Editor {
 			s.push(dS.pop());
 		}
 		
-		StringBuilder sb = new StringBuilder();
 		for(int i=0; i<s.size(); i++) {
 			bw.write(s.get(i));
 		}
