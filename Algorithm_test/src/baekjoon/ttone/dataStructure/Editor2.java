@@ -1,6 +1,6 @@
 package baekjoon.ttone.dataStructure;
 
-// #1406 dataStructrue 에디터 - 연결리스트 직접 구현  
+// #1406 dataStructrue 에디터 - 연결리스트 직접 구현 
 import java.io.*;
 import java.util.Stack;
 
@@ -101,6 +101,12 @@ public class Editor2 {
 				len++;
 				cursor = cursor.insert(add);
 			}
+			
+//			if(cursor.data=='0') {
+//				System.out.println(o +" : " + cursor.data +" ---- " + cursor.next.data);
+//			}else {
+//				System.out.println(o +" : " + cursor.prev.data+ " --- " + cursor.data +" ---- " + cursor.next.data);
+//			}
 		}
 		
 		while(true) {
