@@ -73,78 +73,84 @@ public class QuarantineShip {
 		System.out.println(sb.toString());
 	}
 	
-	static void solve(int pos, int prev){
+	static void solve(int pos, int parent){
 		long now = data[pos];
-		if(data[pos] <= mid) {
-			dp[pos][0] = 0; 
-			dp[pos][1] = now;
-		}else {
-			dp[pos][0] = MAX;
-			dp[pos][1] = INF;
-		}
 		
-		for(int child : list[pos]) {
-			if(child != prev) {
-				solve(child, pos);
-				 
-				System.out.println("pos :" + pos + ", child :"+ child + " : ("+dp[pos][1]+")");
-				if(!checked[pos]) {
-					checked[pos]= true;
-					// 1. 두 트리 합치기 
-					if(dp[pos][1]+dp[child][1] <= mid) {
-						dp[pos][0] = dp[child][0];
-						dp[pos][1] = dp[child][1] + dp[pos][1];
-//						System.out.println("#합 " + pos+"+"+child+" : ("+ dp[pos][1]+")  <=" + mid);
+		List<Integer> child = new ArrayList<>();
+		boolean flag = true;
+		for(int nxt : list[pos]) {
+			if(nxt != parent) {
+				flag = false;
+				solve(nxt, pos);
+				child.add(nxt);
+//				System.out.println(pos +", " +nxt);
+			}
+		}
+		System.out.println(pos);
+//		for(int a : child) {
+//			System.out.println("#" + a);
+//		}
+		
+		// leaf node 초기화 
+		if(flag) {
+			if(now <= mid) {
+				dp[pos][0] = 0;
+				dp[pos][1] = now;
+			}else {
+				dp[pos][0] = MAX;
+				dp[pos][1] = INF;
+			}
+		}else {
+			// child 가중치 큰 순 부터 조회 
+			for(int i=0; i<child.size(); i++) {
+				if(i==0) {
+					if(dp[pos][1]+dp[i][1] <= mid) {
+						dp[pos][0] = dp[i][0];
+						dp[pos][1] = dp[i][1] + dp[pos][1];
 					}
 					// 2. 자식 노드와 바리게이트 pos --- child
 					else if(dp[pos][1] <= mid) {
-						dp[pos][0] = dp[child][0] +1;
+						dp[pos][0] = dp[i][0] +1;
 						dp[pos][1] = dp[pos][1];
-						System.out.println("#바리게이트 " + pos+"~"+child+" : ("+ dp[pos][1]+"+"+dp[child][1]+")  > " + mid);
-						
 					}
 					// 3. 해당 w 탐색 불가
 					else {
 						dp[pos][0] = MAX;
 						dp[pos][1] = INF;
 					}
-				}else {
-//					System.out.println(checked[pos]);
+				}
+				else {
 					// 해당 pos 노드 재방문 (자식노드 2개 이상)
-					if(dp[pos][1] + dp[child][1] <= mid) {
-						dp[pos][0] += dp[child][0];
-						dp[pos][1] = dp[child][1] + dp[pos][1];
-//						System.out.println("#합 " + pos+"+"+child+" : ("+ dp[pos][1]+"+"+dp[child][1]+")  <=" + mid);
+					if(dp[pos][1] + dp[i][1] <= mid) {
+						dp[pos][0] += dp[i][0];
+						dp[pos][1] = dp[i][1] + dp[pos][1];
 					}
 					// 자식노드 갈라야하면 가장 높은 자식노드 제거 
-					else if(now + dp[child][1] <= mid) {
+					else if(dp[pos][1]>now && now + dp[i][1] <= mid) {
 						// 이전 자식노드가 크다면 
-						if((dp[pos][1] - now) > dp[child][1]) {
-							dp[pos][0] += dp[child][0] + 1;
-							dp[pos][1] = now + dp[child][1];
-							System.out.println("#바리게이트 " + pos+"~"+child+" : ("+ now+"+"+dp[child][1]+")  <= " + mid);
+						if((dp[pos][1] - dp[i][1]) > dp[i][1]) {
+							dp[pos][0] += dp[i][0] + 1;
+							dp[pos][1] = now + dp[i][1];
 						}
 						// 현재 자식노드가 크다면 
 						else {
-							dp[pos][0] += dp[child][0] + 1;
-							System.out.println("#바리게이트 " + pos+"~"+child+" : ("+ dp[pos][1]+"----"+dp[child][1]+")  > " + mid);
+							dp[pos][0] += dp[i][0] + 1;
 						}
 					}
 					// 자식노드와 바리게이트 
 					else if(dp[pos][1] <= mid) {
-						dp[pos][0] += dp[child][0] +1;
+						dp[pos][0] += dp[i][0] +1;
 						dp[pos][1] = dp[pos][1];
-						System.out.println("#바리게이트 " + pos+"~"+child+" : ("+ dp[pos][1]+"+"+dp[child][1]+")  > " + mid);
-						
 					}
 					else {
 						dp[pos][0] = MAX;
 						dp[pos][1] = INF;
 					}
 				}
-				
 			}
+			
 		}
+		
 		
 	}
 }
@@ -185,4 +191,13 @@ public class QuarantineShip {
 //4 2
 //3 1
 
+//1
+//7 1
+//1 2 3 4 5 6 7
+//1 2 
+//2 3
+//2 4
+//3 6
+//3 7
+//4 5
 

@@ -1,7 +1,6 @@
 package baekjoon.ttone.tree;
 
-// #13209 tree 검역소 - 중간 저장 2 
-// 현재 코드는 양방향으로 이뤄져 있기 때문에 후위 순회로 dp방문을 하지 않음  
+// #13209 tree 검역소 - 우선순위 큐 풀이  
 import java.io.*;
 import java.util.*;
 
