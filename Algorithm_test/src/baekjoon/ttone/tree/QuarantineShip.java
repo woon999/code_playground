@@ -1,20 +1,13 @@
 package baekjoon.ttone.tree;
 
-// #13209 tree 검역소 - X 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+// #13209 tree 검역소 - 우선순위 큐 풀이  
+import java.io.*;
+import java.util.*;
 
 public class QuarantineShip {
 
-	static int MAX = 100_001;
-	static long mid, INF = MAX*MAX*MAX; 
+	static long cnt, mid;
 	static int[] data;
-	static long[][] dp;
-	static boolean[] checked;
 	static List<Integer>[] list;
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -53,151 +46,46 @@ public class QuarantineShip {
 			for (int i = 1; i <n+1; i++) {
 				max = Math.max(max, data[i]);
 			}
-			while(left+1 < right) {
-				mid = (left+right)/2;
-				dp = new long[n+1][2];
-				checked = new boolean[n+1];
-				System.out.println("----------start----------------"+ mid);
-				solve(1,0);
-				System.out.println(dp[1][0] +" <= " + k);
-				System.out.println();
-				if(max <= mid && dp[1][0] <= k) {
-					right = mid;
+			while(left +1< right) {
+				long m = (left+right)/2;
+				mid = m; cnt = 0;
+				System.out.println("------start------" + mid);
+				System.out.println(left+","  +right);
+				solve(1,1);
+				System.out.println("## cnt : " + cnt);
+				if(max <= m && cnt <= k) {
+					right = m;
 				}else {
-					left= mid;
+					left= m;
 				}
-				
+				System.out.println();
 			}
-			sb.append(right+"\n");
+			sb.append(right).append("\n");
 		}
 		System.out.println(sb.toString());
-	}
+	} 
 	
-	static void solve(int pos, int parent){
+	
+	static long solve(int pos, int prev){
 		long now = data[pos];
 		
-		List<Integer> child = new ArrayList<>();
-		boolean flag = true;
+		Queue<Long> q = new PriorityQueue<>(Collections.reverseOrder());
 		for(int nxt : list[pos]) {
-			if(nxt != parent) {
-				flag = false;
-				solve(nxt, pos);
-				child.add(nxt);
-//				System.out.println(pos +", " +nxt);
+			if(nxt != prev) { 
+				long t = solve(nxt, pos);
+				System.out.println("pos :" + pos + ", child :"+ nxt + " : ("+ t+"+"+ now+")");
+				now += t;
+				q.offer(t);
 			}
 		}
-		System.out.println(pos);
-//		for(int a : child) {
-//			System.out.println("#" + a);
-//		}
 		
-		// leaf node 초기화 
-		if(flag) {
-			if(now <= mid) {
-				dp[pos][0] = 0;
-				dp[pos][1] = now;
-			}else {
-				dp[pos][0] = MAX;
-				dp[pos][1] = INF;
-			}
-		}else {
-			// child 가중치 큰 순 부터 조회 
-			for(int i=0; i<child.size(); i++) {
-				if(i==0) {
-					if(dp[pos][1]+dp[i][1] <= mid) {
-						dp[pos][0] = dp[i][0];
-						dp[pos][1] = dp[i][1] + dp[pos][1];
-					}
-					// 2. 자식 노드와 바리게이트 pos --- child
-					else if(dp[pos][1] <= mid) {
-						dp[pos][0] = dp[i][0] +1;
-						dp[pos][1] = dp[pos][1];
-					}
-					// 3. 해당 w 탐색 불가
-					else {
-						dp[pos][0] = MAX;
-						dp[pos][1] = INF;
-					}
-				}
-				else {
-					// 해당 pos 노드 재방문 (자식노드 2개 이상)
-					if(dp[pos][1] + dp[i][1] <= mid) {
-						dp[pos][0] += dp[i][0];
-						dp[pos][1] = dp[i][1] + dp[pos][1];
-					}
-					// 자식노드 갈라야하면 가장 높은 자식노드 제거 
-					else if(dp[pos][1]>now && now + dp[i][1] <= mid) {
-						// 이전 자식노드가 크다면 
-						if((dp[pos][1] - dp[i][1]) > dp[i][1]) {
-							dp[pos][0] += dp[i][0] + 1;
-							dp[pos][1] = now + dp[i][1];
-						}
-						// 현재 자식노드가 크다면 
-						else {
-							dp[pos][0] += dp[i][0] + 1;
-						}
-					}
-					// 자식노드와 바리게이트 
-					else if(dp[pos][1] <= mid) {
-						dp[pos][0] += dp[i][0] +1;
-						dp[pos][1] = dp[pos][1];
-					}
-					else {
-						dp[pos][0] = MAX;
-						dp[pos][1] = INF;
-					}
-				}
-			}
+		while(!q.isEmpty()&& now > mid) {
 			
+			long remove = q.poll();
+			System.out.println("#바리게이트 " + pos+"~"+prev+" : (" +now+"-"+ remove+ ") / " +now+" > " + mid);
+			now -= remove;
+			cnt++;
 		}
-		
-		
+		return now;
 	}
 }
-//1
-//12 2
-//12 30 1 8 8 6 20 7 5 10 4 1
-//10 8
-//10 5
-//8 7
-//8 2
-//7 4
-//7 1
-//5 9
-//5 6
-//9 12
-//6 3
-//6 11
-
-//1
-//4 0
-//6 9 7 5
-//4 3
-//4 2
-//3 1
-
-//1
-//4 1
-//6 9 7 5
-//4 3
-//4 2
-//3 1
-
-
-//1
-//4 3
-//6 9 7 5
-//4 3
-//4 2
-//3 1
-
-//1
-//7 1
-//1 2 3 4 5 6 7
-//1 2 
-//2 3
-//2 4
-//3 6
-//3 7
-//4 5
-
