@@ -53,13 +53,13 @@ public class PuyoPuyo {
 			
 			mapUpdate();
 			
-			for(int i=0; i<12; i++) {
-				for(int j=0; j<6; j++) {
-					System.out.print(map[i][j] +" ");
-				}
-				System.out.println();
-			}
-			System.out.println("---");
+//			for(int i=0; i<12; i++) {
+//				for(int j=0; j<6; j++) {
+//					System.out.print(map[i][j] +" ");
+//				}
+//				System.out.println();
+//			}
+//			System.out.println("---");
 		}
 
 
