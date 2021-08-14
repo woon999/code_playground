@@ -38,14 +38,14 @@ public class CastleDefense {
 		System.out.println(ans);
 	}
 	
-	static void bfs(int[] archor, int[][] testMap) {
+	static void sumulation(int[] archer, int[][] testMap) {
 		Queue<int[]> ene = new LinkedList<>();
 		int cnt=0;
 		int turn =0;
 		while(true){
 			if(turn > n-1) break;
 			for(int t=0; t<3; t++) {
-				int px = archor[t]; // start
+				int px = archer[t]; // start
 				int py = n-turn; // n-turn : turn마다 궁수 위치 한 칸씩 위로 이동 
 				
 				int min = Integer.MAX_VALUE;
@@ -53,7 +53,6 @@ public class CastleDefense {
 				int ey = -1;
 				for(int i=py-1; i>=0; i--) {
 					for(int j=0; j<m; j++) {
-						if(i<0 || i>n-1 || j<0 ||j >m-1) continue;
 						if(testMap[i][j] == 1) {
 							int dis = Math.abs(py-i) + Math.abs(px-j);
 							
@@ -94,17 +93,15 @@ public class CastleDefense {
 		ans = Math.max(ans, cnt);
 	}
 	
-	// (0~n-1) 3개 조합 
+	// (0~m-1) 3개 조합 
 	static void comb(int idx) {
 		if(s.size() ==3) {		
 			copyMap= copy(copyMap);
-			int[] archor = new int[3];
+			int[] archer = new int[3];
 			for(int i=0; i<3; i++) {
-				archor[i]= s.get(i);
-				System.out.print(archor[i]+" ");
+				archer[i]= s.get(i);
 			}
-			System.out.println();
-			bfs(archor, copyMap);
+			sumulation(archer, copyMap);
 			return;
 		}
 		for(int i=idx; i<m; i++) {
