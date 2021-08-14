@@ -1,6 +1,6 @@
 package baekjoon.ttone.graph;
 
-// #17135 graph 캐슬 디펜스 - bfs, 시뮬레이션
+// #17135 graph 캐슬 디펜스 - 시뮬레이션
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
