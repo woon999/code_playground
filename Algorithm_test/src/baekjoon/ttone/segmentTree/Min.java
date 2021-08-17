@@ -1,4 +1,4 @@
-package baekjoon.ttone.dataStructure;
+package baekjoon.ttone.segmentTree;
 
 // #2357 dataStructure 최솟값 - segmentTree 
 import java.io.*;

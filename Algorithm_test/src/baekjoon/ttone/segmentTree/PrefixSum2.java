@@ -1,4 +1,4 @@
-package baekjoon.ttone.dataStructure;
+package baekjoon.ttone.segmentTree;
 
 // #10999 dataStructure 구간 합 구하기 2 - 세그먼트 트리 with lazy propagation
 // 단순 세그먼트 트리로 접근하게 되면 update할 때마다 최악의 경우 트리 전체를 업데이트해야 하기 때문에 

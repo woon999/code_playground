@@ -1,4 +1,4 @@
-package baekjoon.ttone.dataStructure;
+package baekjoon.ttone.segmentTree;
 
 // #2042 prefixSum 구간 합 구하기 - segment tree 
 import java.io.*;

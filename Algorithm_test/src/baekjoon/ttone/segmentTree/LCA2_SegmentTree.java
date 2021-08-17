@@ -1,4 +1,4 @@
-package baekjoon.ttone.tree;
+package baekjoon.ttone.segmentTree;
 
 // #11438 tree LCA2 - segmentTree
 import java.io.BufferedReader;
