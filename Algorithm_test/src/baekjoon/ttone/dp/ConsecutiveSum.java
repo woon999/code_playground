@@ -12,17 +12,16 @@ public class ConsecutiveSum {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int n = Integer.parseInt(br.readLine());
 		
-		int[] dp = new int[n];
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		dp[0] = Integer.parseInt(st.nextToken());
-		int max = dp[0];
+		int cur =Integer.parseInt(st.nextToken());
+		int max =cur;
 		for(int i=1; i<n; i++) {
 			int num = Integer.parseInt(st.nextToken());
-			dp[i] = Math.max(num, dp[i-1]+num);
-			
-			max = Math.max(max, dp[i]);
-			
+			cur = Math.max(0, cur) + num;
+			System.out.println(cur);
+			max = Math.max(max, cur);
 		}
+		
 		System.out.println(max);
 	}
 }
