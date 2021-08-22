@@ -1,6 +1,6 @@
 package kakao.blind2018.first;
 
-//blind #2 뉴스 클러스터링 - 문자열 
+//blind #2 뉴스 클러스터링 - 자료구조, 문자열 
 import java.util.ArrayList;
 import java.util.List;
 
