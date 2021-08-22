@@ -1,6 +1,6 @@
 package kakao.blind2018.first;
 
-//blind #6 비밀지도 - 자료구조  
+//blind #6 비밀지도 - 자료구조, 배열 
 import java.util.Arrays;
 
 public interface SecretMap {
