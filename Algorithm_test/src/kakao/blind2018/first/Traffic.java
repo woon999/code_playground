@@ -1,8 +1,10 @@
 package kakao.blind2018.first;
 
-// blind #1 추석 트래픽 - 중간 저장 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-// 슬라이딩 범위 더 세분화 시켜야할듯 
+// blind #7 추석 트래픽 - 구간합  
 
 public class Traffic {
 
@@ -24,96 +26,57 @@ public class Traffic {
 	}
 	
 	public static int solution(String[] lines) {
-        int answer = 0;
+		int answer=0;
         int len = lines.length;
-        String s = lines[0].substring(11, lines[0].length()-1);
-        int st = initTime(s, false);
+        int[] st = timeToMilliSec(lines[0]);
+        int[] end = timeToMilliSec(lines[len-1]);
+        int a = st[0];
+        int b = end[1];
         
-        String e = lines[len-1].substring(11, lines[len-1].length()-1);
-        int et = initTime(e, true);
+        System.out.println("------ scope ------");
+        System.out.println(a+" ~ "+ b);
         
-        System.out.println(st+"~ " +et);
-        
-        int size = et-st+1;
-        int[] dp = new int[size];
-        
-        int comp = st;
-        
-        int max = 1;
-        System.out.println("------");
-        for(int i=0; i<len; i++) {
-        	lines[i] = lines[i].substring(11, lines[i].length()-1);
-        	
-        	int[] time = timeToSec(lines[i], comp);
-        	System.out.println(time[0] +" ~ "+ time[1]);
-        	
-        	for(int j=time[0]; j<=time[1]; j++) {
-        		dp[j]++;
-        		if(max < dp[j]) {
-        			max = dp[j];
-        		}
-        	}
+        List<Integer> checkPoint = new ArrayList<>();
+        for(String line : lines) {
+        	int[] section = timeToMilliSec(line);
+        	checkPoint.add(section[0]);
+        	checkPoint.add(section[1]);
         }
-        System.out.println(max);
+        Collections.sort(checkPoint);
+        
+        for(int standard : checkPoint){
+        	int s = standard;
+        	int e = standard + 999;
+        	
+        	int cnt=0;
+        	for(String line : lines) {
+        		int[] log = timeToMilliSec(line);
+        		if(e < log[0] || log[1] < s ) continue;
+        		cnt++;
+        	}
+        	answer = Math.max(answer, cnt);
+        }
+        System.out.println(answer);
         
         return answer;
 	}
 	
-	static int[] timeToSec(String time, int comp) {
-		String[] data = time.split(" ");
-        int tp = removeDot(data[1]);
+	static int[] timeToMilliSec(String line) {
+		line = line.substring(11, line.length()-1);
+		String[] data = line.split(" ");
+		String[] time = data[0].split(":");
+		double space = Double.parseDouble(data[1])*1000;
 		
-		String[] t = data[0].split(":");
-		int hh = Integer.parseInt(t[0]);
-		int mm = Integer.parseInt(t[1]);
-		int ss = removeDot(t[2]);
+		int hhToMS = Integer.parseInt(time[0])*60*60*1000;
+		int mmToMS = Integer.parseInt(time[1])*60*1000;
+		double ssToMS = Double.parseDouble(time[2])*1000;
 		
-		int sSec = ss-tp+1;
-		int start = hh*3600 + mm*60 + (sSec/1000)-comp;
-//		if(sSec%1000>0) start++;
+		int endTimeToMS = hhToMS + mmToMS + (int)ssToMS;
+		int startTimeToMS = endTimeToMS - (int)space+1;
 		
-		int end  = hh*3600 + mm*60 + (ss/1000)-comp;
-		
-		return new int[] {start, end};
+		return new int[] {startTimeToMS, endTimeToMS};
 	}
-	
-	static int initTime(String time,  boolean flag) {
-		String[] data = time.split(" ");
-        int tp = removeDot(data[1]);
-		
-		String[] t = data[0].split(":");
-		int hh = Integer.parseInt(t[0]);
-		int mm = Integer.parseInt(t[1]);
-		int ss = removeDot(t[2]);
-		
-		if(!flag) {
-			ss = ss-tp+1;
-		}
-		
-//		System.out.println(hh+"," +mm+","+ss +" .." + tp);
-		
-		int total = hh*3600 + mm*60 + (ss/1000);
-		if(flag && ss%1000 >0 ) total++;
-		
-		return total;
-		
-	}
-	
-	static int removeDot(String sec) {
-        int ttp =0;
-        if(sec.contains(".")) {
-	        String[] t = sec.split("\\.");
-	        int a = Integer.parseInt(t[0]);
-	        int b = Integer.parseInt(t[1]);
-	        int bLen = t[1].length();
-	        
-	        ttp = (int) (a*1000+b*Math.pow(10, 3-bLen));
-        }else {
-        	ttp = Integer.parseInt(sec)*1000;
-        }
-        
-        return ttp;
-		
-	}
+
 	
 }
+

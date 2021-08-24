@@ -1,6 +1,6 @@
 package kakao.blind2018.first;
 
-//blind #3 셔틀버스 
+//blind #4 셔틀버스 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

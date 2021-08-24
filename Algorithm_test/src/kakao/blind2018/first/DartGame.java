@@ -1,6 +1,6 @@
 package kakao.blind2018.first;
 
-// blind #7 다트 게임 - 자료 구조, 스택   
+// blind #2 다트 게임 - 자료 구조, 스택   
 import java.util.Stack;
 
 public class DartGame {

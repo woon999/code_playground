@@ -1,6 +1,6 @@
 package kakao.blind2018.first;
 
-//blind #4 프렌즈4블록 - 그래프, 시뮬레이션 
+//blind #6 프렌즈4블록 - 그래프, 시뮬레이션 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

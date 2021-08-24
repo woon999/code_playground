@@ -1,6 +1,6 @@
 package kakao.blind2018.first;
 
-//blind #5 캐시 - 자료구조, 큐 
+//blind #3 캐시 - 자료구조, 큐 
 import java.util.LinkedList;
 import java.util.Queue;
 
