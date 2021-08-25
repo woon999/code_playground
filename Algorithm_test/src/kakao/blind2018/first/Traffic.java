@@ -28,14 +28,6 @@ public class Traffic {
 	public static int solution(String[] lines) {
 		int answer=0;
         int len = lines.length;
-        int[] st = timeToMilliSec(lines[0]);
-        int[] end = timeToMilliSec(lines[len-1]);
-        int a = st[0];
-        int b = end[1];
-        
-        System.out.println("------ scope ------");
-        System.out.println(a+" ~ "+ b);
-        
         List<Integer> checkPoint = new ArrayList<>();
         for(String line : lines) {
         	int[] section = timeToMilliSec(line);
