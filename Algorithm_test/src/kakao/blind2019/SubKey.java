@@ -30,16 +30,6 @@ public class SubKey {
 				{"500","muzi","music","3"},
 				{"600","apeach","music","2"}
 		};
-		
-//		String[][] relation = {
-//				{"100","ryan"},
-//				{"200","apeach"},
-//				{"300","tube"},
-//				{"400","con"},
-//				{"500","muzi"},
-//				{"600","apeach"}
-//		};
-		
 		System.out.println(solution(relation));
 		
 	}
@@ -69,10 +59,8 @@ public class SubKey {
 			if(isSubKey(res)) {
 				int cur =0;
 				for(int num : res) {
-					System.out.print(num +" ");
 					cur |= 1<<(num);
 				}
-				System.out.println();
 				
 				if(!isSubSet(cur)) {
 					ans.add(cur);	

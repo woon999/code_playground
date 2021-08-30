@@ -29,22 +29,14 @@ public class FailRate {
 			stageStatus[num]++;
 		}
 		
-//		for(int i=1; i<n+1; i++) {
-//			System.out.print(stageStatus[i]+" ");
-//		}
-//		System.out.println();
-		
 		Map<Integer, Double> res = new HashMap<>();
 		int total = stages.length;
 		for(int i=1; i<n+1; i++) {
 			if(total==0) {
-//				System.out.println(i +", " + stageStatus[i]);
 				res.put(i, (double) 0);
 			}
 			else {
 				double rate = (double)stageStatus[i]/(double)total;
-//				System.out.println(total+" " + stageStatus[i]);
-				System.out.println(rate);
 				total-=stageStatus[i];
 				res.put(i, rate);
 			}
