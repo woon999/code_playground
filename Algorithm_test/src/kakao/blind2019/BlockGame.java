@@ -59,11 +59,8 @@ public class BlockGame {
 			for(int i=0; i<n; i++) {
 				for(int j=0; j<m; j++) {
 					if(!visited[i][j] && gboard[i][j] !=0) {
-						boolean flag;
 						visited[i][j] = true;
-						flag = identifyBlock(j, i, gboard[i][j]);
-						if(flag) {
-							System.out.println(i+","+j);
+						if(identifyBlock(j, i, gboard[i][j])) {
 							removeList.add(new int[] {j,i});
 						}
 					}
@@ -80,18 +77,11 @@ public class BlockGame {
 		
 		return answer;
 	}
+
 	
-	static void print() {
-		for(int i=0; i<n; i++) {
-			for(int j=0; j<m; j++) {
-				System.out.print(gboard[i][j] + " ");
-			}
-			System.out.println();
-		}
-	}
+	// 보드 업데이트 
 	static void boardUpdate(int x, int y, int type) {
 		gboard[y][x] =0;
-		
 		for(int i=0; i<4; i++) {
 			int nx = x + dx[i];
 			int ny = y + dy[i];
@@ -99,9 +89,9 @@ public class BlockGame {
 				boardUpdate(nx, ny, type);
 			}
 		}
-		
 	}
 	
+	// 가능한 블록 식별하기 
 	static boolean identifyBlock(int x, int y, int type) {
 		int px = x, py = y+1;
 		if(!isPossible(px,py,type)) return false;
@@ -112,7 +102,7 @@ public class BlockGame {
 			int ny = py + ddy[d];
 			if(d==4) {
 				if(isPossible(nx, ny, type) && isPossible(nx-2, ny, type)) {
-					if(!isRoof(nx, nx-2, ny)) {
+					if(!isRoof(nx, nx-2, ny)) { // 5
 						visited[ny][nx-2] = true;
 						visited[ny][nx] = true;
 						return true;
@@ -120,25 +110,25 @@ public class BlockGame {
 				}
 			}else {
 				if(isPossible(nx, ny, type)) {
-					if(d==0) {
+					if(d==0) { // 1
 						if(!isRoof(nx, nx-1, ny)) {
 							visited[ny][nx-1] = true;
 							visited[ny][nx] = true;
 							return true;
-						}
-					}else if(d==1) {
-						if(!isRoof(nx, -1, ny)) {
+						} 
+					}else if(d==1) { //2 
+						if(!isRoof(nx, -1,  ny)) {
 							visited[ny][nx+1] = true;
 							visited[ny][nx] = true;
 							return true;
 						}
-					}else if(d==2) {
+					}else if(d==2) { // 3
 						if(!isRoof(nx, -1, ny)) {
 							visited[ny][nx-1] = true;
 							visited[ny][nx] = true;
 							return true;
 						}
-					}else if(d==3) {
+					}else if(d==3) { // 4
 						if(!isRoof(nx, nx+1, ny)) {
 							visited[ny][nx+1] = true;
 							visited[ny][nx] = true;
@@ -149,61 +139,9 @@ public class BlockGame {
 			}
 		}
 		return false;
-		
-//		// 1
-//		int nx = px+2, ny = py;
-//		if(isPossible(nx, ny, type)) {
-//			if(!isRoof(nx, nx-1, ny)) {
-//				visited[ny][nx-1] = true;
-//				visited[ny][nx] = true;
-//				return true;
-//			}
-//		}
-//		
-//		// 2
-//		nx = px-1; ny = py+1;
-//		if(isPossible(nx, ny, type)) {
-//			if(!isRoof(nx, -1, ny)) {
-//				visited[ny][nx+1] = true;
-//				visited[ny][nx] = true;
-//				return true;
-//			}
-//		}
-//		
-//		// 3
-//		nx = px+1; ny = py+1;
-//		if(isPossible(nx, ny, type)) {
-//			if(!isRoof(nx, -1, ny)) {
-//				visited[ny][nx-1] = true;
-//				visited[ny][nx] = true;
-//				return true;
-//			}
-//		}
-//		
-//		// 4
-//		nx = px-2; ny = py;
-//		if(isPossible(nx, ny, type)) {
-//			if(!isRoof(nx, nx+1, ny)) {
-//				visited[ny][nx+1] = true;
-//				visited[ny][nx] = true;
-//				return true;
-//			}
-//		}
-//		
-//		
-//		// 5
-//		nx = px+1; ny = py;
-//		if(isPossible(nx, ny, type) && isPossible(nx-2, ny, type)) {
-//			if(!isRoof(nx, nx-2, ny)) {
-//				visited[ny][nx-2] = true;
-//				visited[ny][nx] = true;
-//				return true;
-//			}
-//		}
-//		
-//		return false;
-		
 	}
+	
+	// 해당 블록 위에 지붕이 있는지 확인하기 
 	static boolean isRoof(int x1, int x2, int y) {
 		if(x2 == -1) {
 			for(int i=0; i<y; i++) {
@@ -221,6 +159,8 @@ public class BlockGame {
 		return false;
 		
 	}
+	
+	// 탐색 가능한 구간인지 확인하기 
 	static boolean isPossible(int x, int y, int type) {
 		if(x <0 || x >m-1 || y<0 || y>n-1 ||  gboard[y][x] != type) return false;
 		
