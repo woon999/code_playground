@@ -6,7 +6,6 @@ public class StringComp {
 
 	public static void main(String[] args) {
 		String s = "aabbaccc";
-//		String s ="abcabcdede";
 //		String s = "ababcdcdababcdcd";
 		solution(s);
 	}
