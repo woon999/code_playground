@@ -1,11 +1,12 @@
 package kakao.blind2020;
 
-// blind #1 문자열 압축 - 문자열  
+// blind #1 문자열 압축 - 문자열
 
 public class StringComp {
 
 	public static void main(String[] args) {
 		String s = "aabbaccc";
+//		String s ="abcabcdede";
 //		String s = "ababcdcdababcdcd";
 		solution(s);
 	}
