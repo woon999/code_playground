@@ -1,10 +1,16 @@
 package kakao.blind2020;
 
-//blind #4 가사 검색 - 정확성 100%, 효율성 2/5 통과 
+//blind #4 가사 검색 - Map, 정렬, 이진탐색 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class LylicsSearch {
-
+	static Map<Integer, ArrayList<String>> data,rData;
+	static ArrayList<String> in,rIn;
 	public static void main(String[] args) {
 	
 		String[] words = {"frodo", "front", "frost", "frozen", "frame", "kakao"};
@@ -18,38 +24,86 @@ public class LylicsSearch {
         int qLen = queries.length;
         int[] answer = new int[qLen];
         
-        for(int i=0; i<qLen ;i++) {
+        // len, words 
+        data = new HashMap<>();
+        rData= new HashMap<>();
+        for(int i=0; i<wLen ;i++) {
+        	String word = words[i];
+        	String reverseWord = reverseString(word);
+        	int totalLen = word.length();
+        	
+        	if(!data.containsKey(totalLen)) {
+        		in = new ArrayList<>();
+        		in.add(word);
+        		rIn = new ArrayList<>();
+        		rIn.add(reverseWord);
+        		data.put(totalLen, in);
+        		rData.put(totalLen, rIn);
+        	}else {
+        		data.get(totalLen).add(word);
+        		rData.get(totalLen).add(reverseWord);
+        	}
+        }
+        
+        // map에 저장된 word 오름차순 정렬 
+        for(int len : data.keySet()) {
+        	List<String> list = data.get(len);
+        	List<String> rList = rData.get(len);
+        	Collections.sort(list);
+        	Collections.sort(rList);
+        }
+        
+        for(int i=0; i<qLen; i++) {
         	String query = queries[i];
         	int totalLen = query.length();
-        	boolean flag = false;
         	
-        	// ? 위치 접두사 true / 접미사 false
+        	// ? 위치 접두사 false / 접미사 true
+        	List<String> queryList;
         	if(query.charAt(0)=='?') {
-            	flag = true;
+            	queryList = rData.get(totalLen);
+            	query = reverseString(query);
+            }else {
+            	queryList = data.get(totalLen);
             }
 //        	System.out.println("----------" +query+ "----------" );
-        	query = query.replace("?", "");
-        	int cutLen = query.length();
-//        	System.out.println("len : "+ totalLen +", flag : " +flag+", restQuery : " + query + ", cutLen : " + cutLen);
+//        	System.out.println("len : "+ totalLen +", flag : " +flag+", restQuery : " + query );
         	
-            int cnt=0;
-            for(int j=0; j<wLen; j++) {
-            	String w = words[j];
-            	if(w.length()!=totalLen) continue;
-            	if(flag) {
-                	w = w.substring(w.length()-cutLen, w.length());
-            	}else {
-            		w = w.substring(0,cutLen);
-            	}
-            	if(query.equals(w)) {
-            		++cnt;
-//            		System.out.println(w + " , " + (++cnt));
-            	}
-            }
-            answer[i]= cnt;
+    		if(!data.containsKey(totalLen)) {
+        		answer[i] = 0;
+    			continue;
+    		}
+    		
+            // 이진탐색 
+    		int s=0,e=0;
+    		String minQuery = query.replace("?", "");
+    		String maxQuery = query.replace('?', Character.MAX_VALUE);
+    		s = search(queryList, minQuery);
+    		e = search(queryList, maxQuery);
+//    		System.out.println(s+"~"+e);
+    		answer[i] = e-s;
         }
         
         return answer;
     }
+	
+	static int search(List<String> wordList, String query) {
+		int start =0, end =wordList.size();
+		
+		 while(start<end) {
+         	int mid = (start+end)/2;
+         	// query >= word
+         	if(query.compareTo(wordList.get(mid))>=0) {
+         		start =mid+1;
+         	}else {
+         		end = mid;
+         	}
+         }
+		 return start;
+	}
+	
+	static String reverseString(String s) {
+		return new StringBuffer(s).reverse().toString();
+	}
+	
 	
 }
