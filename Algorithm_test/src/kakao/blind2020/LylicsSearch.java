@@ -58,12 +58,12 @@ public class LylicsSearch {
         	int totalLen = query.length();
         	
         	// ? 위치 접두사 false / 접미사 true
-        	List<String> queryList;
+        	List<String> wordList;
         	if(query.charAt(0)=='?') {
-            	queryList = rData.get(totalLen);
+        		wordList = rData.get(totalLen);
             	query = reverseString(query);
             }else {
-            	queryList = data.get(totalLen);
+            	wordList = data.get(totalLen);
             }
 //        	System.out.println("----------" +query+ "----------" );
 //        	System.out.println("len : "+ totalLen +", flag : " +flag+", restQuery : " + query );
@@ -75,10 +75,10 @@ public class LylicsSearch {
     		
             // 이진탐색 
     		int s=0,e=0;
-    		String minQuery = query.replace("?", "");
-    		String maxQuery = query.replace('?', Character.MAX_VALUE);
-    		s = search(queryList, minQuery);
-    		e = search(queryList, maxQuery);
+    		String minQuery = query.replace('?', 'a');
+    		String maxQuery = query.replace('?', 'z');
+    		s = search(wordList, minQuery);
+    		e = search(wordList, maxQuery);
 //    		System.out.println(s+"~"+e);
     		answer[i] = e-s;
         }
