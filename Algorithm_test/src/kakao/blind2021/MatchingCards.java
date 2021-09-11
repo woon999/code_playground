@@ -1,6 +1,6 @@
 package kakao.blind2021;
 
-//blind #6 카드 짝 맞추기 (그래프 탐색, BFS, 순열 조합(DFS, 백트래킹)  
+//blind #6 카드 짝 맞추기 (그래프 탐색, BFS, 순열)   
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -105,9 +105,10 @@ public class MatchingCards {
 		 return min;
 	}
 
-	// 1. 카드 찾기 순서 경우의 수 모두 구하기 (dfs, backtracking) 
+	// 1. 카드 찾기 순서 경우의 수 모두 구하기 
 	static void permutation(String comb, int depth,int[] card) {
 		if(card.length == depth) {
+			System.out.println(comb);
 			orders.add(comb);
 			return ;
 		}

@@ -36,7 +36,7 @@ public class MenuRenewal {
         
         Map<String , Integer> map = new HashMap<>();
         for(String menu : combi) {
-//        	System.out.println(menu);
+        	System.out.println(menu);
         	map.put(menu, map.getOrDefault(menu, 0)+1);
         }
         
