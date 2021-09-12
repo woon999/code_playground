@@ -44,7 +44,7 @@ public class BallonBomb {
 			}
 			// 음수인 경우 
 			else {
-				for(int i=in; i<-1; i++	) {
+				for(int i=1; i<-in; i++	) {
 					q.addFirst(q.pollLast());
 				}
 				
