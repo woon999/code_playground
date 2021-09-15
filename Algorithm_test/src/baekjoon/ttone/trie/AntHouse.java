@@ -15,7 +15,6 @@ public class AntHouse {
 
 	static class TrieNode{
 		Map<String, TrieNode> childNode = new HashMap<>();
-		boolean terminal;
 		
 		TrieNode(){
 			/* no-op */ 
@@ -28,7 +27,6 @@ public class AntHouse {
 				trieNode.childNode.putIfAbsent(s, new TrieNode());
 				trieNode = trieNode.childNode.get(s);
 			}
-			trieNode.terminal = true;
 		}
 		
 		public void print(TrieNode cur, int depth) {
