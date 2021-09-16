@@ -17,7 +17,7 @@ public class Boggle {
 	static TrieNode trie;
 	static char[][] map;
 	static boolean[][] check;
-	static List<String> resultList;
+	static Set<String> resultSet;
 	static int[] dx = {0, 1, 1, 1, 0, -1, -1, -1};
 	static int[] dy = {1, 1 ,0 ,-1 ,-1 ,-1, 0, 1};
 	static class TrieNode{
@@ -91,7 +91,7 @@ public class Boggle {
 			}
 			
 			// map 탐색
-			resultList = new ArrayList<>();
+			resultSet = new HashSet<>();
 			check = new boolean[4][4];
 			for(int i=0; i<4; i++) {
 				for(int j=0; j<4; j++) {
@@ -103,6 +103,7 @@ public class Boggle {
 				}
 			}
 			
+			List<String> resultList = new ArrayList<>(resultSet);
 			Collections.sort(resultList);
 			int cnt = 0;
 			int maxLen= 0;
@@ -119,15 +120,13 @@ public class Boggle {
 			sb.append(cnt+" " + resultList.get(idx)+" "+ resultList.size()+"\n");
 			if(t != b-1) br.readLine();
 		}
-		
 		System.out.println(sb.toString());	
+		
 	}
 	
 	static void search(int x, int y, String str) {
 		if(trie.contains(str, true)) {
-			if(!resultList.contains(str)) {
-				resultList.add(str);
-			}
+			resultSet.add(str);
 		}
 		
 		for(int d=0; d<8; d++) {
@@ -156,7 +155,6 @@ public class Boggle {
 		
 		return 0;
 	}
-
 	
 	
 }
