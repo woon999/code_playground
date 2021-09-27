@@ -43,7 +43,6 @@ public class MeetingRoom {
 		
 		Collections.sort(list);
 		
-		System.out.println();
 		int endTime=0, cnt=0;
 		for(Meeting m : list) {
 			if(endTime<=m.start) {
