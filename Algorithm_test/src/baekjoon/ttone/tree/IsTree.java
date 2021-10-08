@@ -16,14 +16,12 @@ public class IsTree {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Map<Integer, Integer> map = new HashMap<>();
 		Set<Integer> vertex = new HashSet<>();
-		Set<Integer> node = new HashSet<>();
 		StringBuilder sb = new StringBuilder();
 		StringTokenizer st;
 		out : 
 		for(int tc=1;;tc++) {
 			map = new HashMap<>();
 			vertex = new HashSet<>();
-			node = new HashSet<>();
 			boolean flag = false;
 			
 			st = new StringTokenizer(br.readLine());
@@ -36,8 +34,6 @@ public class IsTree {
 				if(a == 0) break;
 				if(a== -1) break out;
 				
-				node.add(a);
-				node.add(b);
 				if(!vertex.add(b)) { // 간선 2개이상 
 					flag = true;
 				}
@@ -51,7 +47,7 @@ public class IsTree {
 				}
 				
 				// root 1개 이상 or 0 || 노드개수-1 != 트리 간선갯수-1
-				if(rootNum!=1 || (node.size()-1 != vertex.size())) flag = true;
+				if(rootNum!=1) flag = true;
 			}
 			
 			if(flag) {
