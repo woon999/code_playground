@@ -56,7 +56,6 @@ public class TreeColor {
 		if(dp[cur][color] != -1) return dp[cur][color];
 		
 		dp[cur][color]=0;
-		int cnt =0;
 		for(int nxt : tree[cur]) {
 			int tmp = INF;
 			for(int i=1; i<18; i++) {
@@ -68,7 +67,7 @@ public class TreeColor {
 			dp[cur][color] += tmp; 
 		}
 		
-		return dp[cur][color] += color;
+		return dp[cur][color]+=color;
 	}
 	
 	static void makeTreeData(int idx, int pa) {
