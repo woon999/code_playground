@@ -1,4 +1,4 @@
-package programmers.week9;
+package programmers.week_challenge;
 
 // week9 전력망 둘로 나누기 - union-find
 public class PowerGridDivision2 {

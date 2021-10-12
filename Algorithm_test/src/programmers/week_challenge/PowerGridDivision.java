@@ -1,4 +1,4 @@
-package programmers.week9;
+package programmers.week_challenge;
 
 import java.util.ArrayList;
 import java.util.List;
