@@ -27,7 +27,6 @@ public class Lotto {
         		}
         	}
         }
-        
 //        System.out.println(match+"," + zero);
         int[] answer = {getRanking(match+zero), getRanking(match)};
         return answer;
