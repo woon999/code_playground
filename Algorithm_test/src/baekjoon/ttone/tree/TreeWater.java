@@ -31,17 +31,10 @@ public class TreeWater {
 			list[b].add(a);
 		}
 		
-		leafCounting(1, -1);
-		
+		for(int i=2; i<n+1; i++) {
+			if(list[i].size()==1) leafN++;
+		}
 		System.out.println(String.format("%.10f", (double)w/leafN));
 	}
 	
-	static void leafCounting(int idx, int pa) {
-		if(pa!= -1 && list[idx].size()==1) leafN++;
-		for(int nxt : list[idx]) {
-			if(nxt != pa) {
-				leafCounting(nxt, idx);
-			}
-		}
-	}
 }
