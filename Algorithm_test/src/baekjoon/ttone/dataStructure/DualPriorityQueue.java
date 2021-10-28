@@ -20,8 +20,8 @@ public class DualPriorityQueue {
 		for(int test=0; test<t; test++) {
 			int input = Integer.parseInt(br.readLine());
 			
-			Queue<Integer> min = new PriorityQueue<>(Collections.reverseOrder()); // 내림차순 
-			Queue<Integer> max = new PriorityQueue<>();
+			Queue<Integer> min = new PriorityQueue<>();
+			Queue<Integer> max = new PriorityQueue<>(Collections.reverseOrder()); // 내림차순 
 			map = new HashMap<>();
 			for(int i=0; i<input; i++) {
 				StringTokenizer st = new StringTokenizer(br.readLine());
@@ -29,17 +29,17 @@ public class DualPriorityQueue {
 				
 				if(op.equals("I")) {
 					int num = Integer.parseInt(st.nextToken());
-					min.add(num);
 					max.add(num);
+					min.add(num);
 					map.put(num, map.getOrDefault(num, 0)+1);
 				}else {
 					int type = Integer.parseInt(st.nextToken());
 					
 					if(map.size()==0) continue;
 					if(type == 1) { //최댓값 삭제 
-						delete(min);
-					}else { // 최솟값 삭제
 						delete(max);
+					}else { // 최솟값 삭제
+						delete(min);
 					}
 				}
 			}
@@ -47,9 +47,9 @@ public class DualPriorityQueue {
 			if (map.size()==0) {
 	            sb.append("EMPTY\n");
 	        } else {
-	        	int res = delete(min);
+	        	int res = delete(max);
 	        	sb.append(res+" "); // 최댓값 
-	        	if(map.size()>0) res = delete(max);
+	        	if(map.size()>0) res = delete(min);
 	        	sb.append(res+"\n"); // 최솟값
 	        }
 		}

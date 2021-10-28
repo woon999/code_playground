@@ -11,26 +11,26 @@ public class TellTheMid {
 		StringBuilder sb = new StringBuilder();
 		int n = Integer.parseInt(br.readLine());
 		
-		Queue<Integer> minHeap = new PriorityQueue<>((o1,o2) -> o2-o1); // 내림차순  
-		Queue<Integer> maxHeap = new PriorityQueue<>((o1,o2) -> o1-o2); // 오름차순 
+		Queue<Integer> maxHeap = new PriorityQueue<>((o1,o2) -> o2-o1); // 내림차순  
+		Queue<Integer> minHeap = new PriorityQueue<>((o1,o2) -> o1-o2); // 오름차순 
 		
 		for(int i=0; i<n; i++) {
 			int num = Integer.parseInt(br.readLine());
 			
-			if(minHeap.size() == maxHeap.size()) minHeap.add(num);
-			else maxHeap.add(num);
+			if(maxHeap.size() == minHeap.size()) maxHeap.add(num);
+			else minHeap.add(num);
 			
 			
-			// minHeap이 더 클 경우 원소 switch 
-			if(!minHeap.isEmpty() && !maxHeap.isEmpty()) {
-				if(minHeap.peek() > maxHeap.peek()) {
+			// maxHeap이 더 클 경우 원소 switch 
+			if(!maxHeap.isEmpty() && !minHeap.isEmpty()) {
+				if(maxHeap.peek() > minHeap.peek()) {
 					int tmp = maxHeap.poll();
 					maxHeap.offer(minHeap.poll());
 					minHeap.offer(tmp);
 				}
 			}
 			
-			sb.append(minHeap.peek()+"\n");
+			sb.append(maxHeap.peek()+"\n");
 			
 			
 		}
