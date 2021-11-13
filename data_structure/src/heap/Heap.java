@@ -182,7 +182,7 @@ public class Heap<E> {
                 cv = array[child];
             }
 
-            if(comp.compare(target, (E)cv)>=0) break;
+            if(comp.compare(target, (E)cv)<=0) break;
 
             array[pa] = cv;
             pa = child;

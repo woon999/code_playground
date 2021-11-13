@@ -1,4 +1,4 @@
-package treap;
+package bst.treap;
 
 import java.util.Random;
 /*
@@ -19,7 +19,7 @@ class TreapNode{
 }
 
 public class Treap {
-    /* Function to left-rotate a given treap
+    /* Function to left-rotate a given BST.treap
 
              r                         R
             / \      Left Rotate      / \
@@ -35,7 +35,7 @@ public class Treap {
        root.right = X;
        return R;
    }
-    /* Function to right-rotate a given treap
+    /* Function to right-rotate a given BST.treap
 
                r                        L
               / \     Right Rotate     / \
@@ -78,7 +78,6 @@ public class Treap {
         space += h;
         printTreap(root.right, space);
         System.lineSeparator();
-
         for(int i=h; i<space; i++){
             System.out.print(' ');
         }
