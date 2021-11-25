@@ -1,4 +1,4 @@
-package baekjoon.ttone.stringSearch;
+package baekjoon.ttone.string;
 
 // #16916 StringSearch 부분 문자열 - KMP  
 import java.io.*;

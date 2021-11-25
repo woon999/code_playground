@@ -1,4 +1,4 @@
-package baekjoon.ttone.stringSearch;
+package baekjoon.ttone.string;
 
 // 단순 문자열 매칭 알고리즘 - 시간복잡도 O(n*m) 
 import java.io.*;
