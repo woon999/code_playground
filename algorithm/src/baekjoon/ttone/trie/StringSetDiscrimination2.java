@@ -71,7 +71,6 @@ public class StringSetDiscrimination2 {
 					
 					// 이 위치에서 끝나는 바늘 문자열이 있으면 추가한다. (출력 링크) 
 					if(childNode.fail.output) {
-						System.out.println("?");
 						childNode.output =true;
 					}
 					q.add(childNode);
