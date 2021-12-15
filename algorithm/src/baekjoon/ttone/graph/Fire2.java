@@ -37,7 +37,6 @@ public class Fire2 {
 		
 		int res = -1;
 		out: while(true) {
-			// 불번짐 
 			int fSize = fireQ.size();
 			for(int i=0; i<fSize; i++) {
 				int[] p = fireQ.poll();
