@@ -1,6 +1,6 @@
 package baekjoon.ttone.dataStructure;
 
-// #17299 자료구조 오동큰수 
+// #17299 dataStructrue 오등큰수 
 import java.io.*;
 import java.util.*;
 
@@ -10,23 +10,21 @@ public class BigNumber {
 	public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Stack<Integer> stack = new Stack<>();
+        
         int n = Integer.parseInt(br.readLine());
-        long arr[] = new long[MAX];
+        int count[] = new int[MAX];
         int index[] = new int[MAX];
-        long ans[] = new long[n];
+        int ans[] = new int[n];
         
         StringTokenizer st =  new StringTokenizer(br.readLine());
         for(int i=0; i<n; i++) {
-            int num = Integer.parseInt(st.nextToken());
-            arr[num]++;
-            index[i] = num;
+        	index[i] = Integer.parseInt(st.nextToken());
+            count[index[i]]++;
         }
         
         for(int i=0; i<n; i++) {
-            if(stack.empty()) {
-                stack.push(i);
-            }
-            while(!stack.empty() && arr[index[i]]>arr[index[stack.peek()]]) {
+            while(!stack.empty() && count[index[i]]>count[index[stack.peek()]]) {
+            	System.out.println(stack.peek() + " == " + index[i]);
                 ans[stack.pop()] = index[i];
             }
             stack.push(i);
