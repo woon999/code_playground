@@ -13,7 +13,7 @@ public class BigNumber {
         
         int n = Integer.parseInt(br.readLine());
         int count[] = new int[MAX];
-        int index[] = new int[MAX];
+        int index[] = new int[n];
         int ans[] = new int[n];
         
         StringTokenizer st =  new StringTokenizer(br.readLine());
@@ -24,7 +24,6 @@ public class BigNumber {
         
         for(int i=0; i<n; i++) {
             while(!stack.empty() && count[index[i]]>count[index[stack.peek()]]) {
-            	System.out.println(stack.peek() + " == " + index[i]);
                 ans[stack.pop()] = index[i];
             }
             stack.push(i);
