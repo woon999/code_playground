@@ -3,7 +3,6 @@ package segmenttree.fenwick;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +28,22 @@ class FenwickTreeTest {
 
 	@Test
 	public void 구간업데이트_test() {
+		// [a, b]에 k 더하기
+		int a = 1, b = 2, k = 10;
+
+		for(int i=a; i<=b; i++){
+			arr[i] += k;
+		}
+		// tree.add(a, k);
+		// tree.add(b+1, -k);
+		//
+		System.out.println(tree);
+		// System.out.println(tree.sum(SIZE));
+		// System.out.println(Arrays.stream(arr).sum());
+	}
+
+	@Test
+	public void 배열업데이트_test() {
 		// 3번(arr[2]) = 3 -> 10
 		int idx = 3, val = 10;
 		int nxt = idx+(idx & -idx);

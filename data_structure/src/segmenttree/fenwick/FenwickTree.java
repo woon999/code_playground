@@ -3,7 +3,7 @@ package segmenttree.fenwick;
 import java.util.Arrays;
 
 public class FenwickTree {
-	static int[] tree;
+	int[] tree;
 
 	public FenwickTree(int size) {
 		tree = new int[size+1];
