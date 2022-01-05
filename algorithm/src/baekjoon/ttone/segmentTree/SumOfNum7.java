@@ -1,9 +1,10 @@
 package baekjoon.ttone.segmentTree;
 
+// #2268 fenwickTree 수들의 합 7 
 import java.io.*;
 import java.util.StringTokenizer;
 
-public class SumOfNum {
+public class SumOfNum7 {
 	static int[] arr;
 	static long[] tree;
 	static int n;
@@ -26,7 +27,6 @@ public class SumOfNum {
 	
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		n = Integer.parseInt(st.nextToken());
 		int m = Integer.parseInt(st.nextToken());
@@ -50,11 +50,6 @@ public class SumOfNum {
 				long dif = b - arr[a];
 				arr[a] = b;
 				add(a, dif);
-				
-				for(int j=1; j<=n; j++) {
-					System.out.print(tree[j]+" ");
-				}
-				System.out.println();
 			}
 		}
 		System.out.println(sb.toString());
