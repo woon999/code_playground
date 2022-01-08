@@ -4,13 +4,14 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
+// ref: https://st-lab.tistory.com/205#%EC%A0%84%EC%B2%B4
 public class Heap<E> {
 
     private final Comparator<? super E> comparator;
     private static final int DEFAULT_CAPACITY = 10; // 기본 크기
 
     private int size;
-    private Object[] array;
+    private Object[] arr;
 
     // 초기 공간 할당 X
     public Heap()   {
@@ -23,13 +24,13 @@ public class Heap<E> {
     }
 
     public Heap(Comparator<? super E> comparator) {
-        this.array = new Object[DEFAULT_CAPACITY];
+        this.arr = new Object[DEFAULT_CAPACITY];
         this.size = 0;
         this.comparator = comparator;
     }
 
     public Heap(int capacity, Comparator<? super E> comparator) {
-        this.array = new Object[capacity];
+        this.arr = new Object[capacity];
         this.size = 0;
         this.comparator = comparator;
     }
@@ -55,20 +56,20 @@ public class Heap<E> {
         Object[] newArray = new Object[newCapacity];
 
         for(int i=1; i<=size; i++){
-            newArray[i] = array[i];
+            newArray[i] = arr[i];
         }
 
         /**
          * 현재 배열은 GC처리를 위해 null로 변환한 뒤
          * 새 배열 연결
          */
-        this.array = null;
-        this.array = newArray;
+        this.arr = null;
+        this.arr = newArray;
     }
 
     public void add(E value){
-        if(size == array.length-1){
-            resize(array.length*2);
+        if(size == arr.length-1){
+            resize(arr.length*2);
         }
 
         shiftUp(size+1, value);
@@ -86,17 +87,17 @@ public class Heap<E> {
     private void shiftUpComparator(int idx, E target, Comparator<? super E> comparator) {
         while(idx>1){
             int pa = getParent(idx);
-            Object pv = array[pa];
+            Object pv = arr[pa];
 
             // 타겟 >= 부모 - 종료
             if(comparator.compare(target, (E)pv)>=0) break;
 
             // 타겟 < 부모 - 부모와 자식 교체
-            array[idx] = pv;
+            arr[idx] = pv;
             idx = pa;
         }
         // 최종위치에 타겟 노드 값 저장
-        array[idx] = target;
+        arr[idx] = target;
     }
 
     private void shiftUpComparable(int idx, E target) {
@@ -104,22 +105,22 @@ public class Heap<E> {
 
         while(idx>1){
             int pa = getParent(idx);
-            Object pv = array[pa];
+            Object pv = arr[pa];
 
             if(comp.compareTo((E)pv)>=0) break;
 
-            array[idx] = pv;
+            arr[idx] = pv;
             idx = pa;
         }
-        array[idx] = comp;
+        arr[idx] = comp;
     }
 
     public E remove(){
-        if(array[1] ==null) throw new NoSuchElementException();
+        if(arr[1] ==null) throw new NoSuchElementException();
 
-        E result = (E) array[1];
-        E target = (E) array[size];
-        array[size] = null;
+        E result = (E) arr[1];
+        E target = (E) arr[size];
+        arr[size] = null;
 
         shiftDown(1, target);
         return result;
@@ -136,7 +137,7 @@ public class Heap<E> {
     private void shiftDownComparable(int idx, E target) {
         Comparable<? super E> comp = (Comparable<? super E>) target;
 
-        array[idx] = null;
+        arr[idx] = null;
         size--;
 
         int pa = idx;
@@ -146,52 +147,52 @@ public class Heap<E> {
 
             int right = getRightChild(pa);
 
-            Object cv = array[child];
+            Object cv = arr[child];
 
-            if(right <= size && ((Comparable<? super E>)cv).compareTo((E)array[right]) > 0) {
+            if(right <= size && ((Comparable<? super E>)cv).compareTo((E)arr[right]) > 0) {
                 child = right;
-                cv = array[child];
+                cv = arr[child];
             }
 
             if(comp.compareTo((E) cv) <= 0){
                 break;
             }
-            array[pa] = cv;
+            arr[pa] = cv;
             pa = child;
 
         }
-        array[pa] = comp;
+        arr[pa] = comp;
 
-        if(array.length > DEFAULT_CAPACITY && size < array.length / 4) {
-            resize(Math.max(DEFAULT_CAPACITY, array.length / 2));
+        if(arr.length > DEFAULT_CAPACITY && size < arr.length / 4) {
+            resize(Math.max(DEFAULT_CAPACITY, arr.length / 2));
         }
     }
 
     private void shiftDownComparator(int idx, E target, Comparator<? super E> comp) {
-        array[idx] = null;
+        arr[idx] = null;
         size--;
         int pa = idx;
         int child;
 
         while((child=getLeftChild(pa)) <= size){
             int right = getRightChild(pa);
-            Object cv = array[child];
+            Object cv = arr[child];
 
-            if(right <= size && comp.compare((E)cv, (E)array[right])>0){
+            if(right <= size && comp.compare((E)cv, (E)arr[right])>0){
                 child = right;
-                cv = array[child];
+                cv = arr[child];
             }
 
             if(comp.compare(target, (E)cv)<=0) break;
 
-            array[pa] = cv;
+            arr[pa] = cv;
             pa = child;
         }
 
-        array[pa] = target;
+        arr[pa] = target;
 
-        if(array.length > DEFAULT_CAPACITY && size < array.length / 4) {
-            resize(Math.max(DEFAULT_CAPACITY, array.length / 2));
+        if(arr.length > DEFAULT_CAPACITY && size < arr.length / 4) {
+            resize(Math.max(DEFAULT_CAPACITY, arr.length / 2));
         }
     }
 
@@ -201,10 +202,10 @@ public class Heap<E> {
     }
 
     public E peek() {
-        if(array[1] == null) {
+        if(arr[1] == null) {
             throw new NoSuchElementException();
         }
-        return (E)array[1];
+        return (E)arr[1];
     }
 
     public boolean isEmpty() {
@@ -212,7 +213,7 @@ public class Heap<E> {
     }
 
     public Object[] toArray() {
-        return Arrays.copyOf(array, size + 1);
+        return Arrays.copyOf(arr, size + 1);
     }
 
     public void printHeap(){
@@ -223,7 +224,7 @@ public class Heap<E> {
             for(int j=0; j<len; j++){
                 int idx =len+j;
                 if(idx>=size+1) break out;
-                System.out.print(array[idx]+"  ");
+                System.out.print(arr[idx]+"  ");
             }
             System.out.println();
         }
