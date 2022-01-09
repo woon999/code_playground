@@ -1,4 +1,4 @@
-package baekjoon.ttone.segmentTree;
+package baekjoon.tttwo.segmenttree;
 
 // #2243 segmentTree 사탕상자 - 이분탐색 
 import java.io.*;

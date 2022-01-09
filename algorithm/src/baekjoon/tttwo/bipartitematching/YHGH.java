@@ -1,10 +1,10 @@
-package baekjoon.ttone.bipartitematching;
+package baekjoon.tttwo.bipartitematching;
 
-// #11376 bipartitematching 열혈강호 2
+// #11375 bipartitematching 열혈강호 
 import java.io.*;
 import java.util.*;
 
-public class YHGH2 {
+public class YHGH {
 
 	static List<Integer>[] list;
 	static int[] task;
@@ -33,10 +33,8 @@ public class YHGH2 {
 		
 		int cnt = 0;
 		for(int i=1; i<=n; i++) {
-			for(int j=0; j<2; j++) {
-				Arrays.fill(check, false);
-				if(dfs(i)) cnt++; 
-			}
+			Arrays.fill(check, false);
+			if(dfs(i)) cnt++; 
 		}
 		
 		System.out.println(cnt);

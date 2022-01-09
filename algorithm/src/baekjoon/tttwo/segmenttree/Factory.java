@@ -1,4 +1,4 @@
-package baekjoon.ttone.segmentTree;
+package baekjoon.tttwo.segmenttree;
 
 // #7578 segmentTree 공장 
 import java.io.*;

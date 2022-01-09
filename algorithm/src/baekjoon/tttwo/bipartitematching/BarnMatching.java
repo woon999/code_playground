@@ -1,4 +1,4 @@
-package baekjoon.ttone.bipartitematching;
+package baekjoon.tttwo.bipartitematching;
 
 // #2188 bipartitematching 축사 배정 
 import java.io.*;

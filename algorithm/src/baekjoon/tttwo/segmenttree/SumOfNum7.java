@@ -1,4 +1,4 @@
-package baekjoon.ttone.segmentTree;
+package baekjoon.tttwo.segmenttree;
 
 // #2268 fenwickTree 수들의 합 7 
 import java.io.*;

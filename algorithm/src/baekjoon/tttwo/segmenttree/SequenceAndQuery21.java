@@ -1,4 +1,4 @@
-package baekjoon.ttone.segmentTree;
+package baekjoon.tttwo.segmenttree;
 
 // #16975 fenwickTree 수열과 쿼리 21 
 import java.io.*;

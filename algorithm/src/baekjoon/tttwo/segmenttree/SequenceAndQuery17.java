@@ -1,4 +1,4 @@
-package baekjoon.ttone.segmentTree;
+package baekjoon.tttwo.segmenttree;
 
 // #14438 segmentTree 수열과 쿼리 17 
 import java.io.*;

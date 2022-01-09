@@ -1,10 +1,10 @@
-package baekjoon.ttone.bipartitematching;
+package baekjoon.tttwo.bipartitematching;
 
-// #11375 bipartitematching 열혈강호 
+// #11377 bipartitematching 열혈강호 3
 import java.io.*;
 import java.util.*;
 
-public class YHGH {
+public class YHGH3 {
 
 	static List<Integer>[] list;
 	static int[] task;
@@ -15,6 +15,7 @@ public class YHGH {
 		
 		int n = Integer.parseInt(st.nextToken());
 		int m = Integer.parseInt(st.nextToken());
+		int k = Integer.parseInt(st.nextToken());
 		
 		list = new ArrayList[n+1];
 		for(int i=1; i<=n; i++) {
@@ -32,26 +33,24 @@ public class YHGH {
 		}
 		
 		int cnt = 0;
-		for(int i=1; i<=n; i++) {
+		for(int i=1; i<=2*n; i++) {
 			Arrays.fill(check, false);
-			if(dfs(i)) cnt++; 
-		}
-		
-		System.out.println(cnt);
-		
-		for(int i=1; i<=n; i++) {
-			if(task[i] != 0) {
-				System.out.println(task[i] +" - " + i);
+			if(i<=n) {
+				if(dfs(i)) cnt++;
+			}
+			else{
+				if(dfs(i-n) && k>0) {
+					k--;
+					cnt++;	
+				}
 			}
 		}
-		
+		System.out.println(cnt);
 	}
 	
 	static boolean dfs(int here) {
 		for(int nxt : list[here]) {
-			
 			if(check[nxt]) continue;
-			
 			check[nxt] = true;
 			
 			if(task[nxt] == 0  || dfs(task[nxt])) {
