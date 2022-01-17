@@ -1,101 +1,76 @@
 package bst.treap;
 
-import java.util.Random;
-/*
-    ref : https://www.techiedelight.com/implementation-treap-data-structure-cpp-java-insert-search-delete/
-*/
-
-class TreapNode{
-    int data;  // 이 노드에 저장된 원소
-    int priority; // 이 노드의 우선순위(proirity)
-    TreapNode left, right;
-
-    // data, left, right 초기화 및 난수 우선순위 생성
-    TreapNode(int data){
-        this.data = data;
-        this.priority = new Random().nextInt(100);
-        this.left = this.right = null;
-    }
-}
 
 public class Treap {
-    /* Function to left-rotate a given BST.treap
 
-             r                         R
-            / \      Left Rotate      / \
-           L   R        ———>         r   Y
-              / \                   / \
-             X   Y                 L   X
-   */
-   public static TreapNode rotateLeft(TreapNode root){
-       TreapNode R = root.right;
-       TreapNode X = root.right.left;
-       // rotate
-       R.left = root;
-       root.right = X;
-       return R;
-   }
-    /* Function to right-rotate a given BST.treap
+	public Node insert(Node root, Node node){
+		if(root == null){
+			return node;
+		}
 
-               r                        L
-              / \     Right Rotate     / \
-             L   R        ———>        X   r
-            / \                          / \
-           X   Y                        Y   R
-   */
-    public static TreapNode rotateRight(TreapNode root){
-        TreapNode L = root.left;
-        TreapNode Y = root.left.right;
-        // rotate
-        L.right = root;
-        root.left = Y;
-        return L;
-    }
+		// node가 root를 대체헤야 한다. 해당 서브트리를 반으로 잘라 각각 자손으로 한다.
+		if(root.priority < node.priority){
+			Node[] splitted = split(root, node.key);
+			node.setLeft(splitted[0]);
+			node.setRight(splitted[1]);
+			return node;
+		}else if(root.key > node.key){
+			root.setLeft(insert(root.left, node));
+		}else {
+			root.setRight(insert(root.right, node));
+		}
+		return root;
+	}
 
-   public static TreapNode insertNode(TreapNode root, int data){
-       if(root == null){
-           return new TreapNode(data);
-       }
+	// split 두 개의 트립으로 분리한다.
+	public Node[] split(Node root, int key) {
+		Node[] pair = new Node[2];
+		if (root == null) {
+			return pair;
+		}
 
-       if(data < root.data){
-           root.left = insertNode(root.left, data);
-           if(root.left != null && root.left.priority > root.priority){
-               root = rotateRight(root);
-           }
-       }else{
-           root.right = insertNode(root.right, data);
-           if(root.right != null && root.right.priority > root.priority){
-               root = rotateLeft(root);
-           }
-       }
-       return root;
-   }
+		// 루트가 key 미만이면 오른쪽 서브트리를 쪼갠다.
+		if (root.key < key) {
+			Node[] rs = split(root.right, key);
+			root.setRight(rs[0]);
+			return new Node[]{root, rs[1]};
+		} else { // root가 key 이상이면 왼쪽 서브트리를 쪼갠다.
+			Node[] ls = split(root.left, key);
+			root.setLeft(ls[1]);
+			return new Node[]{ls[0], root};
+		}
+	}
 
-   public static void printTreap(TreapNode root, int space){
-        final int h = 10;
-        if(root == null) return;
 
-        space += h;
-        printTreap(root.right, space);
-        System.lineSeparator();
-        for(int i=h; i<space; i++){
-            System.out.print(' ');
-        }
 
-        System.out.println(root.data+"("+root.priority+")");
+	public static void printTreap(Node root, int space) {
+		final int h = 10;
+		if (root == null)
+			return;
 
-        System.lineSeparator();
-        printTreap(root.left, space);
-   }
+		space += h;
+		printTreap(root.right, space);
+		System.lineSeparator();
+		for (int i = h; i < space; i++) {
+			System.out.print(' ');
+		}
 
-    public static void main(String[] args) {
-        int[] keys = {5,2,1,4,9,8,10};
+		System.out.println(root.key + "(" + root.priority + ")");
 
-        TreapNode root = null;
-        for(int key : keys){
-            root = insertNode(root, key);
-            System.out.println("-------------");
-            printTreap(root,0);
-        }
-    }
+		System.lineSeparator();
+		printTreap(root.left, space);
+	}
+
+	public static void main(String[] args) {
+		int[] keys = {5, 2, 1, 4, 9, 8, 10};
+
+		Node root = null;
+		Treap treap = new Treap();
+		for (int key : keys) {
+			root = treap.insert(root, new Node(key));
+			System.out.println("insert: " + key);
+			printTreap(root, 0);
+		}
+
+	}
 }
