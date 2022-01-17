@@ -2,7 +2,6 @@ package bst.treap;
 
 
 public class Treap {
-
 	public Node insert(Node root, Node node){
 		if(root == null){
 			return node;
@@ -23,7 +22,7 @@ public class Treap {
 	}
 
 	// split 두 개의 트립으로 분리한다.
-	public Node[] split(Node root, int key) {
+	private Node[] split(Node root, int key) {
 		Node[] pair = new Node[2];
 		if (root == null) {
 			return pair;
@@ -39,6 +38,36 @@ public class Treap {
 			root.setLeft(ls[1]);
 			return new Node[]{ls[0], root};
 		}
+	}
+
+	// root를 루트로 하는 트립에서 key를 지우고 결과 트립의 루트를 반환한다.
+	public Node erase(Node root, int key){
+		if(root == null) return root;
+		// root를 지우고 양 서브트리를 합친 뒤 반환한다.
+		if(root.key == key){
+			Node ret = merge(root.left, root.right);
+			root = null;
+			return ret;
+		}
+
+		if(root.key > key){
+			root.setLeft(erase(root.left, key));
+		} else{
+			root.setRight(erase(root.right, key));
+		}
+		return root;
+	}
+
+	// a와 b가 두 개의 트립이고, max(a) < min(b)일 때 이 둘을 합친다.
+	private Node merge(Node a, Node b){
+		if(a == null) return b;
+		if(b == null) return a;
+		if(a.priority < b.priority){
+			b.setLeft(merge(a,  b.left));
+			return b;
+		}
+		a.setRight(merge(a.right, b));
+		return a;
 	}
 
 
@@ -61,16 +90,5 @@ public class Treap {
 		printTreap(root.left, space);
 	}
 
-	public static void main(String[] args) {
-		int[] keys = {5, 2, 1, 4, 9, 8, 10};
 
-		Node root = null;
-		Treap treap = new Treap();
-		for (int key : keys) {
-			root = treap.insert(root, new Node(key));
-			System.out.println("insert: " + key);
-			printTreap(root, 0);
-		}
-
-	}
 }
