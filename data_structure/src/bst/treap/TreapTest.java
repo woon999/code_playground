@@ -3,7 +3,6 @@ package bst.treap;
 import static bst.treap.Treap.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,22 +14,18 @@ public class TreapTest {
 	public void setUp(){
 		root = null;
 		treap = new Treap();
+		for (int key : keys) {
+			root = treap.insert(root, new Node(key));
+		}
 	}
 
 	@Test
 	public void print(){
-		for (int key : keys) {
-			root = treap.insert(root, new Node(key));
-			System.out.println("insert: " + key);
-			printTreap(root, 0);
-		}
+		printTreap(root, 0);
 	}
 
 	@Test
 	public void insert(){
-		for (int key : keys) {
-			root = treap.insert(root, new Node(key));
-		}
 		StringBuilder sb = new StringBuilder();
 		recursion(root, sb);
 		System.out.println(sb.toString());
@@ -47,9 +42,6 @@ public class TreapTest {
 
 	@Test
 	public void erase(){
-		for (int key : keys) {
-			root = treap.insert(root, new Node(key));
-		}
 		printTreap(root, 0);
 
 		System.out.println("erase: 9");
@@ -59,8 +51,21 @@ public class TreapTest {
 		StringBuilder sb = new StringBuilder();
 		recursion(root, sb);
 		assertEquals(sb.toString(), "1245810");
+	}
 
+	@Test
+	public void getKthNumber(){
+		printTreap(root, 0);
+		Node kth = treap.kth(root, 3);
+		assertEquals(4, kth.key);
+	}
 
+	@Test
+	public void countLessThanX(){
+		// 1, 2, 4, 5, 8, 9, 10
+		printTreap(root, 0);
+		assertEquals(treap.countLessThan(root, 5), 3);
+		assertEquals(treap.countLessThan(root, 10), 6);
 	}
 
 }
