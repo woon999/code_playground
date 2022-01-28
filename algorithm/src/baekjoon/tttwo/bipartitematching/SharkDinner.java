@@ -47,24 +47,12 @@ public class SharkDinner {
 		int cnt = 0;
 		
 		for(int i=1; i<=n; i++) {
-			System.out.print(i +" - ");
-			for(int nxt : list[i]) {
-				System.out.print(nxt+" ");
-			}
-			System.out.println();
-		}
-		
-		for(int i=1; i<=n; i++) {
 			for(int j=0; j<2; j++) {
 				Arrays.fill(check, false);
 				if(dfs(i))cnt++;	
 			}
 		}
 		
-		System.out.println(cnt);
-		for(int i=1; i<=n; i++) {
-			System.out.println(i +" - " + eat[i]);
-		}
 		System.out.println(n-cnt);
 		
 	}
