@@ -1,4 +1,4 @@
-package baekjoon.number;
+package baekjoon.tttwo.number;
 
 // #2023 prime 신기한 소수 
 import java.io.*;

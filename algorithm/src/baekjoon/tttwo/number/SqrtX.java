@@ -1,4 +1,4 @@
-package baekjoon.number;
+package baekjoon.tttwo.number;
 
 // #1016 number 제곱 ㄴㄴ수 
 import java.io.*;

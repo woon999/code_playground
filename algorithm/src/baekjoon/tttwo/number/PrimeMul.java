@@ -1,4 +1,4 @@
-package baekjoon.number;
+package baekjoon.tttwo.number;
 
 // #2014 number 소수의 곱 
 import java.io.*;
