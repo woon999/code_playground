@@ -9,8 +9,8 @@ public class FullBinaryTreeNetwork {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int h = Integer.parseInt(br.readLine());
 		
-		long[] dp = new long[h+1];
-		dp[1] =1;
+		long[] dp = new long[61];
+		dp[0] = dp[1] =1;
 		for(int i=2; i<=h; i++) {
 			if((i&1) == 1) { 
 				dp[i] = dp[i-1]*2 -1;
