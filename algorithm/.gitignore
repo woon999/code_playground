@@ -4,3 +4,4 @@
 .settings
 /bin
 *.iml
+/src/out
