@@ -71,7 +71,7 @@ public class SuffixArray_Manber_Myers {
 			this.group = Arrays.copyOf(group, group.length);
 		}
 
-		public void changeValues(int t, int[] groups){
+		public void changeValues(int t, int[] group){
 			this.t = t;
 			this.group = Arrays.copyOf(group, group.length);
 		}
