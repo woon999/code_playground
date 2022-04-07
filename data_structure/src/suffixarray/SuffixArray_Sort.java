@@ -7,6 +7,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Suffix Array 정렬 알고리즘으로 생성하기
+ * 값 비교 O(n)
+ * 값 정렬 O(nlgn)
+ * 시간복잡도 O(n^2*lgn)
+ */
+
 public class SuffixArray_Sort {
 	public static void main(String[] args) {
 		String text = "alohomora";
