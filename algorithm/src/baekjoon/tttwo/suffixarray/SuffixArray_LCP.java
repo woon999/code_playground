@@ -21,7 +21,6 @@ public class SuffixArray_LCP {
 		}
 		
 		private Comparator<Integer> comparator= new Comparator<>() {
-
 			@Override
 			public int compare(Integer o1, Integer o2) {
 				if(group[o1] != group[o2]) {
@@ -44,47 +43,46 @@ public class SuffixArray_LCP {
 		String text = br.readLine();
 		
 		List<Integer> suffix = getSuffixArray(text);
-		for(int idx : suffix) {
-			System.out.print((idx+1)+" ");
-		}
-		System.out.println();
 		int[] lcp = getLCP(text, suffix);
-		System.out.print("x ");
-		for(int i=1; i<lcp.length; i++) {
-			System.out.print(lcp[i]+" ");
+
+		StringBuilder sb = new StringBuilder();
+		for(int idx : suffix) {
+			sb.append((idx+1) + " ");
 		}
-		System.out.println();
+		sb.append("\n");
+		
+		sb.append("x ");
+		for(int i=0; i<lcp.length-1; i++) {
+			sb.append(lcp[i] + " ");
+		}
+		System.out.println(sb.toString());
 	}
 	
-	static int[] getLCP(String text, List<Integer> suffix){
-		int n = suffix.size();
+	static int[] getLCP(String text, List<Integer> sa){
+		int n = sa.size();
 		int[] lcp = new int[n];
-		int[] suffixIdx = new int[n];
-		
+
+		// sa의 역함수 배열 isa[sa[i]] = i
+		int[] isa = new int[n];
+
 		for(int i=0; i<n; i++) {
-			suffixIdx[suffix.get(i)] = i;
+			isa[sa.get(i)] = i;
 		}
 		
-		int t = 0;
+		int h = 0;
 		for(int i=0; i<n; i++) {
-			if(suffixIdx[i] == n-1) {
-				t = 0;
-				continue;
+			int k = isa[i];
+			if(k == n-1) continue;
+			
+			int j = sa.get(k+1);
+			while(i+h < n && j+h < n) {
+				if(text.charAt(i+h) != text.charAt(j+h)) break;
+				h++;
 			}
 			
-			int j = suffix.get(suffixIdx[i]+1);
-			
-			while(i+t < n && j+t < n) {
-				if(text.charAt(i+t) != text.charAt(j+t)) {
-					break;
-				}
-				t++;
-			}
-			
-			lcp[suffixIdx[i]+1] = t;
-			
-			if(t > 0) {
-				t--;
+			lcp[k] = h;
+			if(h > 0){
+				h--;
 			}
 		}
 		return lcp;
@@ -94,29 +92,29 @@ public class SuffixArray_LCP {
 		int n  = text.length();
 		int t = 1;
 		
-		List<Integer> tmp = new ArrayList<>();
+		List<Integer> sa = new ArrayList<>();
 		int[] group = new int[n+1];
 		for(int i=0; i<n; i++) {
-			tmp.add(i);
+			sa.add(i);
 			group[i] = text.charAt(i)-'a';
 		}
 		group[n] = -1;
 		
 		CompUsing2T compUsing2T = new CompUsing2T(t, n, group);
 		while(t < n) {
-			Collections.sort(tmp, compUsing2T.comparator);
+			Collections.sort(sa, compUsing2T.comparator);
 			
 			t*= 2;
 			if(t >= n) break;
 			
 			int[] nGroup = new int[n+1];
-			nGroup[tmp.get(0)] = 0;
+			nGroup[sa.get(0)] = 0;
 			nGroup[n] = -1;
 			for(int i=1; i<n; i++) {
-				if(compUsing2T.comparator.compare(tmp.get(i-1), tmp.get(i)) < 0 ) {
-					nGroup[tmp.get(i)] = nGroup[tmp.get(i-1)] + 1;
+				if(compUsing2T.comparator.compare(sa.get(i-1), sa.get(i)) < 0 ) {
+					nGroup[sa.get(i)] = nGroup[sa.get(i-1)] + 1;
 				} else {
-					nGroup[tmp.get(i)] = nGroup[tmp.get(i-1)];
+					nGroup[sa.get(i)] = nGroup[sa.get(i-1)];
 				}
 			}
 			
@@ -125,6 +123,6 @@ public class SuffixArray_LCP {
 			
 		}
 		
-		return tmp;
+		return sa;
 	}
 }
