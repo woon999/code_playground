@@ -1,10 +1,10 @@
 package baekjoon.tttwo.suffixarray;
 
-// #1605 suffixarray 반복 부분문자열 - LCP  
+// #3033 suffixarray 가장 긴 문자열 - LCP  
 import java.io.*;
 import java.util.*;
 
-public class RepeatingSubString {
+public class LongestStr {
 
 	static int n;
 
@@ -42,6 +42,7 @@ public class RepeatingSubString {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
 		n = Integer.parseInt(br.readLine());
 		String text = br.readLine();
 		
@@ -76,9 +77,6 @@ public class RepeatingSubString {
 				h -= 1;
 			}
 		}
-		
-		int idx = 0;
-		
 		return max;
 	}
 

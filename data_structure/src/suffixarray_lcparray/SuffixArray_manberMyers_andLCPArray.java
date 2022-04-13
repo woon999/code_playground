@@ -85,7 +85,6 @@ public class SuffixArray_manberMyers_andLCPArray {
 		for (int i = 0; i < n; i++) {
 			isa[sa.get(i)] = i;
 		}
-
 		int k = 0;
 		for (int i = 0; i < n; i++) {
 			int idx = isa[i];
