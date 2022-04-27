@@ -26,9 +26,8 @@ public class PrefixSum2 {
 			elements[i] = Long.parseLong(br.readLine());
 		}
 		
-		int treeSize = getTreeSize();
-		tree = new long[treeSize];
-		lazy = new long[treeSize];
+		tree = new long[n*4];
+		lazy = new long[n*4];
 		
 		
 		init(0,n-1,1);
@@ -47,10 +46,6 @@ public class PrefixSum2 {
 		}
 		bw.flush();
 		bw.close();
-	}
-	static int getTreeSize() {
-		int h = (int)Math.ceil(Math.log(n)/Math.log(2)) +1;
-		return (int)Math.pow(2, h)-1;
 	}
 	
 	static long init(int start, int end, int node) {
@@ -105,6 +100,7 @@ public class PrefixSum2 {
 		return pSum(start, mid, node*2, left, right) + pSum(mid+1, end, node*2+1, left, right);
 	}
 }
+
 
 
 
