@@ -21,9 +21,6 @@ public class ArrowCompetition {
 		System.out.println(Arrays.toString(solution(n, info)));
 	}
 	
-	// 그리디
-	// 가장 큰 점수 10점부터 차례대로 +1 만큼 할당하기
-	
 	static int[] answer;
 	static int[] g_info;
 	static int max = -1;
