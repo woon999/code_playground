@@ -77,7 +77,6 @@ public class RepeatingSubString {
 			}
 		}
 		
-		int idx = 0;
 		
 		return max;
 	}
