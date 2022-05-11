@@ -30,7 +30,7 @@ public class CameleonSubStr {
 			for(int i=1; i<n-1; i++) {
 				if(pi[i] == len) {
 					pattern = text.substring(i-len+1, i+1);
-					System.out.println(i +" - " + pattern);
+//					System.out.println(i +" - " + pattern);
 					break out;
 				}
 				
