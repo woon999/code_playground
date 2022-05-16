@@ -24,8 +24,6 @@ public class Cramming {
 		
 		// dp[i][t] = score, 1~i번 문제 중 t시간 내에 얻을 수 있는 최대 점수 
 		int[][] dp = new int[n+1][t+1];
-		dp[0][0] = study[0][0];
-		dp[0][1] = study[0][1];
 		for(int i=1; i<=n; i++) {
 			for(int j=0; j<=t; j++) {
 				if(study[i][0] <= j) { // 해당 단원 공부할 시간이 있다면
