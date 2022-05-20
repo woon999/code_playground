@@ -34,10 +34,10 @@ PS 연습은 백준과 프로그래머스를 통해 연습하고 있습니다. (
 #### 알고리즘
   1. 동적계획법 DP [(link)](https://loosie.tistory.com/150?category=972195)
   2. 백트래킹 기법 [(link)](https://loosie.tistory.com/196?category=972195)
-  3. 분할정복 알고리즘 [(link)](https://loosie.tistory.com/237?category=972195)
+  3. 분할정복 알고리즘 정리(합병 정렬, 퀵 정렬, 이진탐색) [(link)](https://loosie.tistory.com/237?category=972195)
   4. 위상정렬 [(link)](https://loosie.tistory.com/161?category=972195)
   5. 비트와 비트마스크(bitmask) [(link)](https://loosie.tistory.com/238?category=972195)
-  6. DFS, BFS 그래프 알고리즘 [(link)](https://loosie.tistory.com/151?category=972195)
+  6. DFS, BFS 그래프 탐색 알고리즘 [(link)](https://loosie.tistory.com/151?category=972195)
   7. 다익스트라, 플로이드 와샬 [(link)](https://loosie.tistory.com/146?category=972195)
   8. 최소 신장 트리 크루스칼 알고리즘 [(link)](https://loosie.tistory.com/159?category=972195)
   9. 다익스트라 vs 크루스칼 [(link)](https://loosie.tistory.com/167?category=972195)
