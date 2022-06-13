@@ -17,6 +17,5 @@ public class HashSetTester {
 		assertEquals(one, true);
 		assertEquals(two, true);
 		assertEquals(againOne, false);
-
 	}
 }
