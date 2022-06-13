@@ -32,7 +32,8 @@ public class HashSet<E> implements Set<E> {
 
 	@Override
 	public boolean add(E e) {
-		return false;
+		// e에 대한 hash 값과 e를 보낸다. 정상적으로 저장되면 null을 반환한다.
+		return add(hash(e), e) == null;
 	}
 
 	private E add(int hash , E key){
