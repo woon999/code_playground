@@ -110,12 +110,12 @@ public class HashSet<E> implements Set<E> {
 			while (value != null) {
 				int idx = value.hash % newCapacity; // 새로운 인덱스를 구한다.
 
-				 // 새로 담을 idx에 노드가 존재할 경우 (해시 충돌)
+				// 새로 담을 idx에 노드가 존재할 경우 (해시 충돌)
 				if (newTable[idx] != null) {
 					Node<E> tail = newTable[idx];
 
 					// 마지막 노드로 이동
-					while(tail.next != null){
+					while (tail.next != null) {
 						tail = tail.next;
 					}
 
@@ -148,7 +148,52 @@ public class HashSet<E> implements Set<E> {
 
 	@Override
 	public boolean remove(Object o) {
-		return false;
+		// o에 대한 hash 값과 o를 보낸다. 정상적으로 삭제되면 삭제된 노드를 반환한다.
+		return remove(hash(o), o) != null;
+	}
+
+	private Object remove(int hash, Object key) {
+		int idx = hash % table.length;
+
+		Node<E> node = table[idx];
+		Node<E> target = null;
+		Node<E> prev = null;
+
+		// 해당 idx에 원소가 없을 경우 null
+		if (node == null) {
+			return null;
+		}
+
+		// 같은 원소가 있는지 table 전체 탐색
+		while (node != null) {
+
+			/**
+			 * 같은 원소(노드)인 경우
+			 *  1. hash 값이 일치한다.
+			 *  2. key 값이 일치하거나 key 객체 값이 일치한다.
+			 */
+			if (node.hash == hash && (node.key == key || node.key.equals(key))) {
+				target = node;
+
+				/**
+				 * 같은 원소를 찾은 경우 prev, next를 연결해준다.
+				 */
+				if(prev == null){ // 이전 노드가 존재하지 않는 경우, table head에 위치한다.
+					table[idx] = node.next;
+					node = null;
+				} else { // prev next 포인터를 next 노드에 붙여준다.
+					prev.next = node.next;
+					node = null;
+				}
+				size--;
+				break;
+			}
+
+			prev = node;
+			node = node.next;
+		}
+
+		return target;
 	}
 
 	@Override
