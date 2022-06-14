@@ -2,12 +2,14 @@ package hashset;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Objects;
+
 import org.junit.jupiter.api.Test;
 
 public class HashSetTester {
 
 	@Test
-	void addTest(){
+	void addTest_Integer(){
 		// given, when
 		HashSet<Integer> intSet = new HashSet<>();
 		boolean one = intSet.add(1);
@@ -18,6 +20,34 @@ public class HashSetTester {
 		assertEquals(one, true);
 		assertEquals(two, true);
 		assertEquals(againOne, false);
+	}
+
+	@Test
+	void addTest_String(){
+		// given, when
+		HashSet<String> strSet = new HashSet<>();
+		boolean one = strSet.add("one");
+		boolean two = strSet.add("two");
+		boolean againOne = strSet.add("one");
+
+		// then
+		assertEquals(one, true);
+		assertEquals(two, true);
+		assertEquals(againOne, false);
+	}
+
+	@Test
+	void addTest_Object(){
+		// given, when
+		HashSet<Car> objSet = new HashSet<>();
+		boolean red = objSet.add(new Car(1, "red"));
+		boolean blue = objSet.add(new Car(2, "blue"));
+		boolean againRed = objSet.add(new Car(1, "red"));
+
+		// then
+		assertEquals(red, true);
+		assertEquals(blue, true);
+		assertEquals(againRed, false);
 	}
 
 	@Test
@@ -42,7 +72,7 @@ public class HashSetTester {
 	}
 
 	@Test
-	void removeTest(){
+	void removeTest_Integer(){
 		HashSet<Integer> intSet = new HashSet<>();
 		// given
 		boolean one = intSet.add(1);
@@ -58,5 +88,70 @@ public class HashSetTester {
 		// then
 		assertEquals(removeOne, true);
 		// assertEquals(intSet.contains(1), false);
+	}
+
+	@Test
+	void removeTest_String(){
+		HashSet<String> strSet = new HashSet<>();
+		// given
+		boolean one = strSet.add("one");
+		boolean two = strSet.add("two");
+
+		assertEquals(one, true);
+		assertEquals(two, true);
+		// assertEquals(intSet.contains(1), true);
+
+		// when
+		boolean removeOne = strSet.remove("one");
+
+		// then
+		assertEquals(removeOne, true);
+		// assertEquals(intSet.contains(1), false);
+	}
+
+	@Test
+	void removeTest_Object(){
+		HashSet<Car> objSet = new HashSet<>();
+		// given
+		boolean red = objSet.add(new Car(1, "red"));
+		boolean blue = objSet.add(new Car(2, "blue"));
+
+		assertEquals(red, true);
+		assertEquals(blue, true);
+		// assertEquals(intSet.contains(1), true);
+
+		// when
+		boolean removeOne = objSet.remove(new Car(1, "red"));
+
+		// then
+		assertEquals(removeOne, true);
+		// assertEquals(intSet.contains(1), false);
+	}
+
+}
+
+class Car {
+	int number;
+	String color;
+
+	public Car(int number, String color) {
+		this.number = number;
+		this.color = color;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Car car = (Car)o;
+		return number == car.number &&
+			Objects.equals(color, car.color);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(number, color);
 	}
 }
