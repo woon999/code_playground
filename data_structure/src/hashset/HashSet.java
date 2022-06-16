@@ -200,7 +200,7 @@ public class HashSet<E> implements Set<E> {
 
 	@Override
 	public boolean contains(Object o) {
-		int idx = hash(o) + table.length;
+		int idx = hash(o) % table.length;
 		Node<E> tmp = table[idx];
 
 		/**

@@ -128,6 +128,39 @@ public class HashSetTester {
 		// assertEquals(intSet.contains(1), false);
 	}
 
+	@Test
+	void containsTest_Integer(){
+		HashSet<Integer> intSet = new HashSet<>();
+		intSet.add(1);
+		intSet.add(2);
+
+		assertTrue(intSet.contains(1));
+		assertTrue(intSet.contains(2));
+		assertFalse(intSet.contains(3));
+	}
+
+	@Test
+	void containsTest_String(){
+		HashSet<String> strSet = new HashSet<>();
+		strSet.add("one");
+		strSet.add("two");
+
+		assertTrue(strSet.contains("one"));
+		assertTrue(strSet.contains("two"));
+		assertFalse(strSet.contains("three"));
+	}
+
+	@Test
+	void containsTest_Object(){
+		HashSet<Object> objSet = new HashSet<>();
+		objSet.add(new Car(1, "red"));
+		objSet.add(new Car(2, "blue"));
+
+		assertTrue(objSet.contains(new Car(1, "red")));
+		assertTrue(objSet.contains(new Car(2, "blue")));
+		assertFalse(objSet.contains(new Car(3, "green")));
+	}
+
 }
 
 class Car {
