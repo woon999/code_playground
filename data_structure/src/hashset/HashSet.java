@@ -1,5 +1,7 @@
 package hashset;
 
+import java.util.Objects;
+
 public class HashSet<E> implements Set<E> {
 
 	// java.util.HashSet
@@ -198,6 +200,21 @@ public class HashSet<E> implements Set<E> {
 
 	@Override
 	public boolean contains(Object o) {
+		int idx = hash(o) + table.length;
+		Node<E> tmp = table[idx];
+
+		/**
+		 * 같은 객체 내용이어도 hash 값은 다를 수 있다.
+		 * 해당 메서드는 내용이 같은지를 알아보고 싶을 때 쓰는 메소드이기에 hash 값은 비교안하고
+		 * 내용 부분만 비교한다. 단, null은 제외한다. (Object.equals() 사용)
+		 */
+		while(tmp != null){
+			// 같은 객체를 찾았을 경우 true 리턴
+			if (Objects.equals(o, tmp.key)){
+				return true;
+			}
+			tmp = tmp.next;
+		}
 		return false;
 	}
 }
