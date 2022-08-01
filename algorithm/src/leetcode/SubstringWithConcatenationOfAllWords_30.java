@@ -25,7 +25,7 @@ public class SubstringWithConcatenationOfAllWords_30 {
 
 		for (int i = 0; i <= s.length() - (oneWordLength * wordsLength); i++) {
 			Map<String, Integer> wordSeen = new HashMap<>();
-			// i: start, j: word count
+			// i: start, j: 대응되는 word count
 			for (int j = 0; j < wordsLength; j++) {
 				int idx = i + j * oneWordLength;
 				String nextWord = s.substring(idx, idx + oneWordLength);
