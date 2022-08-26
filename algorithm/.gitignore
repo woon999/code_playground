@@ -6,3 +6,4 @@
 *.iml
 /src/out
 .DS_Store
+out
