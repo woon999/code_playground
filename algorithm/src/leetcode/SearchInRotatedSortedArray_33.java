@@ -22,13 +22,14 @@ public class SearchInRotatedSortedArray_33 {
 				break;
 			}
 
+			// mid >= s,  [4,5(mid),7]
 			if(nums[mid] >= nums[s]){
 				if(target >= nums[s] && target <= nums[mid]) { // target in [s, mid]
 					e = mid - 1;
 				}else { // target in [mid, e]
 					s = mid + 1;
 				}
-			} else {
+			} else { // mid < s, [7,0(mid),1]
 				if(target >= nums[mid] && target <= nums[e]){ // target in [mid ,e]
 					s = mid + 1;
 				} else { // target in [s, mid]
