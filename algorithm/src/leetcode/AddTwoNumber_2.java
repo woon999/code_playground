@@ -45,9 +45,11 @@ public class AddTwoNumber_2 {
 				l2 = l2.next;
 			}
 
+			flag = 0;
+
 			ListNode sumNode = new ListNode(sum % 10);
 
-			if (head == null) {
+			if (head == null) { // 첫 노드
 				head = sumNode;
 				tmp = head;
 			} else{
@@ -55,16 +57,13 @@ public class AddTwoNumber_2 {
 				tmp = sumNode;
 			}
 
-			flag = 0;
 			if(sum >= 10){
 				flag = 1;
 			}
 		}
 
 		if(flag == 1){
-			ListNode up = new ListNode(1);
-			tmp.next = up;
-			tmp = up;
+			tmp.next = new ListNode(1);
 		}
 
 		return head;

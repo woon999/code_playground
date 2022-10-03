@@ -1,4 +1,4 @@
-# #75 ruby Sort Colors
+# #75 ruby Two Sum
 
 # @param {Integer[]} nums
 # @param {Integer} target
