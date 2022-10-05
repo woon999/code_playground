@@ -1,14 +1,15 @@
 package leetcode;
 
 // #3 - Longest Substring Without Repeating Characters
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class LongestSubstringWithoutRepeatingCharacters_3 {
 	public static void main(String[] args) {
-		// String s = "pwwkew";
-		String s = "dvdf";
-		System.out.println(lengthOfLongestSubstring(s));
+		String s = "pwwkew";
+		// String s = "dvdf";
+		// System.out.println(lengthOfLongestSubstring(s));
+
+		System.out.println(lengthOfLongestSubstring_improvement(s));
 	}
 
 	public static int lengthOfLongestSubstring(String s) {
@@ -34,6 +35,25 @@ public class LongestSubstringWithoutRepeatingCharacters_3 {
 
 			set.clear();
 			max = Math.max(max, dp[i]);
+		}
+		return max;
+	}
+
+	public static int lengthOfLongestSubstring_improvement(String s) {
+		Queue<Character> queue = new LinkedList<>();
+		int max = 0;
+		for(char c: s.toCharArray()){
+			if(!queue.contains(c)){
+				queue.offer(c);
+			}else{
+				queue.offer(c);
+
+				while(queue.peek() != c){
+					queue.poll();
+				}
+				queue.poll();
+			}
+			max = Math.max(max, queue.size());
 		}
 		return max;
 	}
