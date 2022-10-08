@@ -6,7 +6,6 @@ def length_of_longest_substring(s)
   max = 0
   s.each_char do |c|
     unless index = stack.index(c)
-      p "? #{stack}"
       stack.push(c)
     else
       stack.push(c)
@@ -18,10 +17,6 @@ def length_of_longest_substring(s)
 
   max
 end
-
-a = [1,2,3,4,5]
-3.times {a.shift}
-p "dd: #{a}"
 
 s = "abcabcbb"
 p length_of_longest_substring(s)
