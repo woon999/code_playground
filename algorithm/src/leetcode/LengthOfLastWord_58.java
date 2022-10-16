@@ -1,8 +1,8 @@
 package leetcode;
 
-// #26 - Length Of Last Word
+// #58 - Length Of Last Word
 
-public class LengthOfLastWord_26 {
+public class LengthOfLastWord_58 {
 	public static void main(String[] args) {
 		String s = "   fly me   to   the moon  ";
 
