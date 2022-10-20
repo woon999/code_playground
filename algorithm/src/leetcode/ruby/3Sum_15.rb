@@ -1,4 +1,4 @@
-# 3 two pointer 3Sum
+# 15 two pointer 3Sum
 
 # @param {Integer[]} nums
 # @return {Integer[][]}
