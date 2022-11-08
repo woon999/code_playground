@@ -26,9 +26,11 @@ def dfs(root, target_sum, path_sum = 0)
 
   return true if path_sum == target_sum if !root.left && !root.right
 
-  left  = dfs(root.left, target_sum, path_sum)
-  right = dfs(root.right, target_sum, path_sum)
-  left | right
+  f = false
+  f |= dfs(root.left, target_sum, path_sum)
+  f |= dfs(root.right, target_sum, path_sum)
+
+  f
 end
 
 l3 = TreeNode.new(3)
