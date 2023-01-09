@@ -8,9 +8,7 @@ def smallest_range_i(nums, k)
   min = nums.min
   max = nums.max
   l = max - min
-  if l <= t
-    return 0
-  end
+  return 0 if l <= t
 
   max - min - t
 end
