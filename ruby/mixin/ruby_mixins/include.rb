@@ -27,9 +27,9 @@ end
 p MyClass.ancestors
 # [MyClass, MyModule, BaseClass, Object, Kernel, BasicObject]
 
-p  MyClass.instance_method(:log)
+p MyClass.instance_method(:log)
 # #<UnboundMethod: MyModule#log() /mixin/ruby_mixins/include.rb:12>
 
-p  MyClass.new.log
+p MyClass.new.log
 # log by MyModule
 
