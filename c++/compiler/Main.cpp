@@ -22,7 +22,8 @@ auto main() -> int
 {
     string sourceCode = R""""(
         function main() {
-            print 'Hello, World!';
+            printL 'Hello, World!';
+            printL 1+2*3;
         }
     )"""";
 
