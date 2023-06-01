@@ -2,8 +2,8 @@
 # 어휘 분석 
 ```
 function main() {
-    printL 'Hello, World!';
-    printL 1+2*3;
+    p 'Hello, World!';
+    pl 1+2*3;
 }
 ```
 
@@ -15,10 +15,10 @@ function    function
 (           (
 )           )
 {           {
-printL      printL
+printL      p
 #String     Hello, World!
 ;           ;
-printL      printL
+printL      pl
 #Number     1
 ;           ;
 }           }

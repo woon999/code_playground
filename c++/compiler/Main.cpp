@@ -2,13 +2,13 @@
 #include <vector>
 #include <string>
 #include "Scanner.cpp"
-// #include "Token.h"
+#include "Node.h"
 
 using namespace std;
 using std::string;
 using std::vector;
 
-auto scan(string) -> vector<Token>;
+auto parse(vector<Token>) -> Program *;
 auto printTokenList(vector<Token> tokenList) -> void
 {
     cout << setw(12) << left << "KIND"
@@ -22,8 +22,8 @@ auto main() -> int
 {
     string sourceCode = R""""(
         function main() {
-            printL 'Hello, World!';
-            printL 1+2*3;
+            p 'Hello, World!';
+            pl 1+2*3;
         }
     )"""";
 
