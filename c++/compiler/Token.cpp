@@ -1,10 +1,8 @@
 #include <map>
-#include <iomanip>
 #include "Token.h"
 
 using std::left;
 using std::map;
-using std::setw;
 
 static map<string, Kind> stringToKind = {
     {"#unknown", Kind::Unknown},

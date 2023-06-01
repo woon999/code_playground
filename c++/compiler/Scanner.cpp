@@ -1,11 +1,7 @@
-﻿#include <vector>
-#include <string>
-#include <iostream>
-#include "Token.cpp"
+﻿#include <iostream>
+#include "Token.h"
 
 using std::cout;
-using std::string;
-using std::vector;
 
 enum class CharType
 {

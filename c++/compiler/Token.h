@@ -1,8 +1,14 @@
+#pragma once
 #include <string>
 #include <iostream>
+#include <iomanip>
+#include <vector>
+#include <string>
 
 using std::ostream;
+using std::setw;
 using std::string;
+using std::vector;
 
 enum class Kind
 {

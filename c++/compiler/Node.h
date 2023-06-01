@@ -1,3 +1,4 @@
+#pragma once
 #include <any>
 #include <map>
 #include <vector>
@@ -86,6 +87,13 @@ struct ExpressionStatement : Statement
 };
 
 struct Or : Expression
+{
+    Expression *lhs;
+    Expression *rhs;
+    auto print(int) -> void;
+};
+
+struct And : Expression
 {
     Expression *lhs;
     Expression *rhs;

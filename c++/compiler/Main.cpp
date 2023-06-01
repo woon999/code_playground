@@ -1,22 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include "Scanner.cpp"
-#include "Node.h"
-
-using namespace std;
-using std::string;
-using std::vector;
-
-auto parse(vector<Token>) -> Program *;
-auto printTokenList(vector<Token> tokenList) -> void
-{
-    cout << setw(12) << left << "KIND"
-         << "STRING" << endl;
-    cout << string(23, '-') << endl;
-    for (auto &token : tokenList)
-        cout << token << endl;
-}
+#include "Main.h"
 
 auto main() -> int
 {
@@ -28,7 +10,10 @@ auto main() -> int
     )"""";
 
     cout << sourceCode << endl;
-    printTokenList(scan(sourceCode));
+
+    auto tokenList = scan(sourceCode);
+    auto syntaxTree = parse(tokenList);
+    printSyntaxTree(syntaxTree);
 
     return 1;
 }
