@@ -6,11 +6,12 @@
 
 ## 1. PS 🖋
 
-PS 연습은 백준과 프로그래머스를 통해 연습하고 있습니다.
+PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하고 있습니다.
 
 - BOJ [(link)](https://www.acmicpc.net/)
 - Programmers [(link)](https://programmers.co.kr/)
 - LeetCode [(link)](https://leetcode.com/)
+- Codewars [(lint)](https://www.codewars.com/)
 
 ## 2. BLOG 📚
 
