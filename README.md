@@ -1,7 +1,4 @@
 # Algorithm 공부
-
-프로그래밍 언어는 Java, Ruby를 사용하고 있습니다.
-
 ## 0. 알고리즘 공부하는 법 ❓
 
 - [PS는 어떻게 하는 것이 좋은가?](https://subinium.github.io/how-to-study-problem-solving/)
