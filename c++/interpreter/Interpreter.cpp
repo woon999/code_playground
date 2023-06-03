@@ -6,12 +6,10 @@
 #include "Datatype.h"
 #include "Node.h"
 #include <cmath>
-#include <algorithm>
 
 using std::any;
 using std::cout;
 using std::endl;
-using std::fill_n;
 using std::function;
 using std::list;
 using std::map;
