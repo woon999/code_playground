@@ -3,7 +3,6 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
-#include <string>
 
 using std::ostream;
 using std::setw;
