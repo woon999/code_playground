@@ -6,6 +6,7 @@ auto main() -> int
         function main() {
             pl 'Hello, World!';
             pl 1+2*3;
+            pl 1*2+3*4;
             pl 'abc'*3;
         }
     )"""";

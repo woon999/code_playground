@@ -6,10 +6,12 @@
 #include "Datatype.h"
 #include "Node.h"
 #include <cmath>
+#include <algorithm>
 
 using std::any;
 using std::cout;
 using std::endl;
+using std::fill_n;
 using std::function;
 using std::list;
 using std::map;
@@ -72,7 +74,6 @@ auto Variable::interpret() -> void
 {
   local.back().front()[name] = expression->interpret();
 }
-
 auto For::interpret() -> void
 {
   local.back().emplace_front();
@@ -238,13 +239,17 @@ auto Arithmetic::interpret() -> any
   }
   if (kind == Kind::Multiply && isString(lValue) && isNumber(rValue))
   {
-    string mulstr;
-    string str = toString(lValue);
-    for (int i = 0; i < toNumber(rValue); i++)
+    string strValue = toString(lValue);
+    int numberValue = toNumber(rValue);
+
+    string result;
+    result.reserve(strValue.size() * numberValue);
+
+    for (int i = 0; i < numberValue; i++)
     {
-      mulstr += str;
+      result += strValue; // Concatenate the string value to the result
     }
-    return mulstr;
+    return result;
   }
   if (kind == Kind::Divide && isNumber(lValue) && isNumber(rValue))
   {
