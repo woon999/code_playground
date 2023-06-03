@@ -236,6 +236,16 @@ auto Arithmetic::interpret() -> any
   {
     return toNumber(lValue) * toNumber(rValue);
   }
+  if (kind == Kind::Multiply && isString(lValue) && isNumber(rValue))
+  {
+    string mulstr;
+    string str = toString(lValue);
+    for (int i = 0; i < toNumber(rValue); i++)
+    {
+      mulstr += str;
+    }
+    return mulstr;
+  }
   if (kind == Kind::Divide && isNumber(lValue) && isNumber(rValue))
   {
     return toNumber(rValue) == 0 ? 0.0 : toNumber(lValue) / toNumber(rValue);

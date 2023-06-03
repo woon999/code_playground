@@ -4,8 +4,9 @@ auto main() -> int
 {
     string sourceCode = R""""(
         function main() {
-            p 'Hello, World!';
+            pl 'Hello, World!';
             pl 1+2*3;
+            pl 'abc'*3;
         }
     )"""";
 
