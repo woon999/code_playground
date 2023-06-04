@@ -231,6 +231,43 @@ pl          pl
 }           }
 }           }
 
+~~~
+for i =0, i<5, i=i+1 {
+    if i == 1 {
+        continue;
+    }
+    pl i;
+}
+~~~
+
+for         for
+#identifier i
+=           =
+#Number     0
+,           ,
+#identifier i
+<           <
+#Number     5
+,           ,
+#identifier i
+=           =
+#identifier i
++           +
+#Number     1
+{           {
+if          if
+#identifier i
+==          ==
+#Number     1
+{           {
+continue    continue
+;           ;
+}           }
+pl          pl
+#identifier i
+;           ;
+}           }
+
 }           }
 #EndOfToken 
 
@@ -389,6 +426,35 @@ FUNCTION main:
         ELSE:
           PRINT_LINE
             GET_VARIABLE: i
+    FOR:
+      VARIABLE:
+        VAR i:
+          0
+      CONDITION:
+        <:
+          LHS:
+            GET_VARIABLE: i
+          RHS:
+            5
+      EXPRESSION:
+        SET_VARIABLE: i
+          +:
+            LHS:
+              GET_VARIABLE: i
+            RHS:
+              1
+      BLOCK:
+        IF:
+          CONDITION:
+            ==:
+              LHS:
+                GET_VARIABLE: i
+              RHS:
+                1
+          BLOCK:
+            CONTINUE
+        PRINT_LINE
+          GET_VARIABLE: i
 ```
 
 ## result
@@ -412,6 +478,10 @@ i: 2
 one
 two
 three
+4
+0
+2
+3
 4
 ```
 

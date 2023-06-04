@@ -99,6 +99,7 @@ auto For::interpret() -> void
   local.back().pop_front();
 }
 
+// continue, break 문은 예외를 던져서 처리
 auto Break::interpret() -> void
 {
   throw BreakException();
