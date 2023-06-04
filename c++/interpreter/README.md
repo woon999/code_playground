@@ -17,6 +17,38 @@ function main() {
 
 ## TokenList
 ```
+KIND        STRING
+-----------------------
+function    function
+#identifier main
+(           (
+)           )
+{           {
+pl          pl
+#String     Hello, World!
+;           ;
+pl          pl
+#Number     1
++           +
+#Number     2
+*           *
+#Number     3
+;           ;
+pl          pl
+#Number     1
+*           *
+#Number     2
++           +
+#Number     3
+*           *
+#Number     4
+;           ;
+pl          pl
+#String     abc
+*           *
+#Number     3
+;           ;
+pl          pl
 true        true
 or          or
 #String     Hello, World!
@@ -35,14 +67,34 @@ pl          pl
 false       false
 and         and
 #String     Hello, World!
+;           ;
+#identifier global
+=           =
+#Number     123123
+;           ;
+var         var
+#identifier local
+=           =
+#Number     99
+;           ;
+pl          pl
+#String     global: 
+,           ,
+#identifier global
+;           ;
+pl          pl
+#String     local: 
+,           ,
+#identifier local
 ;           ;
 }           }
 #EndOfToken 
+
 ```
 
 ## Syntax Tree
 ```
-UNCTION main: 
+FUNCTION main: 
   BLOCK:
     PRINT_LINE
       "Hello, World!"
@@ -100,6 +152,17 @@ UNCTION main:
           false
         RHS:
           "Hello, World!"
+    EXPRESSION:
+      SET_VARIABLE: global
+        123123
+    VAR local:
+      99
+    PRINT_LINE
+      "global: "
+      GET_VARIABLE: global
+    PRINT_LINE
+      "local: "
+      GET_VARIABLE: local
 ```
 
 ## result
@@ -112,6 +175,8 @@ true
 Hello, World!
 Hello, World!
 false
+global: 123123
+local: 99
 ```
 
 

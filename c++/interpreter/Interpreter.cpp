@@ -26,8 +26,8 @@ struct ContinueException
 {
 };
 
-static map<string, any> global;
-static list<list<map<string, any>>> local;
+static map<string, any> global;            // 전역 변수 관리
+static list<list<map<string, any>>> local; // 지역 변수 관리
 static map<string, Function *> functionTable;
 extern map<string, function<any(vector<any>)>> builtinFunctionTable;
 
@@ -43,7 +43,7 @@ auto interpret(Program *program) -> void
   local.emplace_back().emplace_front();
   try
   {
-    functionTable["main"]->interpret();
+    functionTable["main"]->interpret(); // 메인 함수 호출
   }
   catch (ReturnException)
   {

@@ -13,6 +13,11 @@ auto main() -> int
             pl false or 'Hello, World!';
             pl true and 'Hello, World!';
             pl false and 'Hello, World!';
+
+            global = 123123;
+            var local = 99;
+            pl 'global: ', global;
+            pl 'local: ', local;
         }
     )"""";
 
