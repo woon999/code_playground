@@ -18,6 +18,10 @@ auto main() -> int
             var local = 99;
             pl 'global: ', global;
             pl 'local: ', local;
+
+            global = local = 1;
+            pl 'global: ', global;
+            pl 'local: ', local;
         }
     )"""";
 

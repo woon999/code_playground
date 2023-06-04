@@ -23,6 +23,12 @@ function    function
 #identifier main
 (           (
 )           )
+
+pl 'Hello, World!';
+pl 1+2*3;
+pl 1*2+3*4;
+pl 'abc'*3;
+
 {           {
 pl          pl
 #String     Hello, World!
@@ -48,6 +54,12 @@ pl          pl
 *           *
 #Number     3
 ;           ;
+
+pl true or 'Hello, World!';
+pl false or 'Hello, World!';
+pl true and 'Hello, World!';
+pl false and 'Hello, World!';
+
 pl          pl
 true        true
 or          or
@@ -68,6 +80,12 @@ false       false
 and         and
 #String     Hello, World!
 ;           ;
+
+global = 123123;
+var local = 99;
+pl 'global: ', global;
+pl 'local: ', local;
+
 #identifier global
 =           =
 #Number     123123
@@ -76,6 +94,27 @@ var         var
 #identifier local
 =           =
 #Number     99
+;           ;
+pl          pl
+#String     global: 
+,           ,
+#identifier global
+;           ;
+pl          pl
+#String     local: 
+,           ,
+#identifier local
+;           ;
+
+global = local = 1;
+pl 'global: ', global;
+pl 'local: ', local;
+
+#identifier global
+=           =
+#identifier local
+=           =
+#Number     1
 ;           ;
 pl          pl
 #String     global: 
@@ -163,6 +202,16 @@ FUNCTION main:
     PRINT_LINE
       "local: "
       GET_VARIABLE: local
+    EXPRESSION:
+      SET_VARIABLE: global
+        SET_VARIABLE: local
+          1
+    PRINT_LINE
+      "global: "
+      GET_VARIABLE: global
+    PRINT_LINE
+      "local: "
+      GET_VARIABLE: local
 ```
 
 ## result
@@ -177,6 +226,8 @@ Hello, World!
 false
 global: 123123
 local: 99
+global: 1
+local: 1
 ```
 
 
