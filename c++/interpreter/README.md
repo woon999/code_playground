@@ -19,17 +19,23 @@ function main() {
 ```
 KIND        STRING
 -----------------------
+~~~
+function main()
+~~~
+
 function    function
 #identifier main
 (           (
 )           )
+{           {
 
+~~~
 pl 'Hello, World!';
 pl 1+2*3;
 pl 1*2+3*4;
 pl 'abc'*3;
+~~~
 
-{           {
 pl          pl
 #String     Hello, World!
 ;           ;
@@ -55,10 +61,12 @@ pl          pl
 #Number     3
 ;           ;
 
+~~~
 pl true or 'Hello, World!';
 pl false or 'Hello, World!';
 pl true and 'Hello, World!';
 pl false and 'Hello, World!';
+~~~
 
 pl          pl
 true        true
@@ -81,10 +89,12 @@ and         and
 #String     Hello, World!
 ;           ;
 
+~~~
 global = 123123;
 var local = 99;
 pl 'global: ', global;
 pl 'local: ', local;
+~~~
 
 #identifier global
 =           =
@@ -106,9 +116,11 @@ pl          pl
 #identifier local
 ;           ;
 
+~~~
 global = local = 1;
 pl 'global: ', global;
 pl 'local: ', local;
+~~~
 
 #identifier global
 =           =
@@ -126,6 +138,99 @@ pl          pl
 ,           ,
 #identifier local
 ;           ;
+
+~~~
+for i =0, i<3, i=i+1 {
+  pl 'i: ', i;
+}
+~~~
+
+for         for
+#identifier i
+=           =
+#Number     0
+,           ,
+#identifier i
+<           <
+#Number     3
+,           ,
+#identifier i
+=           =
+#identifier i
++           +
+#Number     1
+{           {
+pl          pl
+#String     i: 
+,           ,
+#identifier i
+;           ;
+}           }
+
+~~~
+for i =0, i<5, i=i+1 {
+  if i == 1 {
+      pl 'one';
+  } elsif i == 2{
+      pl 'two';
+  } elsif i== 3 {
+      pl 'three';
+  } else {
+      pl i;
+  }
+}
+~~~
+
+for         for
+#identifier i
+=           =
+#Number     0
+,           ,
+#identifier i
+<           <
+#Number     5
+,           ,
+#identifier i
+=           =
+#identifier i
++           +
+#Number     1
+{           {
+if          if
+#identifier i
+==          ==
+#Number     1
+{           {
+pl          pl
+#String     one
+;           ;
+}           }
+elsif       elsif
+#identifier i
+==          ==
+#Number     2
+{           {
+pl          pl
+#String     two
+;           ;
+}           }
+elsif       elsif
+#identifier i
+==          ==
+#Number     3
+{           {
+pl          pl
+#String     three
+;           ;
+}           }
+else        else
+{           {
+pl          pl
+#identifier i
+;           ;
+}           }
+}           }
+
 }           }
 #EndOfToken 
 
@@ -212,6 +317,78 @@ FUNCTION main:
     PRINT_LINE
       "local: "
       GET_VARIABLE: local
+    FOR:
+      VARIABLE:
+        VAR i:
+          0
+      CONDITION:
+        <:
+          LHS:
+            GET_VARIABLE: i
+          RHS:
+            3
+      EXPRESSION:
+        SET_VARIABLE: i
+          +:
+            LHS:
+              GET_VARIABLE: i
+            RHS:
+              1
+      BLOCK:
+        PRINT_LINE
+          "i: "
+          GET_VARIABLE: i
+    FOR:
+      VARIABLE:
+        VAR i:
+          0
+      CONDITION:
+        <:
+          LHS:
+            GET_VARIABLE: i
+          RHS:
+            5
+      EXPRESSION:
+        SET_VARIABLE: i
+          +:
+            LHS:
+              GET_VARIABLE: i
+            RHS:
+              1
+      BLOCK:
+        IF:
+          CONDITION:
+            ==:
+              LHS:
+                GET_VARIABLE: i
+              RHS:
+                1
+          BLOCK:
+            PRINT_LINE
+              "one"
+        ELSEIF:
+          CONDITION:
+            ==:
+              LHS:
+                GET_VARIABLE: i
+              RHS:
+                2
+          BLOCK:
+            PRINT_LINE
+              "two"
+        ELSEIF:
+          CONDITION:
+            ==:
+              LHS:
+                GET_VARIABLE: i
+              RHS:
+                3
+          BLOCK:
+            PRINT_LINE
+              "three"
+        ELSE:
+          PRINT_LINE
+            GET_VARIABLE: i
 ```
 
 ## result
@@ -228,6 +405,14 @@ global: 123123
 local: 99
 global: 1
 local: 1
+i: 0
+i: 1
+i: 2
+0
+one
+two
+three
+4
 ```
 
 

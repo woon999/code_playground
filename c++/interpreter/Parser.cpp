@@ -194,7 +194,7 @@ auto parseIf() -> If *
         skipCurrent(Kind::LeftBrace);
         result->blocks.push_back(parseBlock());
         skipCurrent(Kind::RightBrace);
-    } while (skipCurrentIf(Kind::Elif));
+    } while (skipCurrentIf(Kind::Elseif));
     if (skipCurrentIf(Kind::Else))
     {
         skipCurrent(Kind::LeftBrace);

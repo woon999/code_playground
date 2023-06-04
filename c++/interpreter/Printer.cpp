@@ -65,7 +65,7 @@ auto If::print(int depth) -> void
   for (size_t i = 0; i < conditions.size(); i++)
   {
     indent(depth);
-    cout << (i == 0 ? "IF:" : "ELIF:") << endl;
+    cout << (i == 0 ? "IF:" : "ELSEIF:") << endl;
     indent(depth + 1);
     cout << "CONDITION:" << endl;
     conditions[i]->print(depth + 2);

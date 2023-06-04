@@ -22,7 +22,7 @@ static map<string, Kind> stringToKind = {
     {"break", Kind::Break},
     {"continue", Kind::Continue},
     {"if", Kind::If},
-    {"elif", Kind::Elif},
+    {"elsif", Kind::Elseif},
     {"else", Kind::Else},
     {"p", Kind::Print},
     {"pl", Kind::PrintLine},

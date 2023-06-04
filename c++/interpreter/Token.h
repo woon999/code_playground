@@ -28,7 +28,7 @@ enum class Kind
     Break,
     Continue,
     If,
-    Elif,
+    Elseif,
     Else,
     Print,
     PrintLine,

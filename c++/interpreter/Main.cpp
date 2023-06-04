@@ -22,6 +22,22 @@ auto main() -> int
             global = local = 1;
             pl 'global: ', global;
             pl 'local: ', local;
+            
+            for i =0, i<3, i=i+1 {
+                pl 'i: ', i;
+            }
+
+            for i =0, i<5, i=i+1 {
+                if i == 1 {
+                    pl 'one';
+                } elsif i == 2{
+                    pl 'two';
+                } elsif i== 3 {
+                    pl 'three';
+                } else {
+                    pl i;
+                }
+            }
         }
     )"""";
 
