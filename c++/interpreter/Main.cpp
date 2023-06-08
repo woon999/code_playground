@@ -2,7 +2,7 @@
 
 auto main() -> int
 {
-    string sourceCode = R""""(
+    string sourceCode0 = R""""(
         function main() {
             pl 'Hello, World!';
             pl 1+2*3;
@@ -46,6 +46,21 @@ auto main() -> int
 
                 pl i;
             }
+        }
+    )"""";
+
+    string sourceCode = R""""(
+        function main() {
+            sayHo();
+            add(1,2);
+        }
+
+        function sayHo(){
+            pl 'Ho!';
+        }
+
+        function add(a, b){
+            pl a+b;
         }
     )"""";
 

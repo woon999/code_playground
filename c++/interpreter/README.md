@@ -485,6 +485,123 @@ three
 4
 ```
 
+---
+
+## funcation SoruceCode
+```
+function main() {
+    sayHo();
+    add(1,2);
+}
+
+function sayHo(){
+    pl 'Ho!';
+}
+
+function add(a, b){
+  pl a+b;
+}
+```
+
+## Token List
+```
+KIND        STRING
+-----------------------
+function    function
+#identifier main
+(           (
+)           )
+{           {
+#identifier sayHo
+(           (
+)           )
+;           ;
+#identifier add
+(           (
+#Number     1
+,           ,
+#Number     2
+)           )
+;           ;
+}           }
+
+~~~
+function sayHo(){
+    pl 'Ho!';
+}
+~~~
+
+function    function
+#identifier sayHo
+(           (
+)           )
+{           {
+pl          pl
+#String     Ho!
+;           ;
+}           }
+function    function
+
+
+~~~
+function add(a, b){
+  pl a+b;
+}
+~~~
+
+#identifier add
+(           (
+#identifier a
+,           ,
+#identifier b
+)           )
+{           {
+pl          pl
+#identifier a
++           +
+#identifier b
+;           ;
+}           }
+#EndOfToken 
+```
+
+## Syntax Tree
+```
+FUNCTION main: 
+  BLOCK:
+    EXPRESSION:
+      CALL:
+        EXPRESSION:
+          GET_VARIABLE: sayHo
+    EXPRESSION:
+      CALL:
+        EXPRESSION:
+          GET_VARIABLE: add
+        ARGUMENT:
+          1
+        ARGUMENT:
+          2
+FUNCTION sayHo: 
+  BLOCK:
+    PRINT_LINE
+      "Ho!"
+
+FUNCTION add: 
+  PARAMETERS:a b 
+  BLOCK:
+    PRINT_LINE
+      +:
+        LHS:
+          GET_VARIABLE: a
+        RHS:
+          GET_VARIABLE: b
+```
+## result
+```
+Ho!
+3
+```
+
 
 ---
 refs: https://github.com/AcornPublishing/crafting-compiler

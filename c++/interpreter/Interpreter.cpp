@@ -274,6 +274,7 @@ auto Unary::interpret() -> any
 auto Call::interpret() -> any
 {
   auto value = sub->interpret();
+
   if (isBuiltinFunction(value))
   {
     vector<any> values;
@@ -281,15 +282,20 @@ auto Call::interpret() -> any
       values.push_back(arguments[i]->interpret());
     return toBuiltinFunction(value)(values);
   }
+
   if (isFunction(value) == false)
     return nullptr;
+
+  // 함수 호출 인자
   map<string, any> parameters;
   for (size_t i = 0; i < arguments.size(); i++)
   {
     auto name = toFunction(value)->parameters[i];
     parameters[name] = arguments[i]->interpret();
   }
+
   local.emplace_back().push_front(parameters);
+
   try
   {
     toFunction(value)->interpret();
@@ -299,7 +305,9 @@ auto Call::interpret() -> any
     local.pop_back();
     return exception.result;
   }
+
   local.pop_back();
+
   return nullptr;
 }
 

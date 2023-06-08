@@ -110,6 +110,7 @@ auto setValueOfMap(any object, any key, any value) -> any
   return value;
 }
 
+// 데이터 타입이 함수의 호출을 표현하는 노드인지 확인, if false, return null
 auto isFunction(any value) -> bool
 {
   return value.type() == typeid(Function *);
