@@ -7,3 +7,4 @@ set -xe
 # -Wall -Wextra: 컴파일 중에 추가 경고를 활성화하는 컴파일러 플래그. 잠재적인 문제를 파악하고 코드 품질을 개선하는 데 도움.
 clang -Wall -Wextra -o twice twice.c
 clang -Wall -Wextra -o gates gates.c
+clang -Wall -Wextra -o xor xor.c

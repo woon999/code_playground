@@ -39,13 +39,11 @@ float nand_train[][3] = {
 sample *train = nand_train;
 size_t train_count = 4;
 
-float rand_float(void)
-{
+float rand_float(void){
     return (float)rand() / (float)RAND_MAX;
 }
 
-float cost(float w1, float w2, float b)
-{
+float cost(float w1, float w2, float b){
     // cost 평균 제곱 오차(MSE) - result 크면 나쁨, 0으로 수렴할수록 좋음 
     float result = 0.0f;
     for(size_t i=0; i<train_count; ++i){
@@ -60,8 +58,7 @@ float cost(float w1, float w2, float b)
     return result/train_count;
 }
 
-int main()
-{
+int main(){
     srand(time(NULL));
     rand();
     float w1 = rand_float();
