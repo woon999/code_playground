@@ -21,14 +21,17 @@ float rand_float(void)
     return (float)rand() / (float)RAND_MAX;
 }
 
-// cost 평균 제곱 오차(MSE) 
-//  - result 크면 나쁨, 0으로 수렴할수록 좋음 
-float cost(float w, int flag)
+// https://acsicorp.com/wp-content/uploads/2020/04/comparision.png
+// neruals - x1, x2, x3, ...
+// weights - w1, w2, w3, ...
+// y = x1*w1 + x2*w2 + x3*w3 + ...
+float cost(float w, float b, int flag)
 {
+    // cost 평균 제곱 오차(MSE) - result 크면 나쁨, 0으로 수렴할수록 좋음 
     float result = 0.0f;
     for(size_t i=0; i<train_count; ++i){
         float x = train[i][0];
-        float y = x*w;
+        float y = x*w + b;
 
         float diff = y - train[i][1];
         result += diff*diff;
@@ -43,21 +46,20 @@ float cost(float w, int flag)
 int main(void)
 {
     float w = rand_float()*10.0f;
-    
-    // 유한 차분은 함수의 도함수를 근사화하는 데 사용되는 수치 방법이다. https://en.wikipedia.org/wiki/Finite_difference
+    float b = rand_float()*5.0f;
+
     // forward finite difference method derivation 과정
-    //  0) eps, rate는 임의로 값을 조정한다.
-    //  1) f'(w) = f(w+h) - f(w)/h 
-    //  2) w = w - w'
-    //  3) 1)~2) 과정을 돌려 근사치로 도달한다.
     float eps = 1e-3;
     float rate = 1e-3;
-    printf("w: %f, cost: %f \n", w, cost(w, 1));
+    printf("w: %f, b: %f, cost: %f \n", w, b, cost(w, b, 1));
     for(size_t i=0; i<10000; ++i){
-        float dcost = (cost(w + eps, 0) - cost(w, 0))/eps;
-        w -= rate*dcost; 
+        float c = cost(w, b, 0);
+        float dw = (cost(w + eps, b, 0) - c)/eps;
+        float db = (cost(w, b + eps, 0) - c)/eps;
+        w -= rate*dw; 
+        b -= rate*db; 
     }
-    printf("w: %f, cost: %f \n", w, cost(w, 1));
+    printf("w: %f, b: %f, cost: %f \n", w, b, cost(w, b, 1));
     
     return 0;
 }
