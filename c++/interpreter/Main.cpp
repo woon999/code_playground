@@ -53,6 +53,7 @@ auto main() -> int
         function main() {
             sayHo();
             add(1,2);
+            pl getC(3,4);
         }
 
         function sayHo(){
@@ -61,6 +62,10 @@ auto main() -> int
 
         function add(a, b){
             pl a+b;
+        }
+
+        function getC(a, b){
+            return a * a + b * b;
         }
     )"""";
 

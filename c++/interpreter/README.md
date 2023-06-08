@@ -562,6 +562,31 @@ pl          pl
 #identifier b
 ;           ;
 }           }
+
+~~~
+function getC(a, b){
+  return a * a + b * b;
+}
+~~~
+
+#identifier getC
+(           (
+#identifier a
+,           ,
+#identifier b
+)           )
+{           {
+return      return
+#identifier a
+*           *
+#identifier a
++           +
+#identifier b
+*           *
+#identifier b
+;           ;
+}           }
+
 #EndOfToken 
 ```
 
@@ -595,11 +620,31 @@ FUNCTION add:
           GET_VARIABLE: a
         RHS:
           GET_VARIABLE: b
+
+FUNCTION getC: 
+  PARAMETERS:a b 
+  BLOCK:
+    RETURN:
+      +:
+        LHS:
+          *:
+            LHS:
+              GET_VARIABLE: a
+            RHS:
+              GET_VARIABLE: a
+        RHS:
+          *:
+            LHS:
+              GET_VARIABLE: b
+            RHS:
+              GET_VARIABLE: b
 ```
+
 ## result
 ```
 Ho!
 3
+25
 ```
 
 

@@ -300,7 +300,7 @@ auto Call::interpret() -> any
   {
     toFunction(value)->interpret();
   }
-  catch (ReturnException exception)
+  catch (ReturnException exception) // 함수 return 예외 받아서 처리
   {
     local.pop_back();
     return exception.result;
