@@ -264,8 +264,10 @@ auto Arithmetic::interpret() -> any
 auto Unary::interpret() -> any
 {
   auto value = sub->interpret();
+
   if (kind == Kind::Add && isNumber(value))
     return abs(toNumber(value));
+
   if (kind == Kind::Subtract && isNumber(value))
     return toNumber(value) * -1;
   return 0.0;
@@ -275,11 +277,13 @@ auto Call::interpret() -> any
 {
   auto value = sub->interpret();
 
+  // 내장 함수
   if (isBuiltinFunction(value))
   {
     vector<any> values;
     for (size_t i = 0; i < arguments.size(); i++)
       values.push_back(arguments[i]->interpret());
+
     return toBuiltinFunction(value)(values);
   }
 
@@ -300,7 +304,7 @@ auto Call::interpret() -> any
   {
     toFunction(value)->interpret();
   }
-  catch (ReturnException exception) // 함수 return 예외 받아서 처리
+  catch (ReturnException exception) // return 예외 받아서 처리
   {
     local.pop_back();
     return exception.result;
@@ -315,10 +319,13 @@ auto GetElement::interpret() -> any
 {
   auto object = sub->interpret();
   auto index_ = index->interpret();
+
   if (isArray(object) && isNumber(index_))
     return getValueOfArray(object, index_);
+
   if (isMap(object) && isString(index_))
     return getValueOfMap(object, index_);
+
   return nullptr;
 }
 
@@ -327,10 +334,13 @@ auto SetElement::interpret() -> any
   auto object = sub->interpret();
   auto index_ = index->interpret();
   auto value_ = value->interpret();
+
   if (isArray(object) && isNumber(index_))
     return setValueOfArray(object, index_, value_);
+
   if (isMap(object) && isString(index_))
     return setValueOfMap(object, index_, value_);
+
   return nullptr;
 }
 
@@ -341,10 +351,13 @@ auto GetVariable::interpret() -> any
     if (variables.count(name))
       return variables[name];
   }
+
   if (global.count(name))
     return global[name];
+
   if (functionTable.count(name))
     return functionTable[name];
+
   if (builtinFunctionTable.count(name))
     return builtinFunctionTable[name];
   return nullptr;
@@ -383,15 +396,19 @@ auto StringLiteral::interpret() -> any
 auto ArrayLiteral::interpret() -> any
 {
   auto result = new Array();
+
   for (auto &node : values)
     result->values.push_back(node->interpret());
+
   return result;
 }
 
 auto MapLiteral::interpret() -> any
 {
   auto result = new Map();
+
   for (auto &[key, value] : values)
     result->values.insert_or_assign(key, value->interpret());
+
   return result;
 }

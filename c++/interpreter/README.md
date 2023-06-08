@@ -490,12 +490,14 @@ three
 ## funcation SoruceCode
 ```
 function main() {
-    sayHo();
-    add(1,2);
+  sayHo();
+  add(1,2);
+  pl getC(3,4);
+  pl sqrt(getC(3,4));
 }
 
 function sayHo(){
-    pl 'Ho!';
+  pl 'Ho!';
 }
 
 function add(a, b){
@@ -521,6 +523,25 @@ function    function
 #Number     1
 ,           ,
 #Number     2
+)           )
+;           ;
+pl          pl
+#identifier getC
+(           (
+#Number     3
+,           ,
+#Number     4
+)           )
+;           ;
+pl          pl
+#identifier sqrt
+(           (
+#identifier getC
+(           (
+#Number     3
+,           ,
+#Number     4
+)           )
 )           )
 ;           ;
 }           }
@@ -606,6 +627,27 @@ FUNCTION main:
           1
         ARGUMENT:
           2
+    PRINT_LINE
+      CALL:
+        EXPRESSION:
+          GET_VARIABLE: getC
+        ARGUMENT:
+          3
+        ARGUMENT:
+          4
+    PRINT_LINE
+      CALL:
+        EXPRESSION:
+          GET_VARIABLE: sqrt
+        ARGUMENT:
+          CALL:
+            EXPRESSION:
+              GET_VARIABLE: getC
+            ARGUMENT:
+              3
+            ARGUMENT:
+              4
+              
 FUNCTION sayHo: 
   BLOCK:
     PRINT_LINE
@@ -645,6 +687,7 @@ FUNCTION getC:
 Ho!
 3
 25
+5
 ```
 
 

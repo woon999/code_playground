@@ -54,6 +54,7 @@ auto main() -> int
             sayHo();
             add(1,2);
             pl getC(3,4);
+            pl sqrt(getC(3,4));
         }
 
         function sayHo(){

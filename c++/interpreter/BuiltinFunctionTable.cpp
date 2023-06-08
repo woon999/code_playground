@@ -12,6 +12,7 @@ using std::map;
 using std::string;
 using std::vector;
 
+// 내장 함수 - length, push ,pop, erase, clock, sqrt
 map<string, function<any(vector<any>)>> builtinFunctionTable = {
     {"length", [](vector<any> values) -> any
      {

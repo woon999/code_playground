@@ -121,6 +121,7 @@ auto toFunction(any value) -> Function *
   return any_cast<Function *>(value);
 }
 
+// 내장 함수인지 확인
 auto isBuiltinFunction(any value) -> bool
 {
   return value.type() == typeid(function<any(vector<any>)>);
