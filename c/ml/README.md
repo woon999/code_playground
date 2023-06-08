@@ -1,4 +1,7 @@
 # ML in C
+
+![neural network](https://acsicorp.com/wp-content/uploads/2020/04/comparision.png)
+
 ## 1) cost 측정 - 평균 제곱 오차(MSE)
 훈련된 모델의 값을 평가하려면 train 데이터 세트의 예측 값과 실제 값 사이의 평균 제곱 오차(MSE)를 계산할 수 있다. MSE가 낮을수록 모델 성능이 좋다.
 - MSE는 result 변수의 차이 제곱을 누적한 다음 데이터 세트의 데이터 포인트 수(train_count)로 나누어 계산한다.
@@ -20,7 +23,7 @@ https://en.wikipedia.org/wiki/Finite_difference
 
 </br>
 
-## 3) result 
+## result - twice
 
 ``` 
 ------------ 초기 데이터 --------------
@@ -39,6 +42,17 @@ actual: 5.998250, expected: 6.000000
 actual: 7.995620, expected: 8.000000
 w: 1.997370, b: 0.006138, cost: 0.000015
 ```
+
+## result - gates
+```
+------------ 초기 데이터 --------------
+w1 = 9.168773, w2 = 9.566946, b = 0.828650, c = 0.121128
+
+---------- 10000번 트레이닝 ------------
+w1 = 9.168773, w2 = 9.566946, b = -3.392821, c = 0.000268
+```
+
+gnuplot > `plot "cost.txt" with lines`
 
 </br>
 
