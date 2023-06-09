@@ -54,7 +54,7 @@ int main(void)
         w -= rate*dw; 
         b -= rate*db; 
     }
-    // printf("w: %f, b: %f, cost: %f \n", w, b, cost(w, b));
+    printf("w: %f, b: %f, cost: %f \n", w, b, cost(w, b));
     
     return 0;
 }

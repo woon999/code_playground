@@ -21,9 +21,10 @@ float sigmoidf(float x){
     return  1.f / (1.f + expf(-x));
 }
 
+// (x|y) & ~(x&y)
 float forward(Xor m, float x1, float x2){
     float a = sigmoidf(m.or_w1*x1 + m.or_w2*x2 + m.or_b);
-    float b = sigmoidf(m.nand_w1*x1 + m.nand_w2*x2 + m.nand_b);
+    float b = sigmoidf(m.n1and_w1*x1 + m.nand_w2*x2 + m.nand_b);
     return sigmoidf(a*m.and_w1 + b*m.and_w2 + m.and_b);
 }
 
@@ -34,6 +35,31 @@ sample xor_train[] = {
     {0, 1, 1},
     {1, 1, 0},
 };
+
+// OR-gate
+float or_train[][3] = {
+    {0, 0, 0},
+    {1, 0, 1},
+    {0, 1, 1},
+    {1, 1, 1},
+};
+
+// AND-gate
+float and_train[][3] = {
+    {0, 0, 0},
+    {1, 0, 0},
+    {0, 1, 0},
+    {1, 1, 1},
+};
+
+// NAND-gate
+float nand_train[][3] = {
+    {0, 0, 1},
+    {1, 0, 1},
+    {0, 1, 1},
+    {1, 1, 0},
+};
+
 
 sample *train = xor_train;
 size_t train_count = 4;
@@ -48,8 +74,8 @@ float cost(Xor m){
         float d = y - train[i][2];
         result += d*d;
     }
-
-    return result/train_count;
+    result /= train_count;
+    return result;
 }
 
 float rand_float(void){
@@ -58,6 +84,9 @@ float rand_float(void){
 
 Xor rand_xor()
 {
+    srand(time(NULL));
+    rand();
+
     Xor m;
     m.or_w1 = rand_float();
     m.or_w2 = rand_float();
@@ -84,76 +113,113 @@ void print_xor(Xor m){
     printf("nand_b = %f \n", m.nand_b);
 }
 
-Xor finite_diff(Xor m){
-
+Xor finite_diff(Xor m, float eps){
     Xor g;
     float c = cost(m);
     float saved;
-    float eps = 1e-2;
 
     saved = m.or_w1;
     m.or_w1 += eps;
     g.or_w1 = (cost(m) -c)/eps;
     m.or_w1 = saved;
 
-    saved = m.or_w1;
-    m.or_w1 += eps;
-    g.or_w1 = (cost(m) - c)/eps;
-    m.or_w1 = saved;
-    
     saved = m.or_w2;
     m.or_w2 += eps;
-    g.or_w1 = (cost(m) - c)/eps;
-    m.or_w1 = saved;
+    g.or_w2 = (cost(m) - c)/eps;
+    m.or_w2 = saved;
     
     saved = m.or_b;
     m.or_b += eps;
-    g.or_w1 = (cost(m) - c)/eps;
-    m.or_w1 = saved;
+    g.or_b = (cost(m) - c)/eps;
+    m.or_b = saved;
     
     saved = m.and_w1;
     m.and_w1 += eps;
-    g.or_w1 = (cost(m) - c)/eps;
-    m.or_w1 = saved;
+    g.and_w1 = (cost(m) - c)/eps;
+    m.and_w1 = saved;
     
     saved = m.and_w2;
     m.and_w2 += eps;
-    g.or_w1 = (cost(m) - c)/eps;
-    m.or_w1 = saved;
+    g.and_w2 = (cost(m) - c)/eps;
+    m.and_w2 = saved;
     
     saved = m.and_b;
     m.and_b += eps;
-    g.or_w1 = (cost(m) - c)/eps;
-    m.or_w1 = saved;
+    g.and_b = (cost(m) - c)/eps;
+    m.and_b = saved;
     
     saved = m.nand_w1;
     m.nand_w1 += eps;
-    g.or_w1 = (cost(m) - c)/eps;
-    m.or_w1 = saved;
+    g.nand_w1 = (cost(m) - c)/eps;
+    m.nand_w1 = saved;
     
     saved = m.nand_w2;
     m.nand_w2 += eps;
-    g.or_w1 = (cost(m) - c)/eps;
-    m.or_w1 = saved;
+    g.nand_w2 = (cost(m) - c)/eps;
+    m.nand_w2 = saved;
     
     saved = m.nand_b;
     m.nand_b += eps;
-    g.or_w1 = (cost(m) - c)/eps;
-    m.or_w1 = saved;
+    g.nand_b = (cost(m) - c)/eps;
+    m.nand_b = saved;
     
-    return m;
+    return g;
+}
+
+Xor learn(Xor m, Xor g, float rate){
+     m.or_w1 -= rate*g.or_w1;
+     m.or_w2 -= rate*g.or_w2;
+     m.or_b -= rate*g.or_b;
+     m.and_w1 -= rate*g.and_w1;
+     m.and_w2 -= rate*g.and_w2;
+     m.and_b -= rate*g.and_b;
+     m.nand_w1 -= rate*g.nand_w1;
+     m.nand_w2 -= rate*g.nand_w2;
+     m.nand_b -= rate*g.nand_b;
+     return m;
 }
 
 int main(void){
-    srand(time(NULL));
-    rand();
-
     Xor m = rand_xor();
-    print_xor(m);
+    float eps = 1e-1;
+    float rate = 1e-1;
+
+    for(size_t i = 0; i<100000; ++i){
+        Xor g = finite_diff(m, eps);
+        m = learn(m,g,rate);
+        printf("cost = %f \n", cost(m));
+    }
 
     printf("------------------------------------\n");
-    print_xor(finite_diff(m));
-    printf("cost = %f \n", cost(m));
 
+    for(size_t i = 0; i<2; ++i){
+        for(size_t j = 0; j<2; ++j){
+            printf("%zu ^ %zu = %f \n", i, j, forward(m, i, j));
+        }
+    }
+
+    printf("------------------------------------\n");
+    printf("\"OR\" neuron \n");
+    for(size_t i = 0; i<2; ++i){
+        for(size_t j = 0; j<2; ++j){
+            printf("%zu | %zu = %f \n", i, j, sigmoidf(i*m.or_w1 + j*m.or_w2 + m.or_b));
+        }
+    }
+
+    printf("------------------------------------\n");
+    printf("\"NAND\" neuron \n");
+    for(size_t i = 0; i<2; ++i){
+        for(size_t j = 0; j<2; ++j){
+            printf("~(%zu & %zu) = %f \n", i, j, sigmoidf(i*m.nand_w1 + j*m.nand_w2 + m.nand_b));
+        }
+    }
+
+    printf("------------------------------------\n");
+    printf("\"AND\" neuron \n");
+    for(size_t i = 0; i<2; ++i){
+        for(size_t j = 0; j<2; ++j){
+            printf("%zu & %zu = %f \n", i, j, sigmoidf(i*m.and_w1 + j*m.and_w2 + m.and_b));
+        }
+    }
     return 0;
 }
