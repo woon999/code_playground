@@ -24,7 +24,7 @@ float sigmoidf(float x){
 // (x|y) & ~(x&y)
 float forward(Xor m, float x1, float x2){
     float a = sigmoidf(m.or_w1*x1 + m.or_w2*x2 + m.or_b);
-    float b = sigmoidf(m.n1and_w1*x1 + m.nand_w2*x2 + m.nand_b);
+    float b = sigmoidf(m.nand_w1*x1 + m.nand_w2*x2 + m.nand_b);
     return sigmoidf(a*m.and_w1 + b*m.and_w2 + m.and_b);
 }
 
