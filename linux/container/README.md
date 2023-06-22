@@ -1,8 +1,8 @@
-# Vagrant로 Ubuntu 18.04 with installed Docker 실행
+# Execute Vagrant Ubuntu 18.04 with installed Docker 
 ```
-# virtualbox 설치
+# virtualbox install
 brew install virtualbox --cask
-# vagrant 설치
+# vagrant install
 brew install vagrant --cask
 
 # VM 중지와 재개
