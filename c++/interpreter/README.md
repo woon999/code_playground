@@ -487,7 +487,8 @@ three
 
 ---
 
-## funcation SoruceCode
+# function
+## SoruceCode
 ```
 function main() {
   sayHo();
@@ -690,6 +691,54 @@ Ho!
 5
 ```
 
+--- 
+
+# Array
+## SoruceCode
+```
+function main() {
+      pl [1,2,3];
+}
+```
+
+## Token List
+```
+KIND        STRING
+-----------------------
+function    function
+#identifier main
+(           (
+)           )
+{           {
+pl          pl
+[           [
+#Number     1
+,           ,
+#Number     2
+,           ,
+#Number     3
+]           ]
+;           ;
+}           }
+#EndOfToken 
+```
+
+## Syntax Tree
+```
+FUNCTION main: 
+  BLOCK:
+    PRINT_LINE
+      [
+        1
+        2
+        3
+      ]
+```
+
+## result
+```
+[ 1 2 3 ]
+```
 
 ---
 refs: https://github.com/AcornPublishing/crafting-compiler

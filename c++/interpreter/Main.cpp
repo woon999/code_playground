@@ -49,7 +49,7 @@ auto main() -> int
         }
     )"""";
 
-    string sourceCode = R""""(
+    string sourceCode1 = R""""(
         function main() {
             sayHo();
             add(1,2);
@@ -67,6 +67,16 @@ auto main() -> int
 
         function getC(a, b){
             return a * a + b * b;
+        }
+    )"""";
+
+    string sourceCode = R""""(
+        function main() {
+            pl [1,2,3];
+
+            var array = ['first', 'second', 'third'];
+            array[1] = '2nd';
+            pl array[1];
         }
     )"""";
 

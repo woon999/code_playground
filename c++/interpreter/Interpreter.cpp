@@ -393,6 +393,8 @@ auto StringLiteral::interpret() -> any
   return value;
 }
 
+// 배열 메모리 힙에 생성
+// 메모리 관리가 따로 필요없도록 reference count 0이 되면 메모리 해제하는 C++ 참조 카운트 포인터 사용
 auto ArrayLiteral::interpret() -> any
 {
   auto result = new Array();
