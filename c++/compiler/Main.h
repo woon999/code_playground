@@ -1,14 +1,23 @@
 #pragma once
-#include <iostream>
-#include <vector>
+#include <tuple>
 #include <string>
-#include "Node.h"
+#include <fstream>
+#include <iomanip>
+#include <iostream>
 #include "Token.h"
+#include "Node.h"
+#include "Code.h"
 
-using namespace std;
+using std::cout;
+using std::endl;
+using std::get;
+using std::left;
+using std::right;
+using std::setw;
 using std::string;
-using std::vector;
+using std::tuple;
 
-auto printSyntaxTree(Program *) -> void;
 auto scan(string) -> vector<Token>;
 auto parse(vector<Token>) -> Program *;
+auto generate(Program *) -> tuple<vector<Code>, map<string, size_t>>;
+auto printObjectCode(tuple<vector<Code>, map<string, size_t>>) -> void;
