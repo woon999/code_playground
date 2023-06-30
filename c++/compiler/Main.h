@@ -20,4 +20,6 @@ using std::tuple;
 auto scan(string) -> vector<Token>;
 auto parse(vector<Token>) -> Program *;
 auto generate(Program *) -> tuple<vector<Code>, map<string, size_t>>;
+auto execute(tuple<vector<Code>, map<string, size_t>>) -> void;
+
 auto printObjectCode(tuple<vector<Code>, map<string, size_t>>) -> void;

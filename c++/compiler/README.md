@@ -144,6 +144,14 @@ ADDR INSTRUCTION    OPERAND
   41 Return   
  ```
 
+# 출력 결과
+```
+Hello, World!7
+0
+1
+2
+if
+```
 
  ---
  refs: https://github.com/AcornPublishing/crafting-compiler
