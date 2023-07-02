@@ -11,6 +11,8 @@
 - 루트디렉토리를 포함
 - 하위의 모든 파일시스템들이 마운트
 
+<img width="809" alt="스크린샷 2023-06-30 오후 9 10 16" src="https://github.com/loosie/code_playground/assets/54282927/4eeba0c7-352f-48f3-9608-d0ce6af96a95">
+
 루트 파일시스템을 피봇하면 Host에 영향이 간다. 그래서 프로세스의 환경을 격리하는 'Namespace'(2002)를 개발하게 되었다. 네임스페이스를 통해 격리를 해서 하고 싶었던 것은 Host에게 영향을 주지않고 pivot_root가 가능하게 만드려고 했다. 그래서 이때 고민했던 것이 '마운트'이다. 
 
 
@@ -21,10 +23,18 @@
 
 부착되는 지점을 마운트 포인트라고 한다. (이전 실습에서 ps 명령어를 실행할 때 proc 마운트 포인트가 필요했음)
 
+<img width="771" alt="스크린샷 2023-06-30 오후 9 14 32" src="https://github.com/loosie/code_playground/assets/54282927/91eeefc4-5495-4d4d-9bdc-a0b1c9e0ac99">
+
 ## 마운트 namespace
-그래서 pivot_root를 하기 위해서 최초의 네임스페이스로 '마운트 네임스페이스'가 개발이 된다. 마운트 네임스페이스는 '마운트 포인트'를 격리한다. 파일 시스템이 루트 파일시스템에 부착되는 위치에 대한 정보를 격리하는 것이다.
+그래서 pivot_root를 하기 위해서 최초의 네임스페이스로 '마운트 네임스페이스'가 개발이 된다. 
+
+<img width="762" alt="스크린샷 2023-06-30 오후 9 18 38" src="https://github.com/loosie/code_playground/assets/54282927/2bfe57ad-f212-472e-bc4c-e639a8e6a3d3">
+
+마운트 네임스페이스는 '마운트 포인트'를 격리한다. 파일 시스템이 루트 파일시스템에 부착되는 위치에 대한 정보를 격리하는 것이다.
 - 부모 프로세스가 속해있는 host 상에서 M 디렉토리가 그대로 보이고 부착된 파일시스템이 보이지 않는다
-- 이렇게 되면 호스트에 영향이 없으므로 pivot_root가 가능해진다 
+- 이렇게 되면 호스트에 영향이 없으므로 pivot_root가 가능해진다
+
+<img width="735" alt="스크린샷 2023-06-30 오후 9 19 26" src="https://github.com/loosie/code_playground/assets/54282927/76d6377a-b4ba-4233-9016-1d8afabc94b2">
 
 <br>
 
@@ -162,6 +172,7 @@ pivot_root . put_old;
 cd /;
 ```
 
+<img width="783" alt="스크린샷 2023-07-02 오후 8 48 52" src="https://github.com/loosie/code_playground/assets/54282927/99be431e-9f92-4df3-b096-ad6d77f91942">
 
 ## terminal1 (container)
 ```zsh
@@ -195,8 +206,10 @@ bin  escape_chroot  lib  lib64	proc  put_old  usr
 2. 그러나 chroot 탈옥 가능
 3. 마운트 네임스페이스 격리 + pivot_root를 이용하여 탈옥 방지 
 
+<img width="776" alt="스크린샷 2023-07-02 오후 8 57 29" src="https://github.com/loosie/code_playground/assets/54282927/5f30cdb6-5403-492b-b6c6-377669651de6">
 
 이제 남은 문제는 중복 문제이다. 보안, 관리, 비용 등 다양한 문제가 발생한다. 다음은 이를 해결해보자. 
+<img width="777" alt="스크린샷 2023-07-02 오후 8 58 44" src="https://github.com/loosie/code_playground/assets/54282927/1535cad9-6514-4214-bf4b-2bc518586d17">
 
 <br>
 
