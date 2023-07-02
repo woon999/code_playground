@@ -4,6 +4,9 @@ Linux는 모든 게 파일이라고 할 만큼 Linix에서 파일은 중요한 �
 ## Container
 FTP, HTTP, SSH 등 다양한 포트를 통해 서버에 접속한다. 해커들도 이러한 방식으로 서버에 침투한다. 해킹 보안 문제를 해결하기 위해 원격으로 들어온 유저를 그 공간에만 가두기 위해서 chroot를 고안해냈다. chroot는 루트 디렉토리 밖으로는 프로세스가 나갈 수 없다. 
 
+<img width="790" alt="스크린샷 2023-06-30 오후 8 08 25" src="https://github.com/loosie/code_playground/assets/54282927/a1ba9c5e-e36a-4694-a994-e2bbef3398cc">
+
+
 
 <br>
 
@@ -164,7 +167,7 @@ mount # 해당 명령어를 통해 mount된 목록 확인 가능
 umount /tmp/myroot/proc # proc 언마운트 
 ```
 
-[]
+<img width="404" alt="스크린샷 2023-06-30 오후 8 40 58" src="https://github.com/loosie/code_playground/assets/54282927/06dd82f6-518d-444e-bded-bad40a88b4a9">
 
 ## docker image(nginx)로 chroot
 남이 만든 이미지로 chroot를 해보자
