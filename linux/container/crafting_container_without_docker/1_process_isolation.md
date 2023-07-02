@@ -265,6 +265,8 @@ dev   initrd.img.old  media	  root	sys   var
 etc   lib	      mnt	  run	tmp   vmlinuz
 ```
 
+탈옥이 성공하였다. 해커가 host 파일시스템에 침투하였다. 다음 실습에서 이를 막아보자. 
+
 <br>
 
 # refs
