@@ -1,26 +1,10 @@
-# Algorithm 공부
-## 0. 알고리즘 공부하는 법 ❓
+# Code playground
+다양한 프로그램을 만들어보는 코드 놀이터입니다 🎮
 
-- [PS는 어떻게 하는 것이 좋은가?](https://subinium.github.io/how-to-study-problem-solving/)
-- [알고리즘 PS/CP 공부 유형 및 보안법](https://subinium.github.io/PS-Study-Types-and-Complements/)
 
-## 1. PS 🖋
+<br> 
 
-PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하고 있습니다.
-
-- BOJ [(link)](https://www.acmicpc.net/)
-- Programmers [(link)](https://programmers.co.kr/)
-- LeetCode [(link)](https://leetcode.com/)
-- Codewars [(lint)](https://www.codewars.com/)
-
-## 2. BLOG 📚
-
-- 알고리즘 풀이 코드 및 과정 블로그에 업로드하고 있습니다. [(check)](https://loosie.tistory.com/category/Java/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20%ED%92%80%EC%9D%B4)
-
-### 알고리즘/자료구조 이론 공부 정리
-
-#### 자료구조
-
+# Data structre
 1. 자료구조와 자바컬렉션프레임워크(JCF) 정리 [(link)](https://loosie.tistory.com/154)
 1. LinkedList, ArrayList 정리 [(link)](https://loosie.tistory.com/153?category=972195)
 1. Java로 LinkedList 구현하기 [(link)](https://loosie.tistory.com/122)
@@ -32,8 +16,22 @@ PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하
 1. Java로 BinaryTree 구현하기 [(link)](https://loosie.tistory.com/127?category=964815)
 1. 힙(Heap) 구현하기 - 우선순위 큐 [(link)](https://loosie.tistory.com/652?category=1034559)
 
-#### 알고리즘
+<br> 
 
+# Algorithm
+## 1. PS 🖋
+- [PS는 어떻게 하는 것이 좋은가?](https://subinium.github.io/how-to-study-problem-solving/)
+- [알고리즘 PS/CP 공부 유형 및 보안법](https://subinium.github.io/PS-Study-Types-and-Complements/)
+
+PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하고 있습니다.
+
+- BOJ [(link)](https://www.acmicpc.net/)
+- Programmers [(link)](https://programmers.co.kr/)
+- LeetCode [(link)](https://leetcode.com/)
+- Codewars [(lint)](https://www.codewars.com/)
+- 알고리즘 풀이 코드 및 과정 블로그에 업로드하고 있습니다. [(check)](https://loosie.tistory.com/category/Java/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20%ED%92%80%EC%9D%B4)
+
+## 2. 알고리즘 이론 정리
 1. 동적계획법 DP [(link)](https://loosie.tistory.com/150?category=972195)
 2. 백트래킹 기법 [(link)](https://loosie.tistory.com/196?category=972195)
 3. 분할정복 알고리즘 정리(합병 정렬, 퀵 정렬, 이진탐색) [(link)](https://loosie.tistory.com/237?category=972195)
@@ -64,6 +62,7 @@ PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하
 28. 펜윅 트리(Fenwick Tree) 빠르고 간단한 구간 합 구하기 [(link)](https://loosie.tistory.com/647?category=972195)
 29. 균형잡힌 이진 검색 트리 BST - 트립(Treap) [(link)](https://loosie.tistory.com/675?category=972195)
 30. 접미사 배열(Suffix Array)와 LCP 배열(Lognest Common Prefix Array) [(link)](https://loosie.tistory.com/798?category=972195)
+
 
 ---
 
