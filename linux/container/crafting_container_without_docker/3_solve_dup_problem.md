@@ -1,7 +1,7 @@
 # 3. 중복을 해결하자
 
 # 오버레이 파일시스템
-OverlayFS는 일종의 유니온 파일 시스템이다. 이를 통해 사용자는 한 파일 시스템을 다른 파일 시스템 위에 오버레이할 수 있다. 변경 사항은 상위 파일 시스템에 기록되지만 하위 파일 시스템은 수정되지 않은 상태로 유지된다.
+OverlayFS는 일종의 유니온 파일 시스템이다. 이를 통해 사용자는 한 파일 시스템을 다른 파일 시스템 위에 오버레이할 수 있다. 변경 사항은 상위 파일 시스템에 기록되지만 하위 파일 시스템은 수정되지 않은 상태로 유지된다
 - 여러 이미지 레이어를 하나로 마운트
 - Lower 레이어는 ReadOnly
 - Upper 레이어는 Writable
@@ -9,16 +9,36 @@ OverlayFS는 일종의 유니온 파일 시스템이다. 이를 통해 사용자
 - Lower 레이어는 변경 x, Upper 레이어만 변경 o
 - https://www.kernel.org/doc/html/latest/filesystems/overlayfs.html
 
+<img width="613" alt="스크린샷 2023-07-03 오후 6 47 20" src="https://github.com/loosie/code_playground/assets/54282927/e97722e2-4f02-4b7b-a3cc-3fa71336964f">
+
 ## 이미지 중복 문제 해결
 - 이미지 저장소: docker repository
 - 컨테이너: 전체 파일 시스템 뷰는 merged view에 합쳐져서 보인다 
 
-[2. 탈옥 막자](https://github.com/loosie/code_playground/blob/master/linux/container/crafting_container_without_docker/2_prevent_container_escape.md) 에서 만든 myroot와 새롭게 tools 를 추가해서 upper dir을 올리고 merged view를 만들어보자.
+<img width="613" alt="스크린샷 2023-07-03 오후 6 52 08" src="https://github.com/loosie/code_playground/assets/54282927/a75f9c29-5268-40cd-a44f-4bc0cd55530f">
+
+<br>
+
+
+# 0. 오버레이 파일시스템 만들기
+[2. 탈옥 막자](https://github.com/loosie/code_playground/blob/master/linux/container/crafting_container_without_docker/2_prevent_container_escape.md) 에서 만든 myroot와 새롭게 tools를 추가해서 upper dir을 올리고 merged view를 만들어 볼 것이다
+
 
 <br>
 
 # 1. Lower Dir1: myroot 확인
-[2. 탈옥 막자](https://github.com/loosie/code_playground/blob/master/linux/container/crafting_container_without_docker/2_prevent_container_escape.md) 에서 만든 myroot를 확인해보자
+이전에 만든 myroot가 제대로 있는지 우선 확인해보자
+```zsh
+root@ubuntu1804:/tmp# tree -L 1 myroot
+myroot
+├── bin
+├── escape_chroo
+├── lib
+├── lib64
+├── proc
+└── usr
+```
+
 
 <br>
 
@@ -34,7 +54,7 @@ wget https://raw.githubusercontent.com/loosie/code_playground/master/linux/conta
 bash lowerdir2_package.sh;
 ```
 
-tree 명령어로 제대로 복사했는지 확인해보자. /bin/rm, /usr/bin/which 모두 제대로 복사되었다.
+tree 명령어로 /bin/rm, /usr/bin/which 모두 제대로 복사되었는지 확인한다 
 ```zsh
 root@ubuntu1804:/tmp# tree tools
 tools
@@ -166,6 +186,8 @@ rootfs/merge/usr
 container 디렉토리는 비어있다. 그런데 merge에 있는 파일을 삭제하고 다시 조회하면 container에 노란색으로 해당 삭제된 파일이 생성되어있는 것을 볼 수 있는데 그 이유는 삭제 마킹을 한 것이다. escape_root는 lower_dir에 있는 파일이 삭제된 것이고 해당 삭제된 정보가 upper_dir 밑에 쓰여진 것이다. 
 - 실제 myroot(lower_dir1)에는 파일이 그대로 있다. 변경된 정보를 upper_dir에서만 관리해준다.
 
+<img width="819" alt="스크린샷 2023-07-03 오후 7 38 51" src="https://github.com/loosie/code_playground/assets/54282927/8c89d8f0-7121-4792-a26a-145f4457143a">
+
 ```zsh
 root@ubuntu1804:/tmp# tree -L 1 myroot
 myroot
@@ -189,6 +211,11 @@ umount /tmp/roofs/merge
 1. 컨테이너 자체 루트파일시스템 
 2. 이미지 중복 문제 해결 
 
+<img width="864" alt="스크린샷 2023-07-03 오후 7 50 01" src="https://github.com/loosie/code_playground/assets/54282927/87965690-bf84-421a-be1c-352d42c2c635">
+
+
+<br> 
+<br>
 
 지금까지 탈옥, 중복 문제를 해결해보았다. 그러나 완벽한 격리 환경을 갖추기 위해서는 아직 부족하다. 다음엔 네임스페이스와 cgroups를 통해 남은 문제들을 해결해보자. 
 - 탈옥 문제: pivot_root
