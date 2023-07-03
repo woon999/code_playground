@@ -227,5 +227,7 @@ umount /tmp/roofs/merge
 <br>
 
 # refs
+- https://docs.docker.com/storage/storagedriver/
+- http://cloudrain21.com/examination-of-docker-containersize-ufs
 - https://youtu.be/lVtgqmjv4BQ
 - https://netpple.github.io/docs/make-container-without-docker/
