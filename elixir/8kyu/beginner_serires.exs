@@ -1,8 +1,12 @@
 # https://www.codewars.com/kata/55f9bca8ecaa9eac7100004a/train/elixir
 
 defmodule Kata do
-  def past(h, m, s) do
+  def past_(h, m, s) do
     (h * 3600 + m * 60 + s) * 1000
+  end
+
+  def past(h, m, s) do
+    :timer.hours(h) + :timer.minutes(m) + :timer.seconds(s)
   end
 end
 
