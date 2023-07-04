@@ -18,9 +18,8 @@
 - 모든 프로세스는 타입별로 네임스페이스에 속함
 - 자식 프로세스는 부모의 네임스페이스를 상속함 
 
-마운트 네임스페이스만으로는 격리가 부족해서 다양한 종류의 네임스페이스가 이후에 많이 생겨났다
-
 ## 네임스페이스 종류
+마운트 네임스페이스만으로는 격리가 부족해서 다양한 종류의 네임스페이스가 이후에 많이 생겨났다
 - 마운트 네임스페이스: 마운트 포인트 격리 (2002)
 - UTS 네임스페이스: hostname, domain name 격리 (2006)
 - IPC 네임스페이스: IPC 격리 (2006)
@@ -120,6 +119,8 @@ logout
 - UTS, Unix Time Sharing 서버 나눠쓰기
 - 호스트명, 도메인명 격리
 
+<img width="500" alt="스크린샷 2023-07-04 오후 8 28 21" src="https://github.com/loosie/code_playground/assets/54282927/fc7aa204-c757-42ea-930a-27c00c346ad4">
+
 ```zsh
 unshare -u
 lsns -p $$
@@ -178,11 +179,16 @@ root@ubuntu1804:/tmp# lsns -p $$
 - 부모-자식 네임스페이스 중첩 구조
 - 부모 네임스페이스 - (see) -> 자식네임스페이스
 
+<img width="500" alt="스크린샷 2023-07-04 오후 8 28 02" src="https://github.com/loosie/code_playground/assets/54282927/e8f44273-0409-4b6e-bfaf-782291f778a5">
+
+
 ## pid 1
 - init 프로세스 (커널이 생성, 커널은 0번 프로세스)
 - 시그널 처리
 - 좀비, 고아 프로세스 처리
 - 죽으면 시스템 패닉(reboot)
+
+<img width="500" alt="스크린샷 2023-07-04 오후 8 30 00" src="https://github.com/loosie/code_playground/assets/54282927/4cf4d357-9b31-46fc-be0a-80de70e505cd">
 
 ## 컨테이너 pid1
 - unshare 할 때 fork하여 자식 PID 네임스페이스의 pid1로 실행
@@ -190,6 +196,7 @@ root@ubuntu1804:/tmp# lsns -p $$
 - 좀비, 고아프로세스 처리
 - 죽으면 컨테이너 종료
 
+<img width="500" alt="스크린샷 2023-07-04 오후 8 31 11" src="https://github.com/loosie/code_playground/assets/54282927/c3c45d56-a322-47cd-90b5-a91b41961779">
 
 ```zsh
 unshare -fp --mount-proc /bin/sh
@@ -252,26 +259,37 @@ root@ubuntu1804:/tmp# kill -SIGKILL 18740
 - 네트워크 스택 경리
 - 네트워크 가상화, 가상 인터페이스(장치) 사용
 
+<img width="550" alt="스크린샷 2023-07-04 오후 8 40 37" src="https://github.com/loosie/code_playground/assets/54282927/8568c021-4b20-4d0f-a6a7-367e4c75520f">
+
 
 ## 네트워크 네임스페이스의 가상장치
 - 여러 네트워크 네임스페이스에 걸쳐 있을 수 없음
 - 다른 네트워크 네임스페이스로 이동할 수 있음 
 - ex) veth, bridge, vxlan, ...
 
+<img width="550" alt="스크린샷 2023-07-04 오후 8 41 05" src="https://github.com/loosie/code_playground/assets/54282927/1b6dbff8-8589-4080-ac32-feaef4b967f2">
+
 
 ## 네트워크 네임스페이스 삭제
 - 가상 인터페이스: 삭제됨
 - 물리 인터페이스: 기존 네임스페이스로 복원됨 
+
+<img width="550" alt="스크린샷 2023-07-04 오후 8 41 55" src="https://github.com/loosie/code_playground/assets/54282927/d5079e56-73b0-4cf6-bf8f-b04f781e3076">
 
 <br>
 
 # 네트워크 네임스페이스 1:1 통신
 네트워크 네임스페이스를 격리하여 RED/BLUE 통신을 진행해보자
 
+<img width="550" alt="스크린샷 2023-07-04 오후 8 43 42" src="https://github.com/loosie/code_playground/assets/54282927/731d6fff-0af2-4067-beaa-29b269d47b88">
+
+
 ## 1) veth pair 설정
 ```zsh
 ip link add veth0 type veth peer name veth1
 ```
+
+<img width="550" alt="스크린샷 2023-07-04 오후 8 44 38" src="https://github.com/loosie/code_playground/assets/54282927/503951f4-f502-4dbf-aba1-79d76d1a7e3a">
 
 ip link 명령어로 새롭게 생성된 veth 확인할 수 있다 (7,8)
 ```zsh
@@ -297,6 +315,9 @@ ip netns add RED
 ip netns add BLUE
 ```
 
+<img width="550" alt="스크린샷 2023-07-04 오후 8 46 35" src="https://github.com/loosie/code_playground/assets/54282927/1ca796a4-4d8e-4305-be96-6b87db0de96f">
+
+
 ## 3) veth0 -> RED, veth1 -> BLUE
 
 ```zsh
@@ -304,11 +325,18 @@ ip link set veth0 netns RED
 ip link set veth1 netns BLUE
 ```
 
+<img width="550" alt="스크린샷 2023-07-04 오후 8 48 45" src="https://github.com/loosie/code_playground/assets/54282927/8b7041bc-7b74-455f-a18e-55caa6ab162f">
+
+
 ## 4) veth up
 ```
 ip netns exec RED ip link set veth0 up
 ip netns exec BLUE ip link set veth1 up
 ```
+
+<img width="550" alt="스크린샷 2023-07-04 오후 8 49 57" src="https://github.com/loosie/code_playground/assets/54282927/2eece5c1-7d21-4ab5-aaa7-cfd2b16869dd">
+
+
 
 ## 5) ip 설정
 ```
@@ -317,6 +345,9 @@ ip netns exec BLUE ip addr add 11.11.11.3/24 dev veth1
 ```
 
 여기까지 1:1 통신 준비완료! 
+
+<img width="550" alt="스크린샷 2023-07-04 오후 8 50 56" src="https://github.com/loosie/code_playground/assets/54282927/794731f0-5704-4a47-8ae3-fcdfb7e749aa">
+
 
 ## 6-1) RED 접속
 네트워크 네임스페이스를 생성하면 /var/run/netns에 해당 파일을 생성해준다 
