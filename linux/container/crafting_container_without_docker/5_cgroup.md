@@ -61,6 +61,8 @@ top
 
 stress를 실행하고 모니터링해보면 자원 제한을 안주었기 때문에 CPU가 100%까지 차는 것을 볼 수 있다
 
+<img width="550" alt="스크린샷 2023-07-05 오후 4 12 05" src="https://github.com/loosie/code_playground/assets/54282927/5800e828-a7e4-4af9-85f0-d6f1727e524e">
+
 <br>
 
 # 2. mycgroup 생성
@@ -122,8 +124,9 @@ top
 
 아까와 똑같이 코어 1개 할당해서 stress를 실행하였는데 모니터링 결과 CPU가 최대 30%까지만 차는 것을 볼 수 있다. cgroup으로 설정을 해주어서 30%가 넘지않게 쓰로틀링이 걸리는 것이다.
 
-<br>
+<img width="550" alt="스크린샷 2023-07-05 오후 4 20 51" src="https://github.com/loosie/code_playground/assets/54282927/e74701db-f484-4425-9a93-2d004bf7f523">
 
+<br>
 
 여기까지 Cgroup에 대해서 알아보았다. 정리하면 다음과 같다.
 - Cgroup 파일시스템으로 리소스 관리
@@ -141,6 +144,8 @@ top
 - user: 루트 권한 문제를 해결하는 user 네임스페이스 개발 
 - 2013년 Docker 등장 
 - 2015년 Kubernetes 등장 
+
+<img width="1000" alt="스크린샷 2023-07-05 오후 4 24 14" src="https://github.com/loosie/code_playground/assets/54282927/9db93fab-e258-4558-8c73-752b3fcb008b">
 
 이제 마지막으로 지금까지 학습한 내용들을 바탕으로 docker없이 컨테이너를 만들어보자
 
