@@ -455,13 +455,135 @@ PING 11.11.11.2 (11.11.11.2) 56(84) bytes of data.
 
 <br>
 
-이를 통해 RED/BLUE 네트워크 격리와 격리된 환경에서의 통신까지 확인해보았다. 이제 cgroups를 통해 자원을 제어해보자. exit후에 실습환경 초기화를 하자.
+이를 통해 RED/BLUE 네트워크 격리와 격리된 환경에서의 통신까지 확인해보았다. exit후에 실습환경 초기화를 하자.
 ```
 ip netns del RED;
 ip netns del BLUE;
 ```
 
 <br>
+
+# 6. USER 네임스페이스
+- UID/GID 넘버스페이스 격리
+- 컨테이너의 루트권한 문제를 해결
+- 부모-자식 네임스페이스의 중첩 구조
+- UID/GID Remap
+
+## 일반 계정으로 container 실행
+```
+sudo usermod -aG docker {계정명}
+```
+- 일반계정에서 docker CLI 사용 ~ docker 그룹에 추가
+- 권한 적용을 위해 터미널을 종료 후 재접속
+
+```zsh
+vagrant@ubuntu1804:~$ sudo usermod -aG docker vagrant
+vagrant@ubuntu1804:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+
+> vagrant ssh
+```
+
+ubuntu로 docker를 실행해보자
+```
+docker run -it ubuntu /bin/sh
+```
+
+### terminal1(ubuntu container)
+```zsh
+vagrant@ubuntu1804:~$ docker run -it ubuntu /bin/sh
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+3153aa388d02: Pull complete
+Digest: sha256:0bced47fffa3361afa981854fcabcd4577cd43cebbb808cea2b1f33a3dd7f508
+Status: Downloaded newer image for ubuntu:latest
+
+# id
+uid=0(root) gid=0(root) groups=0(root)
+```
+
+### terminal2(host)
+```zsh
+vagrant@ubuntu1804:~$ id
+uid=1000(vagrant) gid=1000(vagrant) groups=1000(vagrant),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),112(lpadmin),113(sambashare),997(docker)
+```
+
+컨테이너와 호스트 계정을 비교해보면 다음과 같다
+- 컨테이너 uid=0(root)
+- host는 현재 일반 계정이므로, uid=1000(vagrant) 
+
+일반 계정으로 실행한 컨테이너의 uid는 root이다. 만약 해당 root가 진짜 root 계정이면 보안에 심각한 문제인 것이다.
+
+### terminal1(ubuntu container)
+```
+# readlink /proc/$$/ns/user
+user:[4026531837]
+```
+
+### terminal2(host)
+```
+vagrant@ubuntu1804:~$ ps -ef | grep /bin/sh
+vagrant  19174 19136  0 06:24 pts/0    00:00:00 docker run -it ubuntu /bin/sh
+root     19255 19227  0 06:24 pts/0    00:00:00 /bin/sh
+vagrant  19335 19164  0 06:27 pts/1    00:00:00 grep --color=auto /bin/sh
+
+vagrant@ubuntu1804:~$ readlink /proc/$$/ns/user
+user:[4026531837]
+```
+
+호스트에서 프로세스를 조회해보면 root로 해당 컨테이너가 실행되었다. USER 네임스페이스를 비교해보아도 동일하다. 즉... 컨테이너의 root가 실제 host의 root인 것이다. 
+
+## docker의 root 사용
+통상 docker를 사용할 때 서버 안에서 일반 계정에 docker 권한을 주어서 사용하는 경우가 많다. 이러한 경우에는 docker 컨테이너를 기동을 할 때시스템 주요 볼륨들을 마운트해서 컨테이너를 기동할 수 있게 된다. 이는 보안상 굉장히 큰 문제이다. 
+
+왜 docker는 root를 마구잡이로 사용했을까?
+- 초기에 docker를 라이브러리화해서 보급화하기 위한 툴을 만들 때 root 권한이 있어서 1)패키지 인스톨이 쉽고, 2)시스템 리소스 이용에 제약이 없기 때문이다. 대신 보안은 취약해진다
+
+## USER 네임스페이스 격리
+```
+unshare -U --map-root-user /bin/sh
+```
+
+그럼 이번에는 USER 네임스페이스를 격리한다음 위에서 했던 방식과 같이 컨테이너와 호스트 계정을 비교해보자
+
+### terminal1(ubuntu container)
+```zsh
+vagrant@ubuntu1804:~$ unshare -U --map-root-user /bin/sh
+
+# id
+uid=0(root) gid=0(root) groups=0(root),65534(nogroup)
+
+# readlink /proc/$$/ns/user
+user:[4026532201]
+```
+
+### terminal2(host)
+```zsh
+vagrant@ubuntu1804:~$ id
+uid=1000(vagrant) gid=1000(vagrant) groups=1000(vagrant),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),112(lpadmin),113(sambashare),997(docker)
+
+vagrant@ubuntu1804:~$ ps -ef | grep /bin/sh
+vagrant  19404 19136  0 06:45 pts/0    00:00:00 /bin/sh
+vagrant  19408 19164  0 06:45 pts/1    00:00:00 grep --color=auto /bin/sh
+
+vagrant@ubuntu1804:~$ readlink /proc/$$/ns/user
+user:[4026531837]
+```
+
+호스트에서 프로세스를 조회해보면 이제는 vagrant 계정으로 실행된 것을 확인할 수 있다. 그리고 이젠 USER 네임스페이스도 다르다. 이건 컨테이너 안에서만 root(fake)로 보이는 것이다. USER 네임스페이스간 UID/GID를 Remap한 것이다. 
+
+## Docker의 USER 네임스페이스 지원
+- docerk v1.10+
+- 호스트 UID/GID Remap
+- 보안관점에서 큰 진보
+- But, 기본 설정은 USER 네임스페이스를 쓰지 않음
+
+
+<br>
+
+
+이제 남은 것은 자원이다. 다음에는 cgroups를 통해 자원을 제어해보자.
 
 # refs
 - https://youtu.be/lVtgqmjv4BQ
