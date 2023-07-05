@@ -469,6 +469,8 @@ ip netns del BLUE;
 - 부모-자식 네임스페이스의 중첩 구조
 - UID/GID Remap
 
+<img width="550" alt="스크린샷 2023-07-05 오후 3 21 34" src="https://github.com/loosie/code_playground/assets/54282927/1f9ed3e7-153b-4bdc-b809-1b8a5d61563f">
+
 ## 일반 계정으로 container 실행
 ```
 sudo usermod -aG docker {계정명}
@@ -572,6 +574,9 @@ user:[4026531837]
 ```
 
 호스트에서 프로세스를 조회해보면 이제는 vagrant 계정으로 실행된 것을 확인할 수 있다. 그리고 이젠 USER 네임스페이스도 다르다. 이건 컨테이너 안에서만 root(fake)로 보이는 것이다. USER 네임스페이스간 UID/GID를 Remap한 것이다. 
+
+<img width="550" alt="스크린샷 2023-07-05 오후 3 49 19" src="https://github.com/loosie/code_playground/assets/54282927/d1eedabb-f414-4536-9dbb-16e63b56f505">
+
 
 ## Docker의 USER 네임스페이스 지원
 - docerk v1.10+
