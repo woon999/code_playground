@@ -1,11 +1,14 @@
 # 6. 컨테이너 만들기 (without docker)
 지금까지 학습한 내용을 토대로 Dokcer 없이 각 RED, BLUE 컨테이너를 만든 다음 1대1 통신을 해보자. 먼저 이미지를 준비를 할 것이다. 이전에 사용했던 myroot와 tools를 lower 레이어로 사용할 것이다. 
 
+<img width="671" alt="스크린샷 2023-07-06 오후 10 02 21" src="https://github.com/loosie/code_playground/assets/54282927/728865b0-18ff-4a6e-bc85-bd2e056fcc57">
+
+
 <br>
 
 # 1. 이미지 준비: myroot
----
-[1_process_isolation]에서 만들어둔 myroot가 제대로 있는지 확인해보자 
+
+[1_process_isolation](https://github.com/loosie/code_playground/blob/master/linux/container/crafting_container_without_docker/1_process_isolation.md)에서 만들어둔 myroot가 제대로 있는지 확인해보자 
 ```zsh
 root@ubuntu1804:~# tree /tmp/myroot
 /tmp/myroot
@@ -46,7 +49,6 @@ root@ubuntu1804:~# tree /tmp/myroot
 <br>
 
 # 2. 이미지 준비: tools 
----
 tools에는 다음 명령어들이 포함된다. /tmp 디렉토리로 이동해서 미리 만들어둔 다음 스크립트를 다운받아 실행해준다.
 - ping: 컨테이너 통신 테스트
 - stress: 컨테이너 부하 테스트
@@ -97,8 +99,7 @@ tools
 <br>
 
 # 3. 컨테이너 네트워크
----
-5에서 했던 내용 그대로이다. RED, BLUE 컨테이너를 만들어줄 것이다
+[4_namespace#network_namespace](https://github.com/loosie/code_playground/blob/master/linux/container/crafting_container_without_docker/4_namespace.md#5-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%84%A4%EC%9E%84%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4)에서 했던 내용 그대로이다. RED, BLUE 컨테이너를 만들어줄 것이다
 
 ## 1) 네트워크 네임스페이스 생성
 ```
@@ -130,8 +131,6 @@ root@ubuntu1804:/tmp# ip netns exec BLUE ip l;
     link/ether 82:a5:7f:c0:69:f1 brd ff:ff:ff:ff:ff:ff link-netnsid 0
 ```
 
-
-
 ## 3) IP 할당 및 전원 켜기
 ```
 ip netns exec RED ip addr add dev veth0 11.11.11.2/24;
@@ -150,8 +149,14 @@ ls /var/run/netns
 
 이제 컨테이너 네트워크 구성은 완료되었다
 
+<img width="632" alt="스크린샷 2023-07-06 오후 10 03 14" src="https://github.com/loosie/code_playground/assets/54282927/540b401d-cf41-471d-b45f-d485bb10f6af">
+
+<br> 
+
 # 4-1. RED Cgroup 생성
----
+네트워크 자원 격리를 해주었으니 이젠 [5_cgorup](https://github.com/loosie/code_playground/blob/master/linux/container/crafting_container_without_docker/5_cgroup.md)에서 다룬 내용을 그대로 적용해서 자원을 할당해주자
+
+
 ## 1) cpu, memory Cgroups 생성
 ``` 
 mkdir /sys/fs/cgroup/cpu/red;
@@ -203,7 +208,7 @@ echo "1" > /sys/fs/cgroup/memory/red/cgroup.procs;
 ```
 
 ## 5) 오버레이 마운트
-이제 중복 문제를 해결하기 위해 파일시스템을 만들어 줄 단계이다. 오버레이마운트를 하기 위해 디렉토리 만들자
+이제 [3_solve_dup_problem](https://github.com/loosie/code_playground/blob/master/linux/container/crafting_container_without_docker/3_solve_dup_problem.md)에서 다룬 중복 문제를 해결하기 위해 파일시스템을 만들어 줄 단계이다. 오버레이마운트를 하기 위해 디렉토리 만들자
 ```
 mkdir /redfs;
 mkdir /redfs/container;
@@ -269,9 +274,12 @@ merge 뷰에 채워져있으면 제대로 오버레이마운트가 된 것이다
 9 directories, 33 files
 ```
 
-# 4-2. REDpivot_root
----
-이제 탈옥을 막기위해 pivot_root를 할 차례이다
+<img width="668" alt="스크린샷 2023-07-06 오후 9 32 16" src="https://github.com/loosie/code_playground/assets/54282927/0deec4b4-3e9a-4918-b6f3-2182746d9763">
+
+<br>
+
+# 4-2. RED pivot_root
+이제 [2_prcoess_isolation](https://github.com/loosie/code_playground/blob/master/linux/container/crafting_container_without_docker/2_prevent_container_escape.md)에서 다룬 탈옥 문제를 막기위해 pivot_root를 할 차례이다
 
 ## 1) put_old 생성
 ```
@@ -306,6 +314,9 @@ umount -l put_old;
 rm -rf put_old;
 ```
 
+<img width="635" alt="스크린샷 2023-07-06 오후 9 35 35" src="https://github.com/loosie/code_playground/assets/54282927/ef83982b-bae3-42fd-a23b-98b8764399b4">
+
+
 ## 5) hostname 변경
 마지막으로 hostname 변경해주면 RED 컨테이너 완성이다!
 ```zsh
@@ -319,6 +330,12 @@ ubuntu1804
 # hostname
 RED
 ```
+
+<img width="635" alt="스크린샷 2023-07-06 오후 9 38 58" src="https://github.com/loosie/code_playground/assets/54282927/c19bd97e-2cba-4e07-a52f-142a0513b4bd">
+
+
+<br>
+
 
 # 5. BLUE 컨테이너 만들기
 BLUE 컨테이너는 4-1, 4-2 내용을 그대로 이름만 바꿔서 만들어주면 된다. 이번에는 설명없이 바로 빠르게 만들어보자.
@@ -393,6 +410,10 @@ hostname BLUE;
 ```
 
 
+<img width="400" alt="스크린샷 2023-07-06 오후 9 46 38" src="https://github.com/loosie/code_playground/assets/54282927/3751c0bc-4bb5-4797-b15e-c25c9540524d">
+
+<br>
+
 # 6. RED, BLUE 컨테이너 테스트
 RED, BLUE 컨테이너를 모두 만들었다. 이제 컨테이너가 제대로 동작하는지 확인해보자
 
@@ -440,6 +461,9 @@ stress -c 1
 ### terminal(host)
 top 명령어로 확인해보면 40% 밑으로 CPU가 사용되는 것을 확인할 수 있다
 
+<img width="549" alt="스크린샷 2023-07-06 오후 9 53 30" src="https://github.com/loosie/code_playground/assets/54282927/fd03baef-0258-4094-81ee-d9b039569fdb">
+
+
 ## 3) RED 메모리 리소스 확인
 ### terminal(RED)
 memory 크기 제한 200MB라서 어느정도 한계에 도달하면 Fail이 뜬다
@@ -471,13 +495,21 @@ host에서 dmesg를 하면 해당 로그를 확인할 수 있다
 [52234.321968] oom_reaper: reaped process 27144 (stress), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
 ```
 
+<img width="628" alt="스크린샷 2023-07-06 오후 10 07 10" src="https://github.com/loosie/code_playground/assets/54282927/d2d0c072-5301-4979-832b-b293d60ac3c4">
 
-이로써 컨테이너를 직접 만들어보고 네트워크 ping 테스트, cpu, memory 자원 테스트까지 모두 완료하였다! 추후 더 공부해야할 것들
+<br>
+
+이로써 컨테이너를 직접 만들어보고 네트워크 ping 테스트, cpu, memory 자원 테스트까지 모두 완료하였다! 
+
+<br>
+
+# 추후 더 공부해야할 리스트
 - 컨테이너 네트워크
 - 컨테이너 표준화
 - 컨테이너 오케스트레이션
 - WASM
 
+<br>
 
 # refs
 - https://youtu.be/lVtgqmjv4BQ
