@@ -2,11 +2,6 @@
 
 defmodule Evenator do
   def even?(n) do
-    # if is_float(n) do
-    #     false
-    # else
-    #     rem(n, 2) == 0
-    # end
     !is_float(n) && rem(n, 2) == 0
   end
 end
