@@ -1,6 +1,6 @@
 package java8_tail_factorial;
 
-import static java8tailfactorial.FactorialToBigInteger.*;
+import static java8_tail_factorial.FactorialToBigInteger.*;
 
 import java.math.BigInteger;
 import java.util.stream.Stream;
