@@ -60,3 +60,9 @@ q  65536 0x00003039 --rw-rw-rw-  .....    staff
 > ./receiver
 name : REAKWON, age :80
 ```
+
+<br>
+ 
+--- 
+refs 
+- https://reakwon.tistory.com/97

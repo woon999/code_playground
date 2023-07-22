@@ -12,12 +12,12 @@ type Lesser interface {
 	Less(other Lesser) bool
 }
 
-// 트리 - root
+// Tree 트리 - root
 type Tree struct {
 	Root *TreeNode
 }
 
-// 노드 - value, left, right
+// TreeNode 노드 - value, left, right
 type TreeNode struct {
 	Value Lesser
 
