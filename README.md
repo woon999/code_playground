@@ -87,9 +87,9 @@ PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하
 
 # System
 - ipc
-   - unnamed pipe  [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/unnamed_pipe)
-   - named pipe    [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/named_pipe)
-   - message queue [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/message_queue)
+   - unnamed pipe  [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/1_unnamed_pipe)
+   - named pipe    [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/2_named_pipe)
+   - message queue [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/3_message_queue)
 
  <br>
  
