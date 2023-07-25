@@ -1,10 +1,22 @@
 # Code playground
 다양한 프로그램을 만들어보는 코드 놀이터입니다 🎮
 
-
-<br> 
+<br>
 
 # Data structre
+## code
+- bst [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/bst/basic) [(go)](https://github.com/loosie/code_playground/tree/master/go/data_structure/bst)
+  - avl
+  - treap [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/bst/treap)
+- hash
+  - hashSet [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/hashset)
+- tree
+  - heap(binaryTree) [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/heap)
+  - segmentTree
+    - fenwick [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/segmenttree/fenwick) 
+  - trie [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/trie)
+
+## blog
 1. 자료구조와 자바컬렉션프레임워크(JCF) 정리 [(link)](https://loosie.tistory.com/154)
 1. LinkedList, ArrayList 정리 [(link)](https://loosie.tistory.com/153?category=972195)
 1. Java로 LinkedList 구현하기 [(link)](https://loosie.tistory.com/122)
@@ -31,7 +43,7 @@ PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하
 - Codewars [(lint)](https://www.codewars.com/)
 - 알고리즘 풀이 코드 및 과정 블로그에 업로드하고 있습니다. [(check)](https://loosie.tistory.com/category/Java/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%20%ED%92%80%EC%9D%B4)
 
-## 2. 알고리즘 이론 정리
+## blog
 1. 동적계획법 DP [(link)](https://loosie.tistory.com/150?category=972195)
 2. 백트래킹 기법 [(link)](https://loosie.tistory.com/196?category=972195)
 3. 분할정복 알고리즘 정리(합병 정렬, 퀵 정렬, 이진탐색) [(link)](https://loosie.tistory.com/237?category=972195)
@@ -63,7 +75,29 @@ PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하
 29. 균형잡힌 이진 검색 트리 BST - 트립(Treap) [(link)](https://loosie.tistory.com/675?category=972195)
 30. 접미사 배열(Suffix Array)와 LCP 배열(Lognest Common Prefix Array) [(link)](https://loosie.tistory.com/798?category=972195)
 
+<br>
 
----
 
-최종 수정 2022.04.27 © loosie
+# VM, Compiler, Interpreter
+- c++로 compiler 만들기 [(link)](https://github.com/loosie/code_playground/tree/master/c%2B%2B/compiler)
+   - lexical/syntax anaylsis, code generator, vm, gc
+- c++로 interpreter 만들기 [(link)](https://github.com/loosie/code_playground/tree/master/c%2B%2B/interpreter)
+
+<br>
+
+# System
+- ipc
+   - unnamed pipe  [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/unnamed_pipe)
+   - named pipe    [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/named_pipe)
+   - message queue [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/message_queue)
+
+ <br>
+ 
+# Linux
+- [container](https://github.com/loosie/code_playground/tree/master/linux/container)
+
+
+
+—
+
+최종 수정 2023.07.25 © loosie
