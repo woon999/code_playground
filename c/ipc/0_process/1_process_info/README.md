@@ -1,5 +1,4 @@
-# IPC 
-## 프로세스
+# 프로세스
 프로세스는 실행중인 프로그램(프로그램 + PCB)이다.
 
 각 프로세스는 프로세스 ID 또는 단순히 PID(Process Identification number)라고 하는 고유한 양의 정수로 식별된다. 
@@ -21,9 +20,7 @@ pid_t getppid(void);
 ./processinfo.c
 - 호출 프로세스의 PID와 PPID를 알 수 있는 프로그램
 
-
-
-
+<br>
 
 ---
 refs 
