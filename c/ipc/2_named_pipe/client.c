@@ -15,6 +15,8 @@ int main()
     char readbuf[80];
     char end_str[5];
     printf("FIFO_CLIENT: Send messages, infinitely, to end enter \"end\"\n");
+
+    // open(): 이 시스템 콜은 이미 존재하는 파일을 열거나 새로운 파일을 생성하여 연다.
     fd = open(FIFO_FILE, O_CREAT | O_RDWR);
     strcpy(end_str, "end");
 
@@ -35,7 +37,7 @@ int main()
             readbuf[read_bytes] = '\0';
             printf("FIFOCLIENT: Received string: \"%s\" and length is %d\n", readbuf, (int)strlen(readbuf));
         }
-        else
+        else // end
         {
             write(fd, readbuf, strlen(readbuf));
             printf("FIFOCLIENT: Sent string: \"%s\" and string length is %d\n", readbuf, (int)strlen(readbuf));

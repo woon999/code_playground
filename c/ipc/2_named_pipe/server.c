@@ -16,9 +16,11 @@ int main()
     int to_end;
     int read_bytes;
 
-    /* Create the FIFO if it does not exist */
+    // mkfifo(): FIFO 파일을 생성한다.
     mkfifo(FIFO_FILE, S_IFIFO | 0640);
     strcpy(end, "end");
+
+    // open(): 이 시스템 콜은 이미 존재하는 파일을 열거나 새로운 파일을 생성하여 연다.
     fd = open(FIFO_FILE, O_RDWR);
     while (1)
     {

@@ -33,17 +33,17 @@ int main()
     msg.data.age = 80;
     strcpy(msg.data.name, "REAKWON");
 
-    // msqid를 얻어옴.
+    // msgget(): 새로운 메시지 큐를 생성하거나 기존의 메시지 큐에 접근하여 핸들 또는 식별자를 가져온다 & 받아오는 쪽의 msqid 얻는다
     if ((msqid = msgget(key, IPC_CREAT | 0666)) == -1)
     {
         printf("msgget failed\n");
         exit(0);
     }
 
-    // 메시지 보내기 전 msqid_ds를 한번 보자.
+    // 메시지를 보내기 전에 msqid_ds 출력
     printMsgInfo(msqid);
 
-    // 메시지를 보낸다.
+    // msgsnd(): 메시지 큐에 메시지를 보낸다.
     if (msgsnd(msqid, &msg, sizeof(struct real_data), 0) == -1)
     {
         printf("msgsnd failed\n");
@@ -51,6 +51,7 @@ int main()
     }
 
     printf("message sent\n");
-    // 메시지 보낸 후  msqid_ds를 한번 보자.
+
+    // 메시지를 보낸 후에 msqid_ds 출력
     printMsgInfo(msqid);
 }

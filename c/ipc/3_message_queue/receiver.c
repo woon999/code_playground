@@ -13,13 +13,14 @@ int main()
     int msqid;
     struct message msg;
 
-    // 받아오는 쪽의 msqid얻어오고
+    // msgget(): 새로운 메시지 큐를 생성하거나 기존의 메시지 큐에 접근하여 핸들 또는 식별자를 가져온다 & 받아오는 쪽의 msqid 얻는다
     if ((msqid = msgget(key, IPC_CREAT | 0666)) == -1)
     {
         printf("msgget failed\n");
         exit(0);
     }
-    // 메시지를 받는다.
+
+    // msgrcv(): 메시지 큐에서 메시지를 읽어온다.
     if (msgrcv(msqid, &msg, sizeof(struct real_data), 0, 0) == -1)
     {
         printf("msgrcv failed\n");
@@ -28,7 +29,7 @@ int main()
 
     printf("name : %s, age :%d\n", msg.data.name, msg.data.age);
 
-    // 이후 메시지 큐를 지운다.
+    // msgctl(): 메시지 큐에 대한 제어 작업을 수행한다. (IPC_RMID: 메시지 큐를 제거한다.)
     if (msgctl(msqid, IPC_RMID, NULL) == -1)
     {
         printf("msgctl failed\n");
