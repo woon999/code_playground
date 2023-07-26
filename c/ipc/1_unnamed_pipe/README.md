@@ -15,25 +15,30 @@
 ```c
 > ./build.sh
 + clang -Wall -Wextra -o pipe pipe.c
+
 > ./pipe
+My process ID is 61183, My parent process ID is 56700
+My process ID is 61185, My parent process ID is 61183
 자식 프로세스 -> 부모 메시지: 0
 부모 프로세스 -> 자식 메시지: 0
+
+My process ID is 61185, My parent process ID is 61183
+My process ID is 61183, My parent process ID is 56700
 부모 프로세스 -> 자식 메시지: 1
 자식 프로세스 -> 부모 메시지: -1
+
+My process ID is 61185, My parent process ID is 61183
+My process ID is 61183, My parent process ID is 56700
 부모 프로세스 -> 자식 메시지: 2
 자식 프로세스 -> 부모 메시지: -2
+
+My process ID is 61185, My parent process ID is 61183
+My process ID is 61183, My parent process ID is 56700
 부모 프로세스 -> 자식 메시지: 3
 자식 프로세스 -> 부모 메시지: -3
+
+My process ID is 61185, My parent process ID is 61183
+My process ID is 61183, My parent process ID is 56700
 부모 프로세스 -> 자식 메시지: 4
 자식 프로세스 -> 부모 메시지: -4
-부모 프로세스 -> 자식 메시지: 5
-자식 프로세스 -> 부모 메시지: -5
-부모 프로세스 -> 자식 메시지: 6
-자식 프로세스 -> 부모 메시지: -6
-부모 프로세스 -> 자식 메시지: 7
-자식 프로세스 -> 부모 메시지: -7
-부모 프로세스 -> 자식 메시지: 8
-자식 프로세스 -> 부모 메시지: -8
-부모 프로세스 -> 자식 메시지: 9
-자식 프로세스 -> 부모 메시지: -9
 ```
