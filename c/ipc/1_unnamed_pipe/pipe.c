@@ -61,7 +61,7 @@ int main()
             memset(buff, 0, BUFF_SIZE);                     // buff 삭제
             read(pipes_child[0], buff, BUFF_SIZE);          // child pipe 에서 buff 읽어오기
             printf("부모 프로세스 %s\n", buff);             // buff 출력
-
+            
             sleep(1);
         }
     }

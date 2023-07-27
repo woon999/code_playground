@@ -29,14 +29,16 @@ int main()
         printf("FIFOSERVER: Received string: \"%s\" and length is %d\n", readbuf, (int)strlen(readbuf));
         to_end = strcmp(readbuf, end);
 
-        if (to_end == 0)
+        if (to_end == 0) 
         {
             close(fd);
             break;
         }
+        
         reverse_string(readbuf);
         printf("FIFOSERVER: Sending Reversed String: \"%s\" and length is %d\n", readbuf, (int)strlen(readbuf));
         write(fd, readbuf, strlen(readbuf));
+        
         /*
         sleep - This is to make sure other process reads this, otherwise this
         process would retrieve the message
