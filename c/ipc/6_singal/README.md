@@ -7,6 +7,10 @@
     - Handle the signal
     - Ignore the signal
 
+장점
+- 단순, 가벼움, 비동기 알림. 메시지 전송 없음
+단점
+- 제한된 정보, 순서 및 신뢰성 부족
 
 <br>
 
