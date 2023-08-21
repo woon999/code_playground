@@ -10,7 +10,6 @@ void error_handling(char *message);
 
 int main(int argc, char *argv[])
 {
-    // 파일 디스크립터를 위한 변수
     int sock;
     char message[BUF_SIZE];
     int str_len;
@@ -38,16 +37,22 @@ int main(int argc, char *argv[])
     else
         puts("Connected...........");
 
+    // 3. 연결된 소켓을 통해 서버로부터 데이터를 송수신한다.
     while (1)
     {
+        // 3-1. 키보드로부터 메시지를 입력받는다.
         fputs("Input message(Q to quit): ", stdout);
+
+        // 3-2. 입력받은 메시지를 서버로 전송한다.
         fgets(message, BUF_SIZE, stdin);
 
         if (!strcmp(message, "q\n") || !strcmp(message, "Q\n"))
             break;
 
-        // 3. 연결된 소켓을 통해 서버로부터 데이터를 송수신한다.
+        // 3-3. 서버로부터 전송된 메시지를 수신한다.
         write(sock, message, strlen(message));
+
+        // 3-4. 수신된 메시지를 화면에 출력한다.
         str_len = read(sock, message, BUF_SIZE - 1);
         message[str_len] = 0;
         printf("Message from server: %s", message);
