@@ -1,5 +1,5 @@
-# 멀티프로세스 기반 다중 접속 통신
-- 멀티프로세싱 기반의 다중 접속 서버는 다수의 프로세스를 생성하는 방식으로 서비스를 제공한다
+# 멀티프로세싱 기반 다중 접속 통신
+멀티프로세싱 기반의 다중 접속 서버는 다수의 프로세스를 생성하는 방식으로 서비스를 제공한다
 ![Alt text](image.png)
 
 ## 동작 과정 
@@ -21,8 +21,15 @@
 # server 
 ```
 > ./echo_multi_process_server 3000
+# 연결시 
 new client connected...
 new client connected...
+
+# 연결 종료시 
+client disconnected...
+removed proc id: 27346
+client disconnected...
+removed proc id: 27365
 ```
 
 <br>
