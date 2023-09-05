@@ -3,8 +3,8 @@
 
 <br>
 
-## Variable
-### mutability
+# Variable
+## 1) mutability
 기본 변수는 '불변성'이다. 가변성을 주기 위해서는 'mut'을 사용해야 한다
 ```rust 
 let mut x = 5;
@@ -22,7 +22,9 @@ let y = y+1; // shadowing
 const MAX_POINTS: u32 = 100_000;
 ```
 
-### ownership
+<br>
+
+## 2) ownership
 러스트의 핵심 기능은 바로 소유권이다. 
 1. 러스트의 각각의 값은 해당값의 오너(owner)라고 불리우는 변수를 갖고 있다.
 2. 한번에 딱 하나의 오너만 존재할 수 있다.
@@ -49,18 +51,22 @@ fn copy(x: i32){ // x 복사
 } // 아무 일도 발생하지 않음 
 ```
 
-#### stack 구조 활용 
+<br>
+
+### stack 구조 활용 
 러스트는 런타임 시점에 동적으로 관리되는 메모리(객체)를 '{', '}' in & out을 통해 추적하고 관리한다. 
 ```rust
 {
-    let s = String::from("hello"); // s는 여기서부터 유효합니다
+    let s = String::from("hello"); // s는 여기서부터 유효
 
-    // s를 가지고 뭔가 합니다
+    // s를 가지고 do something
 }                                  // 이 스코프는 끝났고, s는 더 이상 
-                                   // 유효하지 않습니다
+                                   // 유효하지 않다
 ```
 
-#### 객체 얕은 복사
+<br>
+
+### 객체 얕은 복사
 러스트는 얕은 복사를 하면 복사가 된 객체는 deprecated 시킨다. 나중에 2개를 동시에 메모리 해제를 하는 double free 오류를 방지하기 위해서이다. 
 ```rust
 let s1 = String::from("hello");
@@ -79,7 +85,7 @@ println!("q = {}, w = {}", q, w);
 
 <br>
 
-### borrowing
+## 3) borrowing
 소유권을 넘기는 대신 참조(reference)를 통해 빌려주는 방식도 있다. 
 - &: 참조자 
 ```rust
@@ -94,9 +100,11 @@ fn calculate_length(s: &String) -> usize {   // s는 s1을 참조한다
     s.len()
 } // 갖고있는 소유권이 없기 때문에 아무일도 발생하지 않음 
 ```
-![Alt text](image.png)
+![Alt text|850|750](image.png)
 
-#### 가변 참조 
+<br>
+
+### 가변 참조 
 여기서도 러스트 특징이 있는데 가변 참조자는 딱 하나만 만들 수 있다. 
 ```rust
  // mut를 사용하면 빌려서 값을 변경할 수 있다
@@ -128,7 +136,9 @@ let rr3 = &mut ss; // 큰 문제
 // println!("{}, {}, and {}", rr1, rr2, rr3); // error[E0502]: cannot borrow `ss` as mutable because it is also borrowed as immutable
 ```
 
-#### dangling pointer
+<br>
+
+### dangling pointer
 어떤 메모리를 가리키는 포인터가 남아있는 상황에서 일부 메모리를 해제해 버림으로써, 다른 개체가 할당받았을지도 모르는 메모리를 참조하게 된 포인터를 말한다. 
 
 러스트는 데이터 참조자가 생성되면 스코프({,})를 벗어나기 전에 데이터가 먼저 벗어나는지 컴파일러에서 체크한다. 
@@ -144,6 +154,7 @@ fn no_dangle() -> String{ // String을 반환
 } // s는 스코프 밖으로 벗어나고 drop 호출. 메모리 해제. 안전하다
 ```
 
+<br>
 
 ### 배열 slice
 배열 또한 객체이므로 힙에서 관리된다. 배열을 slice하는 경우에는 연속된 일련의 요소를 참조하게 해준다. 소유권 이전이 아니다. 
@@ -153,7 +164,8 @@ let hello = &s[0..5];
 let world = &s[6..11];
 println!("hello = {}, world = {}", hello, world);
 ```
-![Alt text](image-1.png)
+<img width="350" alt="스크린샷 2023-09-05 오후 9 06 23" src="https://github.com/loosie/code_playground/assets/54282927/2b2fcaaf-fa08-487a-99f2-20d284439a32">
+
 
 <br>
 
