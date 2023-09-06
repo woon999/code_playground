@@ -194,6 +194,69 @@ fn first_word(s: &String) -> &str {
 
 <br>
 
+# Struct 
+다양한 형태로 구조체 활용 가능 
+```rust 
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+
+fn build_user(email: String, username: String) -> User {
+    User {
+        active: true,
+        username, // 중복 명시 없이 이렇게 해도 값 대입이 됨
+        email,    //              '' 
+        sign_in_count: 1,
+    }
+}
+
+struct Point(i32, i32, i32);
+```
+
+## 구조체 소유권? 
+User 구조체 정의에서는 의도적으로 &str 문자열 슬라이스 대신 구조체가 소유권을 갖는 String 타입을 사용했다. 구조체 인스턴스가 유효한 동안 각 인스턴스 내의 모든 데이터가 유효하도록 만들기 위해서다. 소유권을 갖기 않기 위해서 참조자를 사용할 수 있지만 lifetime 활용해야 한다. 
+
+```rust 
+struct User {
+    active: bool,
+    username: &str, // expected named lifetime parameter
+    email: &str,   // expected named lifetime parameter
+    sign_in_count: u64,
+}
+```
+
+<br>
+
+# 열거형 
+러스트는 Null이 없다. 다음과 같이 Option 열거형을 사용한다. 
+```rust 
+enum Option<T> {
+    None,
+    Some(T),
+}
+```
+
+if, else는 다른 프로그래밍과 같다. 그런데 러스트는 특유의 match라고 부르는 강력한 제어 흐름 연산자를 갖고 있다. 패턴은 리터럴 값, 변수명, 와일드카드 등 다양한 것으로 구성 가능하다. 
+```rust
+fn give_vegan(drink: Option<&str>){
+    // if drink == Some("milk") { panic!("Hey, this is milk!"); }
+    // if drink == None { println!("What? no drink?"); }
+    // else { println!("I love {}!!", drink.unwrap()); }
+
+    match drink {
+        Some("milk") => panic!("Hey, this is milk!"),
+        None => println!("What? no drink?"),
+        Some(inner) => println!("I love {}!!", inner),
+    }
+}
+```
+- Some(inner)는 _, other로도 대체가 가능하다. 대신 unwrap은 필요. 
+
+<br>
+
 # Resources
 - https://academy.terra.money/courses/rust-basics
 - https://rust-kr.github.io/doc.rust-kr.org
