@@ -316,6 +316,77 @@ fn hashMap() {
 
 <br>
 
+# generic
+제네릭을 사용하면 함수 시그니처나 구조체의 아이템에 다양한 구체적 데이터 타입을 사용할 수 있도록 정의할 수 있다. 
+
+## 제네릭 사용하기 전
+```rust 
+fn largest_i32(list: &[i32]) -> &i32 {
+    let mut largest = &list[0];
+
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn largest_char(list: &[char]) -> &char {
+    let mut largest = &list[0];
+
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+```
+
+## 제네릭 사용
+```rust 
+fn largest<T>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+```
+
+## 제네릭 메서드 
+Point<T> 구조체에 x 메서드를 구현한 모습이다. 
+```rust 
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Point<T> {
+    fn x(&self) -> &T {
+        &self.x
+    }
+}
+
+```
+
+## 제네릭 성능
+제네릭 타입의 사용이 구체적인 타입을 사용했을 때와 비교해서 전혀 느려지지 않다고 한다. 
+러스트 컴파일러는 제네릭을 사용하는 코드를 단형상화(monomorphization)한다. 즉 컴파일러는 제네릭 코드가 호출된 곳을 전부 찾고, 제네릭 코드가 호출할 때 사용된 구체 타입으로 코드를 컴파일 시점에 생성한다.
+- 단형상화: 제네릭 코드를 실제 구체 타입으로 채워진 특정 코드로 바꾸는 과정 
+
+
+<br>
+
+
+<ㅠ>
 # Resources
 - https://academy.terra.money/courses/rust-basics
 - https://rust-kr.github.io/doc.rust-kr.org
