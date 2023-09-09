@@ -385,8 +385,85 @@ impl<T> Point<T> {
 
 <br>
 
+# 다형성과 트레잇
+러스트는 트레잇으로 다형성을 지원한다. 트레잇은 메소드의 집합을 구조체(strcut) 데이터 타입에 연결할 수 있게 해준다. 
 
-<ㅠ>
+```rust
+struct SeaCreature {
+    pub name: String,
+    noise: String,
+}
+
+impl SeaCreature {
+    pub fn get_sound(&self) -> &str {
+        &self.noise
+    }
+}
+
+trait NoiseMaker {
+    fn make_noise(&self);
+}
+
+// 트레잇 구현
+impl NoiseMaker for SeaCreature {
+    fn make_noise(&self) {
+        println!("{}", &self.get_sound());
+    }
+}
+```
+
+## 트레잇 상속
+트레잇은 다른 트레잇의 메소드를 상속받을 수 있다 
+```rust
+// 트레잇 상속
+trait LoudNoiseMaker: NoiseMaker {
+    fn make_alot_of_noise(&self) {
+        println!("making a lot of noise");
+        self.make_noise();
+        self.make_noise();
+        self.make_noise();
+    }
+}
+
+impl LoudNoiseMaker for SeaCreature {}
+
+fn main() {
+    let creature = SeaCreature {
+        name: String::from("Ferris"),
+        noise: String::from("blub"),
+    };
+
+    creature.make_alot_of_noise();
+}
+```
+
+## 동적 vs 정적 디스패치
+- 정적 디스패치: 인스턴스 데이터 타입을 알고 있는 경우, 어떤 함수를 호출해야 하는지 정확히 알고 있다. 
+- 동적 디스패치: 인스턴스 데이터 타입을 모르는 경우, 올바른 함수를 호출할 방법을 찾아야 한다.
+
+동적 디스패치인 경우 트레잇 자료형인 `&dyn MyTrait`을 통해 객체 인스턴스들을 간접적으로 작동시킬 수 있게 한다.Rust에서는 동적 디스패치를 사용할 경우 사람들이 알 수 잇도록 트레잇 자료형 앞에 dyn 붙일 것을 권고한다.
+```rust
+fn static_make_noise(creature: &SeaCreature) {
+    creature.make_noise();
+}
+
+fn dynamic_make_noise(creature: &dyn NoiseMaker) {
+    creature.make_noise();
+}
+
+fn main() {
+    let creature = SeaCreature {
+        name: String::from("Ferris"),
+        noise: String::from("blub"),
+    };
+
+    static_make_noise(&creature);
+    dynamic_make_noise(&creature);
+}
+```
+
+<br>
+
 # Resources
 - https://academy.terra.money/courses/rust-basics
 - https://rust-kr.github.io/doc.rust-kr.org
