@@ -1,6 +1,7 @@
 # ML in C
 
-![neural network](https://acsicorp.com/wp-content/uploads/2020/04/comparision.png)
+![image](https://github.com/loosie/code_playground/assets/54282927/16171b63-2afe-4bce-a4db-5c9fabee08e1)
+
 
 ## 1) cost 측정 - 평균 제곱 오차(MSE)
 훈련된 모델의 값을 평가하려면 train 데이터 세트의 예측 값과 실제 값 사이의 평균 제곱 오차(MSE)를 계산할 수 있다. MSE가 낮을수록 모델 성능이 좋다.
