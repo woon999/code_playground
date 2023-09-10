@@ -45,6 +45,10 @@ where
     creature.make_noise();
 }
 
+struct Ocean {
+    animals: Vec<Box<dyn NoiseMaker>>,
+}
+
 fn main() {
     let creature = SeaCreature {
         name: String::from("Ferris"),
@@ -53,7 +57,19 @@ fn main() {
 
     // creature.make_alot_of_noise();
     // static_make_noise(&creature);
-    // dynamic_make_noise(&creature);
+    // dynamic_make_noise(&creature)
+    // generic_make_noise(&creature);
 
-    generic_make_noise(&creature);
+    let sarah = SeaCreature {
+        name: String::from("Sarah"),
+        noise: String::from("swish"),
+    };
+
+    let ocean = Ocean {
+        animals: vec![Box::new(ferris), Box::new(sarah)],
+    };
+
+    for a in ocean.animals.iter() {
+        a.make_noise();
+    }
 }

@@ -462,7 +462,197 @@ fn main() {
 }
 ```
 
+## 트레잇과 제네릭
+둘은 함께 작동한다. 매개변수 데이터 타입 T를 정의할 때 해당 인자가 어떤 트레잇을 구현해야 하는지 나열함으로써 인자에 어떤 데이터 티입을 쓸 수 있는지 제한할 수 있다.
+```rust
+// fn generic_make_noise(creature: &T)
+// where
+//     T: NoiseMaker,
+// or
+// fn generic_make_noise<T: NoiseMaker>(creature: &T)
+// or
+fn generic_make_noise(creature: &impl NosieMaker)
+{
+    creature.make_noise();
+}
+```
+
 <br>
+
+# Smart Pointer
+## Box
+스택에 있는 데이터를 힙으로 옮길 수 있게 해주는 자료구조다. 
+- 스마트 포인터. 힙에 있는 데이터를 가리키는 포인터를 들고 있음
+- 필드의 크기를 알아야 하는 구조체에 뭔가의 참조를 저장할 때 종종 사용
+```rust 
+struct Ocean {
+    animals: Vec<Box<dyn NoiseMaker>>,
+}
+
+fn main() {
+    let creature = SeaCreature {
+        name: String::from("Ferris"),
+        noise: String::from("blub"),
+    };
+
+    let sarah = SeaCreature {
+        name: String::from("Sarah"),
+        noise: String::from("swish"),
+    };
+
+    let ocean = Ocean {
+        animals: vec![Box::new(ferris), Box::new(sarah)],
+    };
+
+    for a in ocean.animals.iter() {
+        a.make_noise();
+    }
+```
+
+## Rc
+스택에 있는 데이터를 힙으로 옮겨주는 스마트 포인터.
+- Box와 기능은 같지만 추가적으로 immutable borrowing 기능을 갖는 다른 Rc 복제 가능(clone())하다. 
+```rust
+use std::rc::Rc;
+
+struct SPie;
+impl SPie {
+    fn eat(&self) {
+        println!("Pie eaten!");
+    }
+}
+
+fn main() {
+    // 2. Rc
+    let heap_pie = Box::new(SPie);
+    heap_pie.eat();
+
+    let heap_pie2 = Rc::new(SPie);
+    heap_pie2.eat();
+
+    let clone_pie = heap_pie2.clone(); // immutable borrow
+    clone_pie.eat();
+    println!(
+        "{} {}",
+        Rc::strong_count(&heap_pie2),
+        Rc::weak_count(&heap_pie2)
+    );
+}
+```
+
+## Ref Cell
+스마트 포인터가 보유하는 컨테이너 구조이다. 
+- 데이터를 가져오거나 안에 있는 것에 대한 mutable 또는 immutable borrowing이 가능하다.
+- borrowing할 때 러스트는 런탐이에 메모리 안전 규칙을 적용해 남용을 방지한다. 이 규칙을 어기면 RefCell은 panic을 일으킨다. 
+
+```rust
+use std::cell::RefCell;
+
+struct Pie {
+    slices: u8,
+}
+
+impl Pie {
+    fn eat(&mut self) {
+        println!("Pie eaten!");
+        self.slices -= 1;
+    }
+}
+
+fn main() {
+    let pie_cell = RefCell::new(Pie { slices: 8 });
+
+    {
+        let mut pie = pie_cell.borrow_mut();
+        pie.eat();
+        pie.eat();
+    }
+
+    let ref_pie = pie_cell.borrow();
+    println!("{} slices left", ref_pie.slices);
+}
+```
+
+## 스레드 간에 공유하기 Mutex
+Mutex는 보통 스마트 포인터가 보유하는 컨테이너 데이터 구조로서, 데이터를 가져오가나 안에 있는 것에 대한 immutable, mutable borrowing을 해준다. 
+- 비선점 구조로 잠긴 대여를 통해 하나의 CPU만 접근 가능하게 한다.
+- Arc: 스레드 안정성을 가진 참조 카운트 증가 방식을 사용한다. 그외엔 Rc랑 동일하다. 
+```rust 
+use std::sync::Mutex;
+
+struct MPie;
+impl MPie {
+    fn eat(&self) {
+        println!("only I get. Pie eaten!");
+    }
+}
+
+fn main() {
+    println!("Mutex ---- ");
+    let pie_mutex = Mutex::new(MPie);
+
+    let m_pie = pie_mutex.lock().unwrap();
+    m_pie.eat();
+```
+
+## 스마트 포인터 조합하기
+Rc<Vec<Foo>>
+: 힙에 있는 immutable한 데이터 구조의 동일한 Vec을 대여할 수 있는 복수 스마트 포인터를 복제(clone)가능하게 한다. 
+
+Rc<RefCell<Foo>>
+: 복수의 스마트 포인터가 동일한 Foo 구조체를 mutable 또는 immutable하게 대여할 수 있게 한다. 
+
+Arc<Mutex<Foo>>
+: 복수의 스마트 포인터가 임시의 mutable 또는 immutable 대여를 CPU 스레드 독점 방식으로 lock할 수 있게 한다. 
+
+```rust 
+use std::cell::RefCell;
+use std::rc::Rc;
+
+struct Pie {
+    slices: u8,
+}
+
+impl Pie {
+    fn eat_slice(&mut self, name: &str) {
+        println!("{} eats a slice of pie", name);
+        self.slices -= 1;
+    }
+}
+
+struct SeaCreature {
+    pub name: String,
+    pie: Rc<RefCell<Pie>>,
+}
+
+impl SeaCreature {
+    fn eat(&self) {
+        let mut pie = self.pie.borrow_mut();
+        pie.eat_slice(&self.name);
+    }
+}
+
+fn main() {
+    let pie = Rc::new(RefCell::new(Pie { slices: 8 }));
+    let ferris = SeaCreature {
+        name: String::from("Ferris"),
+        pie: pie.clone(),
+    };
+
+    let sarah = SeaCreature {
+        name: String::from("Sarah"),
+        pie: pie.clone(),
+    };
+
+    ferris.eat();
+    sarah.eat();
+
+    let p = pie.borrow();
+    println!("{} slices of pie left", p.slices);
+}
+
+```
+
 
 # Resources
 - https://academy.terra.money/courses/rust-basics
