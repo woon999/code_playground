@@ -653,6 +653,67 @@ fn main() {
 
 ```
 
+<br>
+
+# 멀티 스레딩 기법
+## spawn으로 새로운 스레드 생성 
+thread::spawn 함수를 호출하여 여기에 새로운 스레드에서 실행하고 싶은 코드가 담긴 클로저를 넘긴다. 해당 메서드는 JoinHandle<T>를 리턴한다. 
+```rust
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    thread::spawn(|| {
+        for i in 1..10 {
+            println!("hi number {} from the spawned thread!", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+
+    for i in 1..5 {
+        println!("hi number {} from the main thread!", i);
+        thread::sleep(Duration::from_millis(1));
+    }
+}
+```
+
+## join 핸들을 사용하여 모든 스레드가 끝날 때까지 blocking하기 
+spawn메서드가 리턴한 JoinHandle은 자신의 join 메서드를 호출했을 때 그 스레드가 끝날 때까지 기다리는 소윳값이다. 
+```rust
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        for i in 1..10 {
+            println!("hi number {} from the spawned thread!", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+
+    for i in 1..5 {
+        println!("hi number {} from the main thread!", i);
+        thread::sleep(Duration::from_millis(1));
+    }
+
+    handle.join().unwrap();
+}
+```
+
+## move 클로저 
+move 클로저는 thread::spawn에 넘겨지는 클로저와 함께 자주 사용된다. 
+클로저가 환경으로부터 사용하는 값 소유권을 갖게 된다. 
+```rust
+let v = vec![1, 2, 3];
+
+let handle = thread::spawn(move || {
+    println!("Here's a vector: {:?}", v);
+});
+
+// drop(v); // error[E0382]: use of moved value: `v`
+
+handle.join().unwrap();
+```
 
 # Resources
 - https://academy.terra.money/courses/rust-basics
