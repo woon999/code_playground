@@ -2,19 +2,18 @@ package main
 
 import "fmt"
 
-type printer interface {
-	print()
-}
+func main() {
+	var (
+		mobydick  = book{title: "moby dick", price: 10}
+		minecraft = game{title: "minecraft", price: 20}
+		tetris    = game{title: "tetris", price: 5}
+		rubik     = puzzle{title: "rubik's cube", price: 5}
+	)
 
-type list []printer
+	var store list
+	store = append(store, &minecraft, &tetris, mobydick, rubik)
+	store.print()
 
-func (l list) print() {
-	if len(l) == 0 {
-		fmt.Println("Sorry. We're waiting for delivery.")
-		return
-	}
-
-	for _, it := range l {
-		it.print()
-	}
+	fmt.Println(store[0] == &minecraft) // true
+	fmt.Println(store[3] == rubik)      // true
 }
