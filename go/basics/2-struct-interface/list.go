@@ -1,0 +1,1 @@
+package __struct_interface
