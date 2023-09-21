@@ -95,10 +95,10 @@ PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하
    - signal        [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/6_singal)
    - memory map    [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/7_memory_map)
 - io
-  - [socket](https://github.com/loosie/code_playground/tree/master/c/io/socket)
-  - [multi threading](https://github.com/loosie/code_playground/tree/master/c/io/multithreading)
-  - [multi processing](https://github.com/loosie/code_playground/tree/master/c/io/multiprocessing)
-  - [multiplexing](https://github.com/loosie/code_playground/tree/master/c/io/multiplexing)
+  - socket           [(c)](https://github.com/loosie/code_playground/tree/master/c/io/socket)
+  - multi threading  [(c)](https://github.com/loosie/code_playground/tree/master/c/io/multithreading)
+  - multi processing [(c)](https://github.com/loosie/code_playground/tree/master/c/io/multiprocessing)
+  - multiplexing     [(c)](https://github.com/loosie/code_playground/tree/master/c/io/multiplexing)
 
  <br>
  
@@ -107,6 +107,7 @@ PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하
 
 
 
-—
+
+--—
 
 최종 수정 2023.07.25 © loosie
