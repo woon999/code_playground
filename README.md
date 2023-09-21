@@ -4,17 +4,16 @@
 <br>
 
 # Data structre
-## code
-- bst [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/bst/basic) [(go)](https://github.com/loosie/code_playground/tree/master/go/data_structure/bst)
-  - avl
-  - treap [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/bst/treap)
-- hash
+## code  
   - hashSet [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/hashset)
-- tree
   - heap(binaryTree) [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/heap)
+  - bst [(java)](https://github.com/loosie/code_playground/blob/master/java/data_structure/src/bst/basic/BST.java) [(go)](https://github.com/loosie/code_playground/tree/master/go/data_structure/bst)
+  - balancedTree
+    - treap [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/bst/treap)
   - segmentTree
     - fenwick [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/segmenttree/fenwick) 
-  - trie [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/trie)
+  - trie [(java)](https://github.com/loosie/code_playground/tree/master/java/data_structure/src/trie) [(go)](https://github.com/loosie/code_playground/tree/master/go/data_structure)
+  - patricia trie [(go)](https://github.com/loosie/code_playground/tree/master/go/data_structure)
 
 ## blog
 1. 자료구조와 자바컬렉션프레임워크(JCF) 정리 [(link)](https://loosie.tistory.com/154)
@@ -86,10 +85,20 @@ PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하
 <br>
 
 # System
+- [process](https://github.com/loosie/code_playground/tree/master/c/ipc/0_process)
 - ipc
    - unnamed pipe  [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/1_unnamed_pipe)
    - named pipe    [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/2_named_pipe)
    - message queue [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/3_message_queue)
+   - shared memory [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/4_shared_memory)
+   - semaphore     [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/5_semaphore)
+   - signal        [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/6_singal)
+   - memory map    [(c)](https://github.com/loosie/code_playground/tree/master/c/ipc/7_memory_map)
+- io
+  - [socket](https://github.com/loosie/code_playground/tree/master/c/io/socket)
+  - [multi threading](https://github.com/loosie/code_playground/tree/master/c/io/multithreading)
+  - [multi processing](https://github.com/loosie/code_playground/tree/master/c/io/multiprocessing)
+  - [multiplexing](https://github.com/loosie/code_playground/tree/master/c/io/multiplexing)
 
  <br>
  
