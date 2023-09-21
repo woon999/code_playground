@@ -25,7 +25,7 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func (t *TreeNode) GetChilds() []Node {
+func (t *TreeNode) GetChildren() []Node {
 	var childs []Node
 	if t.Left == nil {
 		childs = append(childs, nil)

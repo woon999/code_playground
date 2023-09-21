@@ -1,6 +1,6 @@
 package node
 
 type Node interface {
-	GetChilds() []Node
+	GetChildren() []Node
 	GetValue() any
 }
