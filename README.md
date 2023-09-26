@@ -78,10 +78,11 @@ PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하
 
 
 # VM, Compiler, Interpreter
-- c++로 compiler 만들기 [(link)](https://github.com/loosie/code_playground/tree/master/c%2B%2B/compiler)
-   - lexical/syntax anaylsis, code generator, vm, gc
-- c++로 interpreter 만들기 [(link)](https://github.com/loosie/code_playground/tree/master/c%2B%2B/interpreter)
-
+- make compiler [(c++)](https://github.com/loosie/code_playground/tree/master/c%2B%2B/compiler)
+  - lexical anaylsis → syntax anaylsis → code generate → execute in vm(stack, gc)
+- make interpreter [(c++)](https://github.com/loosie/code_playground/tree/master/c%2B%2B/interpreter)
+  - lexical anaylsis → syntax anaylsis → interpret
+  
 <br>
 
 # System
@@ -108,6 +109,6 @@ PS 연습은 백준, 프로그래머스, LeetCode, Codewars 를 통해 연습하
 
 
 
---—
+---
 
-최종 수정 2023.07.25 © loosie
+© loosie
