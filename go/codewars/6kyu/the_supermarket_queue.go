@@ -1,58 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func QueueTime(customers []int, n int) int {
-	if len(customers) == 0 {
-		return 0
-	}
+	result := 0
 	if n == 1 {
-		var sum int
 		for _, v := range customers {
-			sum += v
+			result += v
 		}
-		return sum
-	}
-	if n >= len(customers) {
-		var max int
-		for _, v := range customers {
-			if v > max {
-				max = v
-			}
-		}
-		return max
-	}
-	if n == len(customers) {
-		return customers[0]
+		return result
 	}
 
-	var tills []int
-	for i := 0; i < n; i++ {
-		tills = append(tills, customers[i])
+	queues := make([]int, n)
+	for _, v := range customers {
+		queues[0] += v
+		sort.Ints(queues)
 	}
-
-	for i := n; i < len(customers); i++ {
-		var min int
-		for _, v := range tills {
-			if v < min || min == 0 {
-				min = v
-			}
-		}
-		for j, v := range tills {
-			if v == min {
-				tills[j] += customers[i]
-				break
-			}
-		}
-	}
-
-	var max int
-	for _, v := range tills {
-		if v > max {
-			max = v
-		}
-	}
-	return max
+	result = queues[n-1]
+	return result
 }
 
 func main() {
