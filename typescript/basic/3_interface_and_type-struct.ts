@@ -36,6 +36,78 @@ shapes.forEach(shape => {
     console.log(shape.getArea());
 });
 
+// function interface ----------------------------------------------------
+interface GetText {
+    (name: string, age: number): string;
+}
+
+const getText: GetText = function (name, age) {
+    return name + ', ' + age;
+};
+
+console.log(getText('안희종', 30));
+
+
+// hybrid type interface ----------------------------------------------------
+interface Counter {
+    (start: number): string;
+    interval: number;
+    reset(): void;
+}
+
+function getCounter(): Counter {
+    let counter = <Counter>function (start: number) { counter.interval = start; };
+    counter.interval = 123;
+    counter.reset = function () { counter.interval = 123; };
+    return counter;
+}
+
+let c = getCounter();
+c(10); // c 는 함수이지만, 인터페이스로 설정한 Counter 타입이기 때문에, 함수로서 호출이 가능하다. 
+console.log(c.interval); // 10
+c.reset(); // 인터페이스로 설정한 Counter 타입이기 때문에, reset() 함수를 호출 할 수 있다.
+console.log(c.interval); // 123
+c.interval = 5.0;
+console.log(c.interval); // 5.0
+
+// generic interface ----------------------------------------------------
+interface MyResponse<Data> {
+    data: Data;
+    status: number;
+    ok: boolean;
+}
+
+interface User {
+    name: string;
+    readonly height: number;
+}
+
+class UserImpl implements User {
+    name: string;
+    height: number;
+    constructor(name: string, height: number) {
+        this.name = name;
+        this.height = height;
+    }
+}
+
+// getUserApiCall 함수
+async function getUserApiCall(user: User): Promise<MyResponse<User>> {
+    return {
+        data: user,
+        status: 200,
+        ok: true,
+    };
+}
+
+// getUserApiCall 함수 사용
+const user1 = new UserImpl('안희종12313123123', 176);
+async function fetchData() {
+    const res: MyResponse<User> = await getUserApiCall(user1);
+    console.log(res.data.name);
+}
+fetchData();
+
 // type struct ----------------------------------------------------
 type Person = {
     name: string;

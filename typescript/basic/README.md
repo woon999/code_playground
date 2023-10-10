@@ -105,8 +105,10 @@ let myAdd: (x: number, y: number) => number =
 
 <br>
 
-# 인터페이스 
-```typscript
+# 인터페이스 & type struct 
+- interface: 클래스 또는 객체를 위한 타입을 지정 할 때 사용되는 문법. implements로 구현. 
+- type: 특정 타입에 별칭을 붙이는 용도로 사용
+```typescript
 interface Shape {
     name?: string;
     getArea(): number;
