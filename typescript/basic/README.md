@@ -140,3 +140,12 @@ class Circle implements Shape {
 
 `tsc`: 타입 스크립트 파일을 js로 컴파일 한다. 
 
+
+
+---
+
+resources
+- https://www.typescriptlang.org/
+- https://typescript-kr.github.io/
+- https://ahnheejong.gitbook.io/ts-for-jsdev/
+- https://velog.io/@velopert/using-react-with-typescript
