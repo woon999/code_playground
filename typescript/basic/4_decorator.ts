@@ -1,13 +1,13 @@
 function f() {
     console.log("f(): evaluated");
-    return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
+    return function (target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
         console.log("f(): called");
     }
 }
 
 function g() {
     console.log("g(): evaluated");
-    return function (target, propertyKey: string, descriptor: PropertyDescriptor) {
+    return function (target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
         console.log("g(): called");
     }
 }
