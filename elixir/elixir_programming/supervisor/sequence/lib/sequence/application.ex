@@ -4,7 +4,7 @@ defmodule Sequence.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {Sequence.Stash, 123},
+      {Sequence.Stash, Application.get_env(:sequence, :initial_number)},
       {Sequence.Server, nil}
     ]
 
