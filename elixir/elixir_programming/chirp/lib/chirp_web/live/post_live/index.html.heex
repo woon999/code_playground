@@ -1,0 +1,45 @@
+<.header>
+  Timeline
+  <:actions>
+    <.link patch={~p"/posts/new"}>
+      <.button>New Post</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="posts"
+  rows={@streams.posts}
+  row_click={fn {_id, post} -> JS.navigate(~p"/posts/#{post}") end}
+>
+  <:col :let={{_id, post}} label="Username"><%= post.username %></:col>
+  <:col :let={{_id, post}} label="Body"><%= post.body %></:col>
+  <:col :let={{_id, post}} label="Likes count"><%= post.likes_count %></:col>
+  <:col :let={{_id, post}} label="Reposts count"><%= post.reposts_count %></:col>
+  <:action :let={{_id, post}}>
+    <div class="sr-only">
+      <.link navigate={~p"/posts/#{post}"}>Show</.link>
+    </div>
+    <.link patch={~p"/posts/#{post}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, post}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: post.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+
+<.modal :if={@live_action in [:new, :edit]} id="post-modal" show on_cancel={JS.patch(~p"/posts")}>
+  <.live_component
+    module={ChirpWeb.PostLive.FormComponent}
+    id={@post.id || :new}
+    title={@page_title}
+    action={@live_action}
+    post={@post}
+    patch={~p"/posts"}
+  />
+</.modal>
