@@ -10,6 +10,8 @@
 # Where 3rd-party dependencies like ExDoc output generated docs.
 /doc/
 
+
+
 # Ignore .fetch files in case you like to edit your project deps locally.
 /.fetch
 
@@ -27,6 +29,7 @@ finsta-*.tar
 
 # Ignore assets that are produced by build tools.
 /priv/static/assets/
+/priv/static/uploads/
 
 # Ignore digested assets cache.
 /priv/static/cache_manifest.json
