@@ -19,7 +19,7 @@ flatMap: Optional<T> -> (T -> Optional<U>) -> Optional<U>
 ## 1. naturality
 Monad 동작이 여러 변환에서 일관되고 예측 가능하게 유지되도록 하는 속성을 의미한다.
 - unit, bind 모두 해당한다.
-![](https://i.imgur.com/9imhuos.png
+![](https://i.imgur.com/9imhuos.png)
 
 ## 2. identity
 - unit(값을 모나드에 넣는 연산)과 bind 연산(= java flatMap)이 동일성 함수와 일치하는 방식으로 동작해야 한다
