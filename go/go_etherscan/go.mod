@@ -3,7 +3,7 @@ module main
 go 1.21.1
 
 require (
-	github.com/ethereum/go-ethereum v1.13.5
+	github.com/ethereum/go-ethereum v1.13.15
 	github.com/joho/godotenv v1.5.1
 	github.com/liyue201/erc20-go v0.0.0-20210521034206-b2824246def0
 )
@@ -20,7 +20,6 @@ require (
 	github.com/ethereum/c-kzg-4844 v0.4.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
-	github.com/go-stack/stack v1.8.1 // indirect
 	github.com/google/uuid v1.5.0 // indirect
 	github.com/gorilla/websocket v1.5.1 // indirect
 	github.com/holiman/uint256 v1.2.4 // indirect
