@@ -1,15 +1,32 @@
-use axum::{extract::{Path, Query}, response::{Html, IntoResponse}, routing::{get, get_service}, Router};
+use axum::{extract::{Path, Query}, middleware, response::{Html, IntoResponse, Response}, routing::{get, get_service}, Router};
 use serde::Deserialize;
 use tokio::net::TcpListener;
+use tower_cookies::CookieManagerLayer;
 use tower_http::services::ServeDir;
+use crate::model::ModelController;
+
+mod model;
+mod web;
+mod error;
+
+pub use self::error::{Error, Result};
+
+
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>>{
+async fn main() -> Result<()>{
     println!("Hello, world!");
+    let mc = ModelController::new().await?;
 
+    let routes_apis = web::routes_ticket::routes(mc.clone());
+        
     let routes_all: Router = Router::new()
-    .merge(routes_hello())
-    .fallback_service(routes_static());
+        .merge(routes_hello())
+        .merge(web::routes_login::routes())
+        .nest("/api", routes_apis)
+        .layer(middleware::map_response(response_mapper))
+        .layer(CookieManagerLayer::new())
+        .fallback_service(routes_static());
 
     let listener = TcpListener::bind("127.0.0.1:8080").await.unwrap();
 
@@ -19,6 +36,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
 		.unwrap();
     
     Ok(())
+}
+
+async fn response_mapper(res: Response) -> Response {
+    println!("->> {:<12} - response_mapper", "RES_MAPPER");
+
+    println!();
+
+    res
 }
 
 
