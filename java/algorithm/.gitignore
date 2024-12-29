@@ -1,9 +1,0 @@
-.classpath
-.project
-.idea
-.settings
-/bin
-*.iml
-/src/out
-.DS_Store
-out
